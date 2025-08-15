@@ -1,0 +1,492 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* Updated to deep charcoal black theme with orange-gold and lavender accents */
+  --background: hsl(0 0% 4%); /* Deep charcoal black #0A0A0A */
+  --foreground: hsl(0 0% 98%); /* Pure white text #FFFFFF */
+  --card: hsl(0 0% 7% / 0.4); /* Transparent charcoal for glass panels */
+  --card-foreground: hsl(0 0% 93%); /* Off-white card text #EDEDED */
+  --popover: hsl(0 0% 7% / 0.6); /* Darker transparent popover */
+  --popover-foreground: hsl(0 0% 98%); /* White popover text */
+  --primary: hsl(35 85% 60%); /* Warm orange-gold #E7A44D */
+  --primary-foreground: hsl(0 0% 4%); /* Dark text on primary */
+  --secondary: hsl(0 0% 7% / 0.4); /* Transparent charcoal secondary */
+  --secondary-foreground: hsl(0 0% 98%); /* White text on secondary */
+  --muted: hsl(0 0% 70%); /* Muted gray #B3B3B3 */
+  --muted-foreground: hsl(0 0% 45%); /* Darker muted text */
+  --accent: hsl(35 85% 60%); /* Orange-gold accent */
+  --accent-foreground: hsl(0 0% 4%); /* Dark text on accent */
+  --orange-accent: hsl(28 100% 70%); /* Bright orange-gold #FFB86C */
+  --orange-accent-foreground: hsl(0 0% 4%); /* Dark text on orange */
+  --purple-accent: hsl(260 60% 75%); /* Light lavender-purple #B88BFF */
+  --purple-accent-foreground: hsl(0 0% 4%); /* Dark text on purple */
+  --destructive: hsl(0 62.8% 30.6%); /* Dark red destructive */
+  --destructive-foreground: hsl(0 0% 98%); /* White destructive text */
+  --border: hsl(0 0% 100% / 0.1); /* Semi-transparent white border */
+  --input: hsl(0 0% 7% / 0.4); /* Transparent input background */
+  --ring: hsl(35 85% 60% / 0.4); /* Orange-gold ring with transparency */
+  --chart-1: hsl(35 85% 60%); /* Orange-gold chart color */
+  --chart-2: hsl(260 60% 75%); /* Purple chart color */
+  --chart-3: hsl(0 0% 20%); /* Dark gray chart color */
+  --chart-4: hsl(0 0% 70%); /* Muted chart color */
+  --chart-5: hsl(0 0% 98%); /* Light chart color */
+  --radius: 1.5rem; /* 24px radius for panels and buttons */
+  --sidebar: hsl(0 0% 7% / 0.4); /* Transparent sidebar */
+  --sidebar-foreground: hsl(0 0% 98%); /* White sidebar text */
+  --sidebar-primary: hsl(35 85% 60%); /* Orange-gold sidebar primary */
+  --sidebar-primary-foreground: hsl(0 0% 4%); /* Dark sidebar primary text */
+  --sidebar-accent: hsl(35 85% 60%); /* Orange-gold sidebar accent */
+  --sidebar-accent-foreground: hsl(0 0% 4%); /* Dark sidebar accent text */
+  --sidebar-border: hsl(0 0% 100% / 0.1); /* Semi-transparent sidebar border */
+  --sidebar-ring: hsl(35 85% 60% / 0.4); /* Orange-gold sidebar ring */
+  --font-inter: "Inter", sans-serif;
+  --font-poppins: "Poppins", serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-orange-accent: var(--orange-accent);
+  --color-orange-accent-foreground: var(--orange-accent-foreground);
+  --color-purple-accent: var(--purple-accent);
+  --color-purple-accent-foreground: var(--purple-accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-poppins);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Updated gradient to deep charcoal black theme */
+    background: radial-gradient(ellipse at top, hsl(0 0% 7%) 0%, hsl(0 0% 4%) 100%);
+  }
+
+  /* Enhanced glassomorphic utilities with new color theme and 20-30px blur */
+  .neomorphic {
+    background: linear-gradient(145deg, hsl(0 0% 7% / 0.4), hsl(0 0% 5% / 0.6));
+    box-shadow: 0 20px 40px hsl(0 0% 0% / 0.4), 0 8px 16px hsl(0 0% 0% / 0.2), inset 0 1px 0 hsl(0 0% 100% / 0.1), inset
+      0 -1px 0 hsl(0 0% 0% / 0.2);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    border-radius: 1.5rem;
+  }
+
+  .glassmorphic {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow: 0 8px 32px hsl(0 0% 0% / 0.3), 0 4px 16px hsl(0 0% 0% / 0.2), inset 0 1px 0 hsl(0 0% 100% / 0.1);
+    border-radius: 1.25rem;
+  }
+
+  .glassmorphic-strong {
+    background: hsl(0 0% 7% / 0.6);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0.4), 0 6px 20px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(35 85% 60% / 0.1), 0 0
+      0 1px hsl(35 85% 60% / 0.05);
+    border-radius: 1.5rem;
+  }
+
+  .glassmorphic-highlight {
+    background: hsl(0 0% 7% / 0.5);
+    backdrop-filter: blur(25px) saturate(200%);
+    border: 1px solid hsl(35 85% 60% / 0.3);
+    box-shadow: 0 16px 48px hsl(0 0% 0% / 0.5), 0 8px 24px hsl(35 85% 60% / 0.2), inset 0 1px 0 hsl(35 85% 60% / 0.2), 0
+      0 20px hsl(35 85% 60% / 0.3);
+    border-radius: 1.5rem;
+  }
+
+  .neomorphic-button {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 8px 24px hsl(0 0% 0% / 0.3), 0 4px 12px hsl(0 0% 0% / 0.2), inset 0 1px 0 hsl(0 0% 100% / 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    border-radius: 1.25rem;
+  }
+
+  .neomorphic-button:hover {
+    background: hsl(0 0% 7% / 0.6);
+    box-shadow: 0 12px 32px hsl(0 0% 0% / 0.4), 0 6px 16px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.15), 0 0
+      20px hsl(35 85% 60% / 0.3);
+    border: 1px solid hsl(35 85% 60% / 0.4);
+    transform: translateY(-2px);
+  }
+
+  .neomorphic-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px hsl(0 0% 0% / 0.4), inset 0 2px 4px hsl(0 0% 0% / 0.2);
+  }
+
+  /* Updated glow effects with orange-gold and purple accents */
+  .glow-orange {
+    box-shadow: 0 0 20px hsl(35 85% 60% / 0.4), 0 0 40px hsl(35 85% 60% / 0.2), 0 0 60px hsl(35 85% 60% / 0.1);
+  }
+
+  .glow-orange:hover {
+    box-shadow: 0 0 30px hsl(35 85% 60% / 0.6), 0 0 60px hsl(35 85% 60% / 0.3), 0 0 90px hsl(35 85% 60% / 0.15);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(260 60% 75% / 0.4), 0 0 40px hsl(260 60% 75% / 0.2), 0 0 60px hsl(260 60% 75% / 0.1);
+  }
+
+  .glow-purple:hover {
+    box-shadow: 0 0 30px hsl(260 60% 75% / 0.6), 0 0 60px hsl(260 60% 75% / 0.3), 0 0 90px hsl(260 60% 75% / 0.15);
+  }
+
+  .glow-mixed {
+    box-shadow: 0 0 20px hsl(35 85% 60% / 0.3), 0 0 40px hsl(260 60% 75% / 0.2), 0 0 60px hsl(35 85% 60% / 0.1);
+  }
+
+  .glow-mixed:hover {
+    box-shadow: 0 0 30px hsl(35 85% 60% / 0.4), 0 0 60px hsl(260 60% 75% / 0.3), 0 0 90px hsl(35 85% 60% / 0.2);
+  }
+
+  /* Updated button glow classes with new orange-gold theme */
+  .btn-primary-glow {
+    background: hsl(35 85% 60%);
+    color: hsl(0 0% 4%);
+    border: 1px solid hsl(35 85% 60% / 0.5);
+    box-shadow: 0 0 20px hsl(35 85% 60% / 0.5), 0 0 40px hsl(35 85% 60% / 0.3), 0 8px 32px hsl(0 0% 0% / 0.4), inset 0
+      1px 0 hsl(0 0% 100% / 0.2);
+    backdrop-filter: blur(20px) saturate(180%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.25rem;
+  }
+
+  .btn-primary-glow:hover {
+    background: hsl(28 100% 70%);
+    box-shadow: 0 0 30px hsl(35 85% 60% / 0.7), 0 0 60px hsl(35 85% 60% / 0.4), 0 0 90px hsl(35 85% 60% / 0.2), 0 12px
+      40px hsl(0 0% 0% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.3);
+    transform: translateY(-2px);
+    border: 1px solid hsl(35 85% 60% / 0.7);
+  }
+
+  .btn-secondary-glow {
+    background: hsl(0 0% 7% / 0.4);
+    color: hsl(0 0% 98%);
+    border: 1px solid hsl(0 0% 100% / 0.2);
+    box-shadow: 0 0 20px hsl(0 0% 100% / 0.1), 0 8px 32px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(25px) saturate(180%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.25rem;
+  }
+
+  .btn-secondary-glow:hover {
+    background: hsl(0 0% 7% / 0.6);
+    box-shadow: 0 0 30px hsl(0 0% 100% / 0.2), 0 0 60px hsl(35 85% 60% / 0.2), 0 12px 40px hsl(0 0% 0% / 0.4), inset 0
+      1px 0 hsl(0 0% 100% / 0.15);
+    transform: translateY(-2px);
+    border: 1px solid hsl(35 85% 60% / 0.4);
+  }
+
+  /* Updated card classes with new theme and enhanced transparency */
+  .glassmorphic-card {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow: 0 8px 32px hsl(0 0% 0% / 0.3), 0 4px 16px hsl(0 0% 0% / 0.2), inset 0 1px 0 hsl(0 0% 100% / 0.1), 0 0 0
+      1px hsl(35 85% 60% / 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.25rem;
+  }
+
+  .glassmorphic-card:hover {
+    background: hsl(0 0% 7% / 0.6);
+    border: 1px solid hsl(35 85% 60% / 0.3);
+    box-shadow: 0 12px 48px hsl(0 0% 0% / 0.4), 0 6px 24px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.15), 0 0
+      20px hsl(35 85% 60% / 0.2);
+    transform: translateY(-2px);
+  }
+
+  .floating-card {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow: 0 20px 60px hsl(0 0% 0% / 0.4), 0 10px 30px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.1), 0 0
+      0 1px hsl(35 85% 60% / 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.5rem;
+  }
+
+  .floating-card:hover {
+    background: hsl(0 0% 7% / 0.6);
+    border: 1px solid hsl(35 85% 60% / 0.3);
+    box-shadow: 0 24px 80px hsl(0 0% 0% / 0.5), 0 12px 40px hsl(0 0% 0% / 0.4), inset 0 1px 0 hsl(0 0% 100% / 0.15), 0 0
+      30px hsl(35 85% 60% / 0.3);
+    transform: translateY(-4px);
+  }
+
+  /* Removed old cyan and blue glow classes, kept only new theme colors */
+  .float-glass {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow: 0 20px 60px hsl(0 0% 0% / 0.3), 0 10px 30px hsl(0 0% 0% / 0.2), inset 0 1px 0 hsl(0 0% 100% / 0.1);
+    border-radius: 1.5rem;
+  }
+
+  .interactive-highlight {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid hsl(35 85% 60% / 0.3);
+    box-shadow: 0 12px 36px hsl(0 0% 0% / 0.4), 0 6px 18px hsl(35 85% 60% / 0.2), inset 0 1px 0 hsl(35 85% 60% / 0.15),
+      0 0 24px hsl(35 85% 60% / 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1.25rem;
+  }
+
+  .interactive-highlight:hover {
+    background: hsl(0 0% 7% / 0.6);
+    border: 1px solid hsl(35 85% 60% / 0.5);
+    box-shadow: 0 16px 48px hsl(0 0% 0% / 0.5), 0 8px 24px hsl(35 85% 60% / 0.3), inset 0 1px 0 hsl(35 85% 60% / 0.2), 0
+      0 32px hsl(35 85% 60% / 0.3);
+    transform: translateY(-4px);
+  }
+
+  /* Adding floating animations for hero background elements */
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px) rotate(90deg);
+    }
+    50% {
+      transform: translateY(-10px) translateX(-15px) rotate(180deg);
+    }
+    75% {
+      transform: translateY(-30px) translateX(5px) rotate(270deg);
+    }
+  }
+
+  @keyframes float-medium {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-25px) translateX(-20px) rotate(120deg);
+    }
+    66% {
+      transform: translateY(-15px) translateX(25px) rotate(240deg);
+    }
+  }
+
+  @keyframes float-fast {
+    0%,
+    100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    20% {
+      transform: translateY(-15px) translateX(20px) rotate(72deg);
+    }
+    40% {
+      transform: translateY(-30px) translateX(-10px) rotate(144deg);
+    }
+    60% {
+      transform: translateY(-20px) translateX(-25px) rotate(216deg);
+    }
+    80% {
+      transform: translateY(-35px) translateX(15px) rotate(288deg);
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float-medium 6s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float-fast 4s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 10s linear infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  /* Adding 3D cube animations and hero styling */
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .cube-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .cube-face {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cube-face:hover {
+    transform: scale(1.1) rotateY(15deg) rotateX(15deg);
+    box-shadow: 0 20px 40px hsl(0 0% 0% / 0.4), 0 10px 20px hsl(0 0% 0% / 0.3);
+  }
+
+  @keyframes cube-float {
+    0%,
+    100% {
+      transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+    }
+    25% {
+      transform: translateY(-20px) rotateX(15deg) rotateY(90deg);
+    }
+    50% {
+      transform: translateY(-10px) rotateX(-10deg) rotateY(180deg);
+    }
+    75% {
+      transform: translateY(-30px) rotateX(20deg) rotateY(270deg);
+    }
+  }
+
+  @keyframes cube-rotate {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    33% {
+      transform: rotateX(120deg) rotateY(120deg) rotateZ(120deg);
+    }
+    66% {
+      transform: rotateX(240deg) rotateY(240deg) rotateZ(240deg);
+    }
+    100% {
+      transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+  }
+
+  .animate-cube-float {
+    animation: cube-float 6s ease-in-out infinite;
+  }
+
+  .animate-cube-rotate {
+    animation: cube-rotate 12s linear infinite;
+  }
+
+  /* Hero section specific styles */
+  .hero-content {
+    z-index: 10;
+  }
+
+  .hero-3d {
+    z-index: 5;
+  }
+
+  .hero-title-line {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  .hero-title-line:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+
+  .hero-title-line:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+
+  .hero-title-line:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+
+  .hero-description {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in 0.8s ease-out 0.8s forwards;
+  }
+
+  .hero-buttons {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in 0.8s ease-out 1s forwards;
+  }
+}
