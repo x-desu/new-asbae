@@ -41,7 +41,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glassmorphic shadow-lg" : "bg-transparent"
+        isScrolled ? "glassmorphic-strong glow-orange" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,15 +60,17 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium text-base cursor-pointer"
+                className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-base cursor-pointer relative group px-3 py-2 rounded-lg hover:bg-primary/10"
               >
                 {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-orange-accent transition-all duration-300 group-hover:w-full rounded-full glow-orange"></span>
+                <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/5 to-orange-accent/5"></span>
               </a>
             ))}
           </nav>
 
           <div className="hidden lg:flex">
-            <Button className="btn-primary-glow font-semibold px-8 py-3 rounded-full" onClick={handleCTAClick}>
+            <Button className="btn-primary-glow font-bold px-12 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-2xl" onClick={handleCTAClick}>
               Get Started
             </Button>
           </div>
@@ -76,17 +78,17 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="neomorphic-button">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="glassmorphic">
+            <SheetContent side="right" className="glassmorphic-strong">
               <div className="flex flex-col space-y-4 mt-8">
                 {navItems.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="block text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer"
+                    className="block text-lg font-medium text-foreground hover:text-primary transition-all duration-300 cursor-pointer p-3 rounded-lg hover:bg-primary/10"
                     onClick={(e) => {
                       handleNavClick(e, item.href)
                       setIsMobileMenuOpen(false)
@@ -96,7 +98,7 @@ export default function Header() {
                   </a>
                 ))}
                 <Button
-                  className="btn-primary-glow font-semibold mt-4 rounded-full"
+                  className="btn-primary-glow font-bold text-lg px-8 py-3 mt-4 rounded-full transform hover:scale-105 transition-all duration-300"
                   onClick={(e) => {
                     handleCTAClick(e)
                     setIsMobileMenuOpen(false)

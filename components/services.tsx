@@ -168,11 +168,11 @@ export default function Services() {
     if (!card) return;
 
     gsap.to(card, {
-      scale: isEntering ? 1.08 : 1,
-      y: isEntering ? -12 : 0,
-      rotationY: isEntering ? 5 : 0,
-      duration: 0.4,
-      ease: "power2.out",
+      scale: isEntering ? 1.12 : 1,
+      y: isEntering ? -15 : 0,
+      rotationY: isEntering ? 8 : 0,
+      duration: 0.15,
+      ease: "power1.out",
     });
   };
 
@@ -258,10 +258,10 @@ export default function Services() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div ref={headerRef} className="text-center space-y-4 mb-16">
-          <Badge className="neomorphic bg-primary/10 text-primary border-primary/20">
+          <div className="inline-block px-8 py-3 text-lg font-semibold bg-gradient-to-r from-yellow-500/80 via-amber-500/80 to-orange-500/80 backdrop-blur-xl border border-yellow-400/30 hover:border-yellow-400/50 text-white shadow-xl hover:shadow-yellow-400/30 transition-all duration-300 transform hover:scale-105 rounded-full drop-shadow-[0_0_15px_rgba(255,193,7,0.4)]">
             Our Services
-          </Badge>
-          <h2 className="services-title text-3xl sm:text-4xl lg:text-5xl font-serif font-bold">
+          </div>
+          <h2 className="services-title text-3xl sm:text-4xl lg:text-5xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
             Comprehensive IT Solutions
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -277,8 +277,8 @@ export default function Services() {
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
-              className={`service-card neomorphic rounded-2xl p-8 cursor-pointer transition-all duration-300 ${
-                activeService === index ? "ring-2 ring-primary/50" : ""
+              className={`service-card bg-black/80 backdrop-blur-xl border border-yellow-500/30 hover:border-yellow-400/60 rounded-2xl p-8 cursor-pointer transition-all duration-200 hover:shadow-xl hover:shadow-yellow-400/30 hover:scale-105 hover:drop-shadow-[0_8px_30px_rgba(255,193,7,0.3)] ${
+                activeService === index ? "ring-1 ring-yellow-400/50 shadow-yellow-400/20" : ""
               }`}
               onMouseEnter={() => {
                 setActiveService(index);
@@ -289,16 +289,16 @@ export default function Services() {
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
                   <div
-                    className={`service-icon p-3 rounded-xl glassmorphic ${service.color}`}
+                    className={`service-icon p-4 rounded-xl bg-yellow-500/10 backdrop-blur-sm border border-yellow-500/30 hover:border-yellow-400/50 transition-all duration-200 ${service.color}`}
                   >
-                    <service.icon className="h-6 w-6" />
+                    <service.icon className="h-7 w-7" />
                   </div>
-                  <h3 className="text-xl font-serif font-semibold">
+                  <h3 className="text-xl font-serif font-semibold text-white">
                     {service.title}
                   </h3>
                 </div>
 
-                <p className="text-muted-foreground">{service.description}</p>
+                <p className="text-gray-300">{service.description}</p>
 
                 <div className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
@@ -307,14 +307,14 @@ export default function Services() {
                       className="service-feature flex items-center space-x-2"
                     >
                       <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span className="text-sm text-foreground">{feature}</span>
+                      <span className="text-sm text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                <Button variant="ghost" className="group p-0 h-auto">
+                <Button variant="ghost" className="group px-4 py-2 bg-transparent hover:bg-yellow-500/10 border border-yellow-500/30 hover:border-yellow-400/50 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-md hover:shadow-yellow-400/20 text-white hover:text-yellow-300">
                   Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 group-hover:rotate-12 transition-transform duration-300" />
                 </Button>
               </div>
             </div>
@@ -324,7 +324,7 @@ export default function Services() {
         {/* CTA Section */}
         <div
           ref={ctaRef}
-          className="neomorphic rounded-3xl p-8 lg:p-12 text-center"
+          className="bg-white/5 backdrop-blur-xl border border-white/10 hover:border-orange-400/30 rounded-3xl p-8 lg:p-12 text-center shadow-2xl hover:shadow-orange-400/10 transition-all duration-500"
         >
           <div className="space-y-6">
             <h3 className="text-2xl lg:text-3xl font-serif font-bold">
@@ -335,10 +335,10 @@ export default function Services() {
               technology goals and accelerate your startup's growth in the
               Indian market.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
                 size="lg"
-                className="neomorphic-button bg-primary text-primary-foreground hover:bg-primary/90"
+                className="font-medium px-12 py-4 text-lg bg-gradient-to-r from-orange-500/80 via-amber-500/80 to-yellow-500/80 backdrop-blur-xl border border-orange-400/30 hover:border-orange-400/50 text-white hover:text-orange-100 shadow-2xl hover:shadow-orange-400/40 transition-all duration-500 transform hover:scale-110 rounded-2xl hover:from-orange-600/90 hover:via-amber-600/90 hover:to-yellow-600/90 drop-shadow-[0_0_20px_rgba(255,165,0,0.3)]"
                 asChild
               >
                 <a href="#contact">Get Free Consultation</a>
@@ -346,7 +346,7 @@ export default function Services() {
               <Button
                 size="lg"
                 variant="outline"
-                className="neomorphic-button bg-transparent"
+                className="font-normal px-10 py-4 text-lg bg-white/5 backdrop-blur-xl border-2 border-yellow-400/40 hover:border-yellow-400/60 text-foreground/70 hover:text-foreground/90 transition-all duration-500 transform hover:scale-105 rounded-2xl hover:bg-white/10 shadow-lg hover:shadow-yellow-400/20"
                 asChild
               >
                 <a href="#contact">View Our Work</a>
