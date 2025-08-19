@@ -183,7 +183,7 @@ export default function ChatWidget() {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full bg-yellow-500/90 hover:bg-yellow-500 text-black shadow-lg hover:shadow-xl hover:shadow-yellow-400/30 transition-all duration-300 border border-yellow-500/30 ${
+        className={`fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full bg-orange-500/90 hover:bg-orange-500 text-black shadow-lg hover:shadow-xl hover:shadow-orange-400/30 transition-all duration-300 border border-orange-500/30 ${
           isOpen ? "rotate-45" : "hover:scale-105"
         }`}
         aria-label="Toggle chat"
@@ -192,17 +192,17 @@ export default function ChatWidget() {
       </Button>
 
       {isOpen && (
-        <Card className="fixed bottom-20 right-6 z-40 w-80 sm:w-96 h-96 sm:h-[450px] bg-black/90 backdrop-blur-xl border border-yellow-500/30 shadow-2xl flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between p-3 border-b border-yellow-500/20 flex-shrink-0">
+        <Card className="fixed bottom-20 right-6 z-40 w-80 sm:w-96 h-96 sm:h-[450px] bg-black/10 backdrop-blur-2xl border border-orange-500/20 shadow-2xl flex flex-col overflow-hidden">
+          <div className="flex items-center justify-between p-3 border-b border-orange-500/20 flex-shrink-0">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-yellow-500/20 flex items-center justify-center border border-yellow-500/30">
-                <Bot className="h-4 w-4 text-yellow-400" />
+              <div className="h-8 w-8 rounded-full bg-orange-500/20 flex items-center justify-center border border-orange-500/30">
+                <Bot className="h-4 w-4 text-orange-400" />
               </div>
               <div>
                 <h3 className="font-medium text-sm text-white">ASBAE Tech Assistant</h3>
                 <div className="flex items-center gap-1">
                   <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                  <span className="text-xs text-gray-300">Integrated & Online</span>
+                  <span className="text-xs text-white/70">Integrated & Online</span>
                 </div>
               </div>
             </div>
@@ -214,23 +214,27 @@ export default function ChatWidget() {
                 <div key={message.id}>
                   <div className={`flex gap-2 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                     {message.role === "assistant" && (
-                      <div className="h-6 w-6 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-yellow-500/30">
-                        <Bot className="h-3 w-3 text-yellow-400" />
+                      <div className="h-6 w-6 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-orange-500/30">
+                        <Bot className="h-3 w-3 text-orange-400" />
                       </div>
                     )}
                     <div
                       className={`max-w-[75%] rounded-lg px-3 py-2 text-sm break-words ${
                         message.role === "user"
-                          ? "bg-yellow-500/20 text-white border border-yellow-500/30"
-                          : "bg-gray-800/80 border border-gray-600/30 text-gray-200"
+                          ? "bg-orange-500/20 backdrop-blur-sm text-white border border-orange-500/30"
+                          : "bg-white/10 backdrop-blur-sm border border-white/20 text-white"
                       }`}
                     >
                       <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                      <p className={`text-xs mt-1 opacity-70 ${message.role === "user" ? "text-yellow-200" : "text-gray-400"}`}>{formatTime(new Date())}</p>
+                      <p
+                        className={`text-xs mt-1 opacity-70 ${message.role === "user" ? "text-orange-200" : "text-white/60"}`}
+                      >
+                        {formatTime(new Date())}
+                      </p>
                     </div>
                     {message.role === "user" && (
-                      <div className="h-6 w-6 rounded-full bg-gray-600/50 flex items-center justify-center flex-shrink-0 mt-0.5 border border-gray-500/30">
-                        <User className="h-3 w-3 text-gray-300" />
+                      <div className="h-6 w-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 mt-0.5 border border-white/30">
+                        <User className="h-3 w-3 text-white/80" />
                       </div>
                     )}
                   </div>
@@ -243,7 +247,7 @@ export default function ChatWidget() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleQuickOption(option)}
-                          className="text-xs h-7 px-2 bg-gray-800/50 hover:bg-yellow-500/10 border-gray-600/50 text-gray-300 hover:text-yellow-300 hover:border-yellow-500/30"
+                          className="text-xs h-7 px-2 bg-white/10 backdrop-blur-sm hover:bg-orange-500/20 border-white/20 text-white hover:text-orange-300 hover:border-orange-500/30"
                           disabled={isLoading}
                         >
                           {option.label}
@@ -255,15 +259,15 @@ export default function ChatWidget() {
               ))}
               {isLoading && (
                 <div className="flex gap-2 justify-start">
-                  <div className="h-6 w-6 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-yellow-500/30">
-                    <Bot className="h-3 w-3 text-yellow-400" />
+                  <div className="h-6 w-6 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-orange-500/30">
+                    <Bot className="h-3 w-3 text-orange-400" />
                   </div>
-                  <div className="bg-gray-800/80 border border-gray-600/30 rounded-lg px-3 py-2">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2">
                     <div className="flex gap-1 items-center">
-                      <div className="h-1.5 w-1.5 rounded-full bg-yellow-400/60 animate-bounce"></div>
-                      <div className="h-1.5 w-1.5 rounded-full bg-yellow-400/60 animate-bounce [animation-delay:0.1s]"></div>
-                      <div className="h-1.5 w-1.5 rounded-full bg-yellow-400/60 animate-bounce [animation-delay:0.2s]"></div>
-                      <span className="text-xs text-gray-400 ml-2">Thinking...</span>
+                      <div className="h-1.5 w-1.5 rounded-full bg-orange-400/60 animate-bounce"></div>
+                      <div className="h-1.5 w-1.5 rounded-full bg-orange-400/60 animate-bounce [animation-delay:0.1s]"></div>
+                      <div className="h-1.5 w-1.5 rounded-full bg-orange-400/60 animate-bounce [animation-delay:0.2s]"></div>
+                      <span className="text-xs text-white/60 ml-2">Thinking...</span>
                     </div>
                   </div>
                 </div>
@@ -271,7 +275,7 @@ export default function ChatWidget() {
             </div>
           </ScrollArea>
 
-          <form onSubmit={handleSubmit} className="p-3 border-t border-yellow-500/20 flex-shrink-0">
+          <form onSubmit={handleSubmit} className="p-3 border-t border-orange-500/20 flex-shrink-0">
             <div className="flex gap-2">
               <Input
                 ref={inputRef}
@@ -279,13 +283,13 @@ export default function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about our services..."
                 disabled={isLoading}
-                className="flex-1 bg-gray-800/50 border-gray-600/50 focus:border-yellow-500/50 text-sm h-9 text-gray-200 placeholder:text-gray-400"
+                className="flex-1 bg-white/10 backdrop-blur-sm border-white/20 focus:border-orange-500/50 text-sm h-9 text-white placeholder:text-white/60"
                 maxLength={500}
               />
               <Button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-yellow-500/80 hover:bg-yellow-500/90 text-black px-3 h-9 border border-yellow-500/30"
+                className="bg-orange-500/80 hover:bg-orange-500/90 text-black px-3 h-9 border border-orange-500/30"
                 size="sm"
               >
                 <Send className="h-4 w-4" />

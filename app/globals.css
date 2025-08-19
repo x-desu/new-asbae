@@ -45,10 +45,10 @@
   --font-poppins: "Poppins", serif;
 }
 
-
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    /* Replace border-border with border-white/10 for consistent border styling */
+    @apply border-white/10 outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
@@ -86,8 +86,8 @@
     background: hsl(0 0% 7% / 0.5);
     backdrop-filter: blur(25px) saturate(200%);
     border: 1px solid hsl(35 85% 60% / 0.3);
-    box-shadow: 0 16px 48px hsl(0 0% 0% / 0.5), 0 8px 24px hsl(35 85% 60% / 0.2), inset 0 1px 0 hsl(35 85% 60% / 0.2), 0
-      0 20px hsl(35 85% 60% / 0.3);
+    box-shadow: 0 16px 48px hsl(0 0% 0% / 0.5), 0 8px 24px hsl(35 85% 60% / 0.2), inset 0 1px 0 hsl(35 85% 60% / 0.15),
+      0 0 20px hsl(35 85% 60% / 0.3);
     border-radius: 1.5rem;
   }
 

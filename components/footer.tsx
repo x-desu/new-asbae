@@ -44,10 +44,10 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative bg-gradient-to-b from-background to-primary/10 border-t border-border/50">
+    <footer className="relative bg-gradient-to-b from-background to-primary/10 border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Newsletter Section */}
-        <div className="py-12 border-b border-border/50">
+        <div className="py-12 border-b border-white/5">
           <div className="neomorphic rounded-3xl p-8 lg:p-12">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
@@ -169,7 +169,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-border/50">
+        <div className="py-6 border-t border-white/5">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="text-sm text-muted-foreground">
               © 2024 asbae. All rights reserved. Built with ❤️ for modern businesses.

@@ -47,9 +47,9 @@ export default function Hero() {
           hueShift={201}
           noiseIntensity={0}
           scanlineIntensity={0}
-          speed={0.3}
+          speed={0.5}
           scanlineFrequency={0}
-          warpAmount={0}
+          warpAmount={1}
           resolutionScale={1}
         />
       </div>

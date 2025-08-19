@@ -2,7 +2,7 @@
 
 ## Directory Organization
 
-```
+\`\`\`
 ├── app/                    # Next.js App Router
 │   ├── api/               # API routes
 │   ├── globals.css        # Global styles and CSS variables
@@ -30,7 +30,7 @@
 │   └── *.png           # Product demos and team photos
 ├── reference/           # Original/backup files
 └── styles/             # Additional stylesheets
-```
+\`\`\`
 
 ## Naming Conventions
 

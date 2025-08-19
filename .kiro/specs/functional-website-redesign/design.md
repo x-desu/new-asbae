@@ -19,7 +19,7 @@ The design maintains the current single-page application structure while adding 
 
 ### Component Architecture
 
-```
+\`\`\`
 components/
 ├── ui/                     # shadcn/ui base components with glass styling
 ├── sections/               # Page section components
@@ -37,7 +37,7 @@ components/
     ├── navigation.tsx     # Enhanced navigation with glass effects
     ├── footer.tsx         # Updated footer design
     └── theme-provider.tsx # Extended theme management
-```
+\`\`\`
 
 ### Design System Structure
 
@@ -50,7 +50,7 @@ components/
 
 ### Core Glass Component Interface
 
-```typescript
+\`\`\`typescript
 interface GlassComponentProps {
   variant: "light" | "medium" | "strong" | "highlight";
   glow?: "orange" | "purple" | "mixed" | "none";
@@ -58,11 +58,11 @@ interface GlassComponentProps {
   className?: string;
   children: React.ReactNode;
 }
-```
+\`\`\`
 
 ### Service Portfolio Component
 
-```typescript
+\`\`\`typescript
 interface ServiceCardProps {
   service: {
     id: string;
@@ -82,11 +82,11 @@ interface ServiceModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-```
+\`\`\`
 
 ### Product Showcase Component
 
-```typescript
+\`\`\`typescript
 interface ProductFilterProps {
   categories: string[];
   activeCategory: string;
@@ -106,11 +106,11 @@ interface ProductCardProps {
   };
   onClick: (productId: string) => void;
 }
-```
+\`\`\`
 
 ### Contact Form Component
 
-```typescript
+\`\`\`typescript
 interface ContactFormData {
   name: string;
   email: string;
@@ -124,13 +124,13 @@ interface ContactFormProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
   isSubmitting: boolean;
 }
-```
+\`\`\`
 
 ## Data Models
 
 ### Service Data Model
 
-```typescript
+\`\`\`typescript
 interface ServiceData {
   id: string;
   title: string;
@@ -156,11 +156,11 @@ interface PricingTier {
   features: string[];
   recommended?: boolean;
 }
-```
+\`\`\`
 
 ### Product Portfolio Model
 
-```typescript
+\`\`\`typescript
 interface ProductData {
   id: string;
   title: string;
@@ -190,11 +190,11 @@ interface ProductData {
     improvement: string;
   };
 }
-```
+\`\`\`
 
 ### Contact Data Model
 
-```typescript
+\`\`\`typescript
 interface ContactSubmission {
   id: string
   timestamp: Date
@@ -211,7 +211,7 @@ interface ContactValidation {
   message: z.string().min(10).max(1000)
   budget: z.enum(['<10k', '10k-50k', '50k-100k', '>100k']).optional()
 }
-```
+\`\`\`
 
 ## Error Handling
 
@@ -231,7 +231,7 @@ interface ContactValidation {
 
 ### Network Error Handling
 
-```typescript
+\`\`\`typescript
 interface ErrorState {
   type: "network" | "validation" | "server" | "unknown";
   message: string;
@@ -245,7 +245,7 @@ interface ErrorHandlingStrategy {
   retryAction?: () => Promise<void>;
   fallbackContent?: React.ReactNode;
 }
-```
+\`\`\`
 
 ## Testing Strategy
 
@@ -272,7 +272,7 @@ interface ErrorHandlingStrategy {
 
 ### Testing Implementation
 
-```typescript
+\`\`\`typescript
 // Component test example
 describe("GlassCard Component", () => {
   it("applies correct glass variant styles", () => {
@@ -304,7 +304,7 @@ describe("GSAP Animations", () => {
     expect(mockGSAP).toHaveBeenCalled();
   });
 });
-```
+\`\`\`
 
 ## Implementation Architecture
 
@@ -312,7 +312,7 @@ describe("GSAP Animations", () => {
 
 The glassomorphic design system will extend the existing Tailwind configuration with custom utility classes:
 
-```css
+\`\`\`css
 /* Enhanced glass effect utilities */
 .glassmorphic-light {
   background: hsl(0 0% 7% / 0.3);
@@ -331,13 +331,13 @@ The glassomorphic design system will extend the existing Tailwind configuration 
   box-shadow: 0 0 30px hsl(35 85% 60% / 0.6);
   border-color: hsl(35 85% 60% / 0.5);
 }
-```
+\`\`\`
 
 ### Animation Architecture
 
 GSAP animations will be organized into modular, reusable systems:
 
-```typescript
+\`\`\`typescript
 class GlassAnimations {
   static cardHover(element: Element) {
     return gsap.to(element, {
@@ -358,13 +358,13 @@ class GlassAnimations {
     });
   }
 }
-```
+\`\`\`
 
 ### State Management Architecture
 
 Context-based state management for global UI state:
 
-```typescript
+\`\`\`typescript
 interface UIState {
   activeService: string | null;
   portfolioFilter: string;
@@ -377,6 +377,6 @@ const UIContext = createContext<{
   state: UIState;
   dispatch: Dispatch<UIAction>;
 }>();
-```
+\`\`\`
 
 This design provides a comprehensive foundation for transforming the ASBAE landing page into a fully functional business website while maintaining performance, accessibility, and the desired glassomorphic aesthetic.

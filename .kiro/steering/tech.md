@@ -36,7 +36,7 @@
 
 ## Common Commands
 
-```bash
+\`\`\`bash
 # Development
 pnpm dev          # Start development server
 pnpm build        # Build for production
@@ -46,7 +46,7 @@ pnpm lint         # Run ESLint
 # Package management
 pnpm install      # Install dependencies
 pnpm add <pkg>    # Add new package
-```
+\`\`\`
 
 ## Build Configuration
 
