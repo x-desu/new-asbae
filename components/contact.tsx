@@ -1,9 +1,8 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
-import { Mail, Phone, MapPin, Clock, Send, Calendar, MessageSquare, CheckCircle } from "lucide-react"
+import { Mail, Send, MessageSquare, CheckCircle, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -20,22 +19,61 @@ export default function Contact() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [fallbackMailto, setFallbackMailto] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError(null)
+    setFallbackMailto(null)
+
+    if (!formData.email || !formData.message) {
+      setError("Please fill your email and a short message.")
+      return
+    }
+
     setIsSubmitting(true)
+    try {
+      const res = await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          subject: `Project Inquiry from ${formData.name || "ASBAE website"}`,
+          message: formData.message,
+          source: "contact-section",
+          service: formData.service,
+        }),
+      })
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data?.ok) {
+        const subject = `Project Inquiry from ${formData.name || "ASBAE website"}`
+        const body = [
+          `Name: ${formData.name}`,
+          `Email: ${formData.email}`,
+          `Company: ${formData.company || "-"}`,
+          `Service: ${formData.service || "-"}`,
+          "",
+          "Project Details:",
+          formData.message || "-",
+        ].join("\n")
+        setFallbackMailto(
+          `mailto:hello@asbaetech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+        )
+      }
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
+      setIsSubmitted(true)
       setFormData({ name: "", email: "", company: "", service: "", message: "" })
-    }, 3000)
+      setTimeout(() => setIsSubmitted(false), 3000)
+    } catch (err: any) {
+      setError("Something went wrong. Please try again.")
+      console.log("[v0] Unexpected client error:", err?.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleInputChange = (field: string, value: string) => {
@@ -47,25 +85,7 @@ export default function Contact() {
       icon: Mail,
       title: "Email Us",
       details: "hello@asbaetech.com",
-      description: "Get in touch via email",
-    },
-    {
-      icon: Phone,
-      title: "Call Us",
-      details: "+91 97534 98392 / +91 80751 98043",
-      description: "Mon-Sat 10AM-7PM IST",
-    },
-    {
-      icon: MapPin,
-      title: "Visit Us",
-      details: "Bangalore, Karnataka, India",
-      description: "Silicon Valley of India",
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      details: "Mon-Sat: 10AM-7PM IST",
-      description: "24/7 emergency support available",
+      description: "Fastest way to reach the ASBAE team",
     },
   ]
 
@@ -74,19 +94,17 @@ export default function Contact() {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
         <div className="text-center space-y-4 mb-16">
           <Badge className="neomorphic bg-accent/10 text-accent border-accent/20">Get In Touch</Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold">Let's Start Your Project</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold">Contact ASBAE Tech</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Ready to transform your business with cutting-edge technology? Contact us today for a free consultation and
-            discover how we can help your Indian business grow.
+            We’re an AI-driven software services startup. Tell us about your use‑case—deployment, integrations, or
+            custom builds—and we’ll respond quickly.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="neomorphic rounded-3xl p-8 lg:p-12">
+          <div className="neomorphic rounded-3xl p-8 lg:p-12 bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10">
             <div className="space-y-6">
               <div className="flex items-center space-x-3 mb-8">
                 <MessageSquare className="h-6 w-6 text-primary" />
@@ -94,13 +112,29 @@ export default function Contact() {
               </div>
 
               {isSubmitted ? (
-                <div className="text-center space-y-4 py-12">
-                  <CheckCircle className="h-16 w-16 text-primary mx-auto" />
-                  <h4 className="text-xl font-semibold">Message Sent Successfully!</h4>
-                  <p className="text-muted-foreground">
-                    Thank you for contacting us. We'll get back to you within 24 hours.
-                  </p>
-                </div>
+                fallbackMailto ? (
+                  <div className="text-center space-y-4 py-12">
+                    <Mail className="h-16 w-16 text-primary mx-auto" />
+                    <h4 className="text-xl font-semibold">Almost there!</h4>
+                    <p className="text-muted-foreground">
+                      We couldn’t send automatically. Click the button below to email us with your details.
+                    </p>
+                    <a
+                      href={fallbackMailto}
+                      className="inline-flex items-center justify-center rounded-lg px-4 py-2 bg-amber-500 text-black hover:bg-amber-400 shadow-[0_0_30px_rgba(255,193,7,0.25)] hover:shadow-[0_0_40px_rgba(255,193,7,0.4)]"
+                    >
+                      Open email client
+                    </a>
+                  </div>
+                ) : (
+                  <div className="text-center space-y-4 py-12">
+                    <CheckCircle className="h-16 w-16 text-primary mx-auto" />
+                    <h4 className="text-xl font-semibold">Message Sent Successfully!</h4>
+                    <p className="text-muted-foreground">
+                      Thank you for contacting us. We'll get back to you within 24 hours.
+                    </p>
+                  </div>
+                )
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -140,7 +174,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Service Interested In</label>
                     <Select onValueChange={(value) => handleInputChange("service", value)}>
-                      <SelectTrigger className="neomorphic border-0">
+                      <SelectTrigger className="neomorphic border-0 bg-white/5 backdrop-blur-sm">
                         <SelectValue placeholder="Select a service" />
                       </SelectTrigger>
                       <SelectContent className="glassmorphic">
@@ -167,16 +201,17 @@ export default function Contact() {
                     />
                   </div>
 
+                  {error ? <p className="text-sm text-red-400">{error}</p> : null}
                   <Button
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="neomorphic-button bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+                    className="neomorphic-button w-full bg-amber-500 text-black hover:bg-amber-400 shadow-[0_0_30px_rgba(255,193,7,0.25)] hover:shadow-[0_0_40px_rgba(255,193,7,0.4)]"
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                        Sending...
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black mr-2" />
+                        Sending…
                       </>
                     ) : (
                       <>
@@ -190,19 +225,27 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Contact Information */}
           <div className="space-y-8">
-            {/* Contact Details */}
             <div className="grid gap-6">
               {contactInfo.map((info, index) => (
-                <div key={index} className="neomorphic rounded-2xl p-6">
+                <div
+                  key={index}
+                  className="neomorphic rounded-2xl p-6 bg-white/5 backdrop-blur-xl border border-white/10"
+                >
                   <div className="flex items-start space-x-4">
-                    <div className="p-3 rounded-xl glassmorphic text-primary">
+                    <div className="p-3 rounded-xl bg-white/10 backdrop-blur text-primary">
                       <info.icon className="h-6 w-6" />
                     </div>
                     <div className="space-y-1">
                       <h4 className="font-semibold">{info.title}</h4>
-                      <p className="text-foreground font-medium">{info.details}</p>
+                      <p className="text-foreground font-medium">
+                        <a
+                          href="mailto:hello@asbaetech.com"
+                          className="underline decoration-amber-400/50 hover:text-amber-300"
+                        >
+                          {info.details}
+                        </a>
+                      </p>
                       <p className="text-sm text-muted-foreground">{info.description}</p>
                     </div>
                   </div>
@@ -210,35 +253,11 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Schedule Call CTA */}
-            <div className="neomorphic rounded-2xl p-8 bg-gradient-to-br from-primary/5 to-accent/5">
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Calendar className="h-6 w-6 text-accent" />
-                  <h3 className="text-xl font-serif font-semibold">Schedule a Call</h3>
-                </div>
-                <p className="text-muted-foreground">
-                  Prefer to talk? We'll send you a personalized consultation proposal via email to discuss your project
-                  requirements and schedule a call.
-                </p>
-                <Button
-                  className="neomorphic-button bg-accent text-accent-foreground hover:bg-accent/90 w-full"
-                  asChild
-                >
-                  <a href="mailto:hello@asbaetech.com?subject=Free Consultation Request&body=Hi ASBAE Team,%0D%0A%0D%0AI'm interested in discussing my project requirements. Please send me information about your services and let's schedule a consultation call.%0D%0A%0D%0AThank you!">
-                    Request Consultation
-                  </a>
-                </Button>
-              </div>
-            </div>
-
-            {/* Response Time */}
-            <div className="neomorphic rounded-2xl p-6 text-center">
+            <div className="neomorphic rounded-2xl p-6 text-center bg-white/5 backdrop-blur-xl border border-white/10">
               <Clock className="h-8 w-8 text-primary mx-auto mb-3" />
-              <h4 className="font-semibold mb-2">Quick Response Guarantee</h4>
+              <h4 className="font-semibold mb-2">We’ll get back to you fast</h4>
               <p className="text-sm text-muted-foreground">
-                We respond to all inquiries within 4 hours during business hours (10AM-7PM IST), and within 24 hours on
-                weekends.
+                Most emails receive a reply within a few hours—always within 24 hours.
               </p>
             </div>
           </div>
