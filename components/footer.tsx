@@ -44,21 +44,28 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative bg-gradient-to-b from-background to-primary/10 border-t border-white/10">
+    <footer className="relative bg-gradient-to-b from-background to-primary/5 border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Newsletter Section */}
         <div className="py-12 border-b border-white/5">
-          <div className="neomorphic rounded-3xl p-8 lg:p-12">
+          <div className="neomorphic rounded-3xl p-6 sm:p-8 lg:p-12 bg-gradient-to-br from-white/5 to-white/[0.02]">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <h3 className="text-2xl lg:text-3xl font-serif font-bold">Stay Updated</h3>
-                <p className="text-muted-foreground">
+              <div className="space-y-4 text-center lg:text-left">
+                <h3 className="text-2xl lg:text-3xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+                  Stay Updated
+                </h3>
+                <p className="text-muted-foreground text-sm sm:text-base">
                   Subscribe to our newsletter for the latest tech insights, product updates, and industry trends.
                 </p>
               </div>
-              <div className="flex space-x-4">
-                <Input placeholder="Enter your email" className="neomorphic border-0 flex-1" />
-                <Button className="neomorphic-button bg-primary text-primary-foreground hover:bg-primary/90">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Input 
+                  placeholder="Enter your email" 
+                  className="neomorphic border-0 flex-1 bg-white/5 backdrop-blur-sm focus:ring-2 focus:ring-yellow-400/30" 
+                />
+                <Button 
+                  className="neomorphic-button bg-gradient-to-r from-yellow-500/80 to-amber-500/80 text-white hover:from-yellow-600/90 hover:to-amber-600/90 transition-all transform hover:scale-[1.02]"
+                >
                   Subscribe
                 </Button>
               </div>
@@ -67,32 +74,28 @@ export default function Footer() {
         </div>
 
         {/* Main Footer Content */}
-        <div className="py-12">
-          <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="py-8 sm:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-6 md:gap-8">
             {/* Company Info */}
-            <div className="lg:col-span-2 space-y-6">
-              <div>
-                <h2 className="text-3xl font-serif font-bold text-primary mb-4">asbae</h2>
-                <p className="text-muted-foreground mb-6">
-                  Transforming businesses through innovative software solutions and expert IT services. Your technology
-                  partner for growth.
+            <div className="col-span-2 lg:col-span-2 space-y-6 mb-8 sm:mb-0">
+              <div className="space-y-2">
+                <h2 className="text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent mb-2">Asbae</h2>
+                <p className="text-muted-foreground text-sm md:text-base">
+                  Transforming businesses through innovative software solutions and expert IT services.
                 </p>
               </div>
 
               {/* Contact Info */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Mail className="h-4 w-4 text-primary" />
-                  <span className="text-sm">hello@asbae.com</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-4 w-4 text-primary" />
-                  <span className="text-sm">+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="text-sm">Silicon Valley, CA</span>
-                </div>
+              <div className="space-y-2">
+                <a 
+                  href="mailto:hello@asbaetech.com" 
+                  className="flex items-center space-x-3 group"
+                >
+                  <Mail className="h-5 w-5 text-primary group-hover:text-yellow-400 transition-colors" />
+                  <span className="text-sm md:text-base text-muted-foreground group-hover:text-foreground transition-colors">
+                    hello@asbaetech.com
+                  </span>
+                </a>
               </div>
 
               {/* Social Links */}
@@ -111,7 +114,7 @@ export default function Footer() {
             </div>
 
             {/* Services */}
-            <div className="space-y-4">
+            <div className="space-y-4  sm:pt-0">
               <h4 className="font-semibold text-foreground">Services</h4>
               <ul className="space-y-2">
                 {footerLinks.services.map((link, index) => (
@@ -171,13 +174,18 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="py-6 border-t border-white/5">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <div className="text-sm text-muted-foreground">
-              © 2024 asbae. All rights reserved. Built with ❤️ for modern businesses.
+            <div className="text-sm text-muted-foreground text-center md:text-left">
+              © 2025 asbae. All rights reserved.
             </div>
 
-            <Button variant="ghost" size="sm" onClick={scrollToTop} className="neomorphic-button group">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={scrollToTop} 
+              className="neomorphic-button group bg-white/5 hover:bg-white/10"
+            >
               Back to Top
-              <ArrowUp className="ml-2 h-4 w-4 group-hover:-translate-y-1 transition-transform" />
+              <ArrowUp className="ml-2 h-4 w-4 group-hover:-translate-y-0.5 transition-transform" />
             </Button>
           </div>
         </div>

@@ -159,25 +159,7 @@ Best regards`)
         </div>
 
         {/* Device Preview Options */}
-        <div className="neomorphic rounded-3xl p-8 text-center">
-          <div className="space-y-6">
-            <h3 className="text-xl font-serif font-bold">View on Different Devices</h3>
-            <div className="flex justify-center space-x-6">
-              <Button variant="outline" className="neomorphic-button bg-transparent">
-                <Monitor className="mr-2 h-4 w-4" />
-                Desktop
-              </Button>
-              <Button variant="outline" className="neomorphic-button bg-transparent">
-                <Tablet className="mr-2 h-4 w-4" />
-                Tablet
-              </Button>
-              <Button variant="outline" className="neomorphic-button bg-transparent">
-                <Smartphone className="mr-2 h-4 w-4" />
-                Mobile
-              </Button>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </section>
   )

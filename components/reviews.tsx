@@ -155,7 +155,7 @@ export default function Reviews() {
                   <div className="text-sm text-muted-foreground">Success Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">2+ Years</div>
+                  <div className="text-3xl font-bold text-primary">1+ Years</div>
                   <div className="text-sm text-muted-foreground">In Business</div>
                 </div>
                 <div className="text-center">
