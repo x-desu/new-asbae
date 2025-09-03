@@ -9,20 +9,7 @@ export default function CookiePolicy() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-foreground/10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="text-xl font-bold text-foreground">
-              asbae
-            </Link>
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/about#legal">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to About
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </nav>
+     
 
       {/* Content */}
       <section className="pt-32 pb-20">

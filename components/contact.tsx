@@ -49,7 +49,7 @@ export default function Contact() {
       })
 
       const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data?.ok) {
+      if (!res.ok) {
         const subject = `Project Inquiry from ${formData.name || "ASBAE website"}`
         const body = [
           `Name: ${formData.name}`,

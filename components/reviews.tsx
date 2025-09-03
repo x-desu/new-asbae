@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Star, Quote, ChevronLeft, ChevronRight, Award, Shield, CheckCircle } from "lucide-react"
+import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -43,11 +43,11 @@ export default function Reviews() {
     },
   ]
 
-  const certifications = [
-    { name: "ISO 27001", description: "Information Security Management" },
-    { name: "STPI Registered", description: "Software Technology Parks of India" },
-    { name: "AWS Partner", description: "Amazon Web Services Partner" },
-    { name: "Google Cloud", description: "Google Cloud Partner" },
+  const trustedBy = [
+    "Early-stage startups",
+    "SMBs",
+    "Agencies",
+    "Founders",
   ]
 
   useEffect(() => {
@@ -141,6 +141,7 @@ export default function Reviews() {
           </div>
 
           {/* Trust Indicators */}
+          {/* Replaced awards/certifications with neutral, professional signals */}
           <div className="space-y-8">
             {/* Stats */}
             <div className="neomorphic rounded-2xl p-8">
@@ -165,46 +166,30 @@ export default function Reviews() {
               </div>
             </div>
 
-            {/* Certifications */}
+            {/* Trusted By (neutral badges) */}
             <div className="neomorphic rounded-2xl p-8">
-              <div className="flex items-center space-x-3 mb-6">
-                <Shield className="h-6 w-6 text-primary" />
-                <h3 className="text-xl font-serif font-semibold">Certifications & Compliance</h3>
-              </div>
-
-              <div className="space-y-4">
-                {certifications.map((cert, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                    <div>
-                      <div className="font-medium">{cert.name}</div>
-                      <div className="text-sm text-muted-foreground">{cert.description}</div>
-                    </div>
-                  </div>
+              <h3 className="text-xl font-serif font-semibold mb-4">Trusted by teams like</h3>
+              <div className="flex flex-wrap gap-2">
+                {trustedBy.map((label) => (
+                  <Badge key={label} variant="secondary" className="bg-white/10 border-white/10">
+                    {label}
+                  </Badge>
                 ))}
               </div>
             </div>
 
-            {/* Awards */}
+            {/* Our commitments (no certification claims) */}
             <div className="neomorphic rounded-2xl p-8">
-              <div className="flex items-center space-x-3 mb-6">
-                <Award className="h-6 w-6 text-accent" />
-                <h3 className="text-xl font-serif font-semibold">Industry Recognition</h3>
-              </div>
-
+              <h3 className="text-xl font-serif font-semibold mb-4">Our commitments</h3>
               <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Rising Startup Award 2024</span>
-                  <Badge variant="secondary">StartupIndia</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Best Tech Innovation 2023</span>
-                  <Badge variant="secondary">TechCircle</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Young Entrepreneur Recognition</span>
-                  <Badge variant="secondary">NASSCOM</Badge>
-                </div>
+                {["Secure development practices", "Privacy-first data handling", "Clear SLAs and reliable delivery", "NDA-friendly from day one"].map(
+                  (item) => (
+                    <div key={item} className="flex items-center space-x-3">
+                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                      <span className="text-sm">{item}</span>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>

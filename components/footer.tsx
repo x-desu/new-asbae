@@ -29,10 +29,9 @@ export default function Footer() {
       { name: "Case Studies", href: "#case-studies" },
     ],
     legal: [
-      { name: "Privacy Policy", href: "#privacy" },
-      { name: "Terms of Service", href: "#terms" },
-      { name: "Cookie Policy", href: "#cookies" },
-      { name: "GDPR Compliance", href: "#gdpr" },
+      { name: "Privacy Policy", href: "/legal/privacy" },
+      { name: "Terms of Service", href: "/legal/terms" },
+      { name: "Cookie Policy", href: "/legal/cookies" },
     ],
   }
 
