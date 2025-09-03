@@ -45,6 +45,47 @@
   --font-poppins: "Poppins", serif;
 }
 
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Optional: expose chart tokens as Tailwind colors if used */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radius token (Tailwind reads this for rounded-[--radius] utilities in shadcn) */
+  --radius: var(--radius);
+}
+
 @layer base {
   * {
     /* Replace border-border with border-white/10 for consistent border styling */
@@ -196,28 +237,28 @@
   }
 
   .dropdown-glass {
-  background: linear-gradient(135deg, hsl(0 0% 7% / 0.8), hsl(0 0% 5% / 0.9));
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid hsl(0 0% 100% / 0.1);
-  box-shadow: 0 20px 50px -12px hsl(0 0% 0% / 0.5);
-  border-radius: 1rem;
-  overflow: hidden;
-}
+    background: linear-gradient(135deg, hsl(0 0% 7% / 0.8), hsl(0 0% 5% / 0.9));
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+    box-shadow: 0 20px 50px -12px hsl(0 0% 0% / 0.5);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
 
-.dropdown-glass::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, hsl(35 85% 60% / 0.4), transparent);
-}
+  .dropdown-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(35 85% 60% / 0.4), transparent);
+  }
 
-.floating-card {
-  background: hsl(0 0% 7% / 0.4);
-  backdrop-filter: blur(30px) saturate(200%);
+  .floating-card {
+    background: hsl(0 0% 7% / 0.4);
+    backdrop-filter: blur(30px) saturate(200%);
     border: 1px solid hsl(0 0% 100% / 0.1);
     box-shadow: 0 20px 60px hsl(0 0% 0% / 0.4), 0 10px 30px hsl(0 0% 0% / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.1), 0 0
       0 1px hsl(35 85% 60% / 0.05);
