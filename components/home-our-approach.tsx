@@ -117,18 +117,20 @@ export default function HomeOurApproach() {
                                     className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                                 />
 
-                                <div className="relative h-full bg-white/[0.03] backdrop-blur-sm border border-white/5 rounded-[23px] p-6 sm:p-8 hover:bg-white/[0.06] hover:border-white/15 transition-all duration-500 flex flex-col items-start text-left sm:items-center sm:text-center lg:items-start lg:text-left">
+                                <div className="relative h-full bg-white/[0.03] backdrop-blur-sm border border-white/5 rounded-[23px] p-6 hover:bg-white/[0.06] hover:border-white/15 transition-all duration-500 flex flex-row items-center text-left sm:flex-col sm:items-center sm:text-center lg:items-start lg:text-left">
                                     <div
-                                        className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.bgClass} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500`}
+                                        className={`w-12 h-12 flex-shrink-0 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.bgClass} flex items-center justify-center mr-4 sm:mr-0 sm:mb-6 group-hover:scale-110 transition-transform duration-500`}
                                     >
                                         <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${item.iconColor}`} />
                                     </div>
-                                    <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-blue-100/60 leading-relaxed font-light text-sm">
-                                        {item.description}
-                                    </p>
+                                    <div>
+                                        <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-3 text-white">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-blue-100/60 leading-relaxed font-light text-sm sm:text-base">
+                                            {item.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         );

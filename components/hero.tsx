@@ -51,7 +51,7 @@ export default function Hero() {
 
   const handleGetStartedClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   const handleLearnMoreClick = (e: React.MouseEvent) => {
@@ -63,7 +63,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative w-full h-[100svh] min-h-[500px] flex items-center justify-center overflow-hidden bg-background pt-16 lg:pt-20"
+      className="relative w-full min-h-[85svh] lg:min-h-screen flex items-center justify-center overflow-hidden bg-background pt-24 lg:pt-28 pb-10"
     >
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full h-full flex items-center">
         {/* Modern 2-Column Grid */}
@@ -88,10 +88,10 @@ export default function Hero() {
             </h1>
 
             <p ref={descriptionRef} className="text-sm sm:text-base lg:text-lg text-muted-foreground/90 leading-relaxed max-w-lg mx-auto lg:mx-0">
-              At ASBAE TECHNOLOGIES, we help organisations streamline operations, secure data, and deliver seamless digital services. Our solutions combine enterprise IT, SaaS platforms, and cloud infrastructure to create a unified ecosystem.
+              Streamline operations, secure data, and deliver seamless digital services. We unify enterprise IT, SaaS, and cloud into a single, powerful ecosystem.
             </p>
 
-            <div ref={ctaContainerRef} className="flex justify-center lg:justify-start pt-2 lg:pt-4">
+            <div ref={ctaContainerRef} className="flex flex-col items-center lg:items-start gap-8 pt-2 lg:pt-4">
               <Button
                 size="lg"
                 className="group w-full sm:w-auto font-semibold px-8 py-6 text-base lg:text-lg bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-[0_0_30px_-5px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105"
@@ -100,11 +100,38 @@ export default function Hero() {
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
+
+              {/* Featured Cards */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg">
+                <motion.div
+                  whileHover={{ y: -5, borderColor: "rgba(59, 130, 246, 0.5)" }}
+                  className="p-4 rounded-2xl bg-blue-500/5 border border-white/5 backdrop-blur-sm hover:bg-blue-500/10 transition-all cursor-pointer group flex flex-col items-start text-left"
+                  onClick={() => window.location.href = '/services'}
+                >
+                  <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
+                    <Shield className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">DaaS</h3>
+                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Enterprise-grade IT documentation.</p>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ y: -5, borderColor: "rgba(99, 102, 241, 0.5)" }}
+                  className="p-4 rounded-2xl bg-indigo-500/5 border border-white/5 backdrop-blur-sm hover:bg-indigo-500/10 transition-all cursor-pointer group flex flex-col items-start text-left"
+                  onClick={() => window.location.href = '/services'}
+                >
+                  <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform">
+                    <Zap className="w-5 h-5 text-indigo-400" />
+                  </div>
+                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">UGP</h3>
+                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Unified Governance & Compliance.</p>
+                </motion.div>
+              </div>
             </div>
           </div>
 
           {/* Right Column: Abstract React Bits Style Tech Node */}
-          <div ref={rightDecorRef} className="relative w-full h-[350px] sm:h-[450px] lg:h-[500px] flex items-center justify-center perspective-1000 hidden md:flex z-10 scale-90 lg:scale-100">
+          <div ref={rightDecorRef} className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[700px] flex items-center justify-center perspective-1000 z-10 scale-[0.6] sm:scale-[0.75] md:scale-[0.85] lg:scale-[1.5] xl:scale-[1.8] mt-8 lg:mt-0 md:mt-12">
 
             {/* Pulsing Background Glow */}
             <motion.div
@@ -178,7 +205,7 @@ export default function Hero() {
 
             {/* Orbiting Satellite 3: Cpu */}
             <motion.div
-              className="absolute z-20 w-14 h-14 bg-emerald-950/60 backdrop-blur-md border border-emerald-400/30 rounded-xl flex items-center justify-center shadow-xl shadow-emerald-900/10"
+              className="absolute z-20 w-14 h-14 bg-sky-950/60 backdrop-blur-md border border-sky-400/30 rounded-xl flex items-center justify-center shadow-xl shadow-sky-900/10"
               style={{ rotate: 15 }}
               animate={{
                 y: [-100, -80, -100],
@@ -187,7 +214,7 @@ export default function Hero() {
               }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              <Cpu className="w-6 h-6 text-emerald-300" />
+              <Cpu className="w-6 h-6 text-sky-300" />
             </motion.div>
 
             {/* Abstract Tech Grid Background */}

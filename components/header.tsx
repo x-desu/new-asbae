@@ -12,7 +12,6 @@ import ShinyText from "@/lib/TextAnimations/ShinyText/ShinyText"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   // Refs
@@ -91,15 +90,13 @@ export default function Header() {
 
   const handleCTAClick = async (e: React.MouseEvent) => {
     e.preventDefault()
-    await viewTransition.transitionToSection("#contact", { duration: 800 })
+    window.location.href = "/contact"
   }
 
   const navItems = [
-    { name: "Services", href: "#services" },
-    { name: "Products", href: "#products" },
+    { name: "Services", href: "/services" },
     { name: "About", href: "/about" },
-    { name: "Reviews", href: "#reviews" },
-    { name: "Contact", href: "#contact" },
+    { name: "Contact", href: "/contact" },
   ]
 
   return (
@@ -172,13 +169,14 @@ export default function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="neomorphic-button relative z-50"
+              className="neomorphic-button relative z-50 w-12 h-12 flex items-center justify-center rounded-xl"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              aria-label="Toggle Menu"
             >
               {isDropdownOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-7 w-7" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-7 w-7" />
               )}
             </Button>
 
@@ -195,22 +193,22 @@ export default function Header() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className="group block px-4 py-3 text-base font-medium text-foreground/90 hover:text-primary transition-all duration-300 ease-out hover:bg-foreground/5 rounded-lg"
+                        className="group block px-4 py-4 text-base font-medium text-foreground/90 hover:text-primary transition-all duration-300 ease-out hover:bg-foreground/5 rounded-xl border border-transparent hover:border-white/5"
                         onClick={(e) => {
                           handleNavClick(e, item.href)
                           setIsDropdownOpen(false)
                         }}
                       >
-                        <span className="relative group-hover:translate-x-1 transition-transform duration-300 flex items-center">
+                        <span className="relative group-hover:translate-x-2 transition-transform duration-300 flex items-center">
                           <span className="absolute -left-2 opacity-0 group-hover:opacity-100 text-primary transition-all duration-300">→</span>
                           <span className="ml-2">{item.name}</span>
                         </span>
                       </a>
                     ))}
                   </div>
-                  <div className="pt-3 mt-2 border-t border-foreground/10">
+                  <div className="pt-4 mt-2 border-t border-white/10">
                     <Button
-                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-medium rounded-lg py-3 text-base transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold rounded-xl py-6 text-base transition-all duration-300 transform hover:scale-[1.01] shadow-xl active:scale-[0.98]"
                       onClick={(e) => {
                         handleCTAClick(e)
                         setIsDropdownOpen(false)

@@ -38,13 +38,13 @@ export default function HomeMissionVision() {
     return (
         <section ref={containerRef} className="py-16 md:py-24 relative z-10 overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
                     {/* Mission Card */}
-                    <div className="mission-vision-card w-full relative group rounded-3xl overflow-hidden p-[1px]">
+                    <div className="mission-vision-card relative group rounded-3xl overflow-hidden p-[1px] h-full">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-indigo-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[23px] p-6 sm:p-8 md:p-12 hover:bg-white/10 transition-colors duration-500 flex flex-col items-center text-center">
-                            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
-                                <Target className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
+                        <div className="relative h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[23px] p-8 sm:p-10 md:p-12 hover:bg-white/10 transition-colors duration-500 flex flex-col items-center text-center">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                                <Target className="w-7 h-7 sm:w-8 sm:h-8 text-blue-400" />
                             </div>
                             <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-white tracking-tight">
                                 Our Mission
@@ -59,11 +59,11 @@ export default function HomeMissionVision() {
                     </div>
 
                     {/* Vision Card */}
-                    <div className="mission-vision-card w-full relative group rounded-3xl overflow-hidden p-[1px]">
+                    <div className="mission-vision-card relative group rounded-3xl overflow-hidden p-[1px] h-full">
                         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/30 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[23px] p-6 sm:p-8 md:p-12 hover:bg-white/10 transition-colors duration-500 flex flex-col items-center text-center">
-                            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-indigo-500/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
-                                <Eye className="w-6 h-6 sm:w-8 sm:h-8 text-indigo-400" />
+                        <div className="relative h-full bg-white/5 backdrop-blur-md border border-white/10 rounded-[23px] p-8 sm:p-10 md:p-12 hover:bg-white/10 transition-colors duration-500 flex flex-col items-center text-center">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                                <Eye className="w-7 h-7 sm:w-8 sm:h-8 text-indigo-400" />
                             </div>
                             <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-white tracking-tight">
                                 Our Vision

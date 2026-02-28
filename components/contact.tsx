@@ -1,268 +1,104 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
-import { Mail, Send, MessageSquare, CheckCircle, Clock } from "lucide-react"
+import { MessageSquare, ArrowRight, Sparkles, Globe, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { motion } from "framer-motion"
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    service: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [fallbackMailto, setFallbackMailto] = useState<string | null>(null)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setFallbackMailto(null)
-
-    if (!formData.email || !formData.message) {
-      setError("Please fill your email and a short message.")
-      return
-    }
-
-    setIsSubmitting(true)
-    try {
-      const res = await fetch("/api/email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          subject: `Project Inquiry from ${formData.name || "ASBAE website"}`,
-          message: formData.message,
-          source: "contact-section",
-          service: formData.service,
-        }),
-      })
-
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok) {
-        const subject = `Project Inquiry from ${formData.name || "ASBAE website"}`
-        const body = [
-          `Name: ${formData.name}`,
-          `Email: ${formData.email}`,
-          `Company: ${formData.company || "-"}`,
-          `Service: ${formData.service || "-"}`,
-          "",
-          "Project Details:",
-          formData.message || "-",
-        ].join("\n")
-        setFallbackMailto(
-          `mailto:hello@asbaetech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
-        )
-      }
-
-      setIsSubmitted(true)
-      setFormData({ name: "", email: "", company: "", service: "", message: "" })
-      setTimeout(() => setIsSubmitted(false), 3000)
-    } catch (err: any) {
-      setError("Something went wrong. Please try again.")
-      console.log("[v0] Unexpected client error:", err?.message)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const contactInfo = [
+  const redirectCards = [
     {
-      icon: Mail,
-      title: "Email Us",
-      details: "hello@asbaetech.com",
-      description: "Fastest way to reach the ASBAE team",
+      icon: MessageSquare,
+      title: "Direct Consultation",
+      description: "Speak directly with our technical experts about your project requirements and governance needs.",
+      link: "/contact",
+      color: "blue"
     },
+    {
+      icon: Globe,
+      title: "Global Reach",
+      description: "We support organizations worldwide with specialized IT documentation and e-Governance solutions.",
+      link: "/contact",
+      color: "indigo"
+    },
+    {
+      icon: Shield,
+      title: "Secure Partnership",
+      description: "Enterprise-grade security and NDA-ready processes for high-stakes government and private contracts.",
+      link: "/contact",
+      color: "blue"
+    }
   ]
 
   return (
-    <section id="contact" className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-950/10 to-transparent" />
+    <section id="contact" className="py-24 sm:py-32 relative overflow-hidden bg-[#050505]">
+      {/* Dynamic Background Effects */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/5 blur-[120px] rounded-full opacity-50 pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center space-y-4 mb-10 sm:mb-16">
-          <Badge className="neomorphic bg-accent/10 text-accent border-accent/20">Get In Touch</Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold">Contact ASBAE Tech</h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2 sm:px-0">
-            We’re an AI-driven software services startup. Tell us about your use‑case—deployment, integrations, or
-            custom builds—and we’ll respond quickly.
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto space-y-6 mb-16"
+        >
+          <Badge className="bg-blue-500/10 text-blue-400 border-blue-500/20 backdrop-blur-md px-4 py-1.5 mb-2">
+            <Sparkles className="w-3.5 h-3.5 mr-2" />
+            Connect With Our Team
+          </Badge>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+            Ready to Elevate Your <br />
+            <span className="text-blue-500">Infrastructure?</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl mx-auto italic">
+            "We don't just write documentation; we build the governance framework for your digital future."
           </p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          <div className="neomorphic rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10">
-            <div className="space-y-6">
-              <div className="flex items-center space-x-3 mb-6 sm:mb-8">
-                <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                <h3 className="text-xl sm:text-2xl font-serif font-semibold">Send us a message</h3>
-              </div>
-
-              {isSubmitted ? (
-                fallbackMailto ? (
-                  <div className="text-center space-y-4 py-12">
-                    <Mail className="h-16 w-16 text-primary mx-auto" />
-                    <h4 className="text-xl font-semibold">Almost there!</h4>
-                    <p className="text-muted-foreground">
-                      We couldn’t send automatically. Click the button below to email us with your details.
-                    </p>
-                    <a
-                      href={fallbackMailto}
-                      className="inline-flex items-center justify-center rounded-lg px-4 py-2 bg-blue-500 text-white hover:bg-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.25)] hover:shadow-[0_0_40px_rgba(59,130,246,0.4)]"
-                    >
-                      Open email client
-                    </a>
-                  </div>
-                ) : (
-                  <div className="text-center space-y-4 py-12">
-                    <CheckCircle className="h-16 w-16 text-primary mx-auto" />
-                    <h4 className="text-xl font-semibold">Message Sent Successfully!</h4>
-                    <p className="text-muted-foreground">
-                      Thank you for contacting us. We'll get back to you within 24 hours.
-                    </p>
-                  </div>
-                )
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Full Name *</label>
-                      <Input
-                        placeholder="John Doe"
-                        value={formData.name}
-                        onChange={(e) => handleInputChange("name", e.target.value)}
-                        required
-                        className="neomorphic border-0"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Email Address *</label>
-                      <Input
-                        type="email"
-                        placeholder="john@company.com"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        required
-                        className="neomorphic border-0"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Company Name</label>
-                    <Input
-                      placeholder="Your Company"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange("company", e.target.value)}
-                      className="neomorphic border-0"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Service Interested In</label>
-                    <Select onValueChange={(value) => handleInputChange("service", value)}>
-                      <SelectTrigger className="neomorphic border-0 bg-white/5 backdrop-blur-sm">
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent className="glassmorphic">
-                        <SelectItem value="web-development">Web Development</SelectItem>
-                        <SelectItem value="mobile-apps">Mobile Applications</SelectItem>
-                        <SelectItem value="cloud-solutions">Cloud Solutions</SelectItem>
-                        <SelectItem value="database-management">Database Management</SelectItem>
-                        <SelectItem value="cybersecurity">Cybersecurity</SelectItem>
-                        <SelectItem value="it-consulting">IT Consulting</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Project Details *</label>
-                    <Textarea
-                      placeholder="Tell us about your project requirements, timeline, and budget..."
-                      value={formData.message}
-                      onChange={(e) => handleInputChange("message", e.target.value)}
-                      required
-                      rows={4}
-                      className="neomorphic border-0 resize-none"
-                    />
-                  </div>
-
-                  {error ? <p className="text-sm text-red-400">{error}</p> : null}
-                  <Button
-                    type="submit"
-                    size="lg"
-                    disabled={isSubmitting}
-                    className="neomorphic-button w-full bg-blue-500 text-white hover:bg-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.25)] hover:shadow-[0_0_40px_rgba(59,130,246,0.4)]"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black mr-2" />
-                        Sending…
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="ml-2 h-4 w-4" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-              )}
-            </div>
+          <div className="pt-4">
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-500 text-white rounded-full px-10 py-7 text-lg font-bold shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] transform transition-all duration-300 hover:scale-105 active:scale-95"
+              onClick={() => window.location.href = "/contact"}
+            >
+              Get in Touch Now
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
+        </motion.div>
 
-          <div className="space-y-8">
-            <div className="grid gap-6">
-              {contactInfo.map((info, index) => (
-                <div
-                  key={index}
-                  className="neomorphic rounded-2xl p-6 bg-white/5 backdrop-blur-xl border border-white/10"
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 rounded-xl bg-white/10 backdrop-blur text-primary">
-                      <info.icon className="h-6 w-6" />
-                    </div>
-                    <div className="space-y-1">
-                      <h4 className="font-semibold">{info.title}</h4>
-                      <p className="text-foreground font-medium">
-                        <a
-                          href="mailto:hello@asbaetech.com"
-                          className="underline decoration-blue-400/50 hover:text-blue-300"
-                        >
-                          {info.details}
-                        </a>
-                      </p>
-                      <p className="text-sm text-muted-foreground">{info.description}</p>
-                    </div>
-                  </div>
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto mt-20">
+          {redirectCards.map((card, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -8 }}
+              className="relative group cursor-pointer"
+              onClick={() => window.location.href = card.link}
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-500" />
+              <div className="relative h-full glassmorphic rounded-3xl p-8 bg-white/5 border border-white/10 backdrop-blur-xl flex flex-col items-center text-center">
+                <div className={`p-4 rounded-full bg-${card.color}-500/10 text-${card.color}-400 group-hover:bg-${card.color}-500/20 transition-all mb-6 group-hover:scale-110 duration-300`}>
+                  <card.icon className="w-8 h-8" />
                 </div>
-              ))}
-            </div>
-
-            <div className="neomorphic rounded-2xl p-6 text-center bg-white/5 backdrop-blur-xl border border-white/10">
-              <Clock className="h-8 w-8 text-primary mx-auto mb-3" />
-              <h4 className="font-semibold mb-2">We’ll get back to you fast</h4>
-              <p className="text-sm text-muted-foreground">
-                Most emails receive a reply within a few hours—always within 24 hours.
-              </p>
-            </div>
-          </div>
+                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors mb-3">
+                  {card.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {card.description}
+                </p>
+                <div className="mt-6 flex items-center text-blue-400/0 group-hover:text-blue-400 transition-all duration-300 font-semibold text-xs uppercase tracking-widest">
+                  Connect <ArrowRight className="ml-1 h-3 w-3" />
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   )
 }
+

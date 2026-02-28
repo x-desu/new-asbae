@@ -11,22 +11,16 @@ export default function Footer() {
 
   const footerLinks = {
     services: [
-      { name: "Web Development", href: "#web-dev" },
-      { name: "Mobile Apps", href: "#mobile" },
-      { name: "Cloud Solutions", href: "#cloud" },
-      { name: "IT Consulting", href: "#consulting" },
-    ],
-    products: [
-      { name: "Analytics Pro", href: "#analytics" },
-      { name: "Team Manager", href: "#team-manager" },
-      { name: "E-Commerce Suite", href: "#ecommerce" },
-      { name: "Schedule Master", href: "#schedule" },
+      { name: "Documentation as a Service", href: "/services" },
+      { name: "Gov-Grade IT Solutions", href: "/services" },
+      { name: "Technical Consulting", href: "/services" },
+      { name: "Process Optimization", href: "/services" },
     ],
     company: [
-      { name: "About Us", href: "#about" },
-      { name: "Careers", href: "#careers" },
-      { name: "Blog", href: "#blog" },
-      { name: "Case Studies", href: "#case-studies" },
+      { name: "About ASBAE", href: "/about" },
+      { name: "Our Services", href: "/services" },
+      { name: "Contact Us", href: "/contact" },
+      { name: "Privacy Policy", href: "/legal/privacy" },
     ],
     legal: [
       { name: "Privacy Policy", href: "/legal/privacy" },
@@ -117,20 +111,6 @@ export default function Footer() {
               <h4 className="font-semibold text-foreground">Services</h4>
               <ul className="space-y-2">
                 {footerLinks.services.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Products */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-foreground">Products</h4>
-              <ul className="space-y-2">
-                {footerLinks.products.map((link, index) => (
                   <li key={index}>
                     <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.name}

@@ -7,8 +7,11 @@ import { gsapAnimations } from "@/lib/gsap-animations"
 import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil"
 
 // Lazy load heavy below-the-fold components
+const IndustriesSection = dynamic(() => import("@/components/industries-section"), { ssr: false })
 const HomeMissionVision = dynamic(() => import("@/components/home-mission-vision"), { ssr: false })
+const ValuesSection = dynamic(() => import("@/components/values-section"), { ssr: false })
 const HomeOurApproach = dynamic(() => import("@/components/home-our-approach"), { ssr: false })
+const HomeServicesOverview = dynamic(() => import("@/components/home-services-overview"), { ssr: false })
 const Contact = dynamic(() => import("@/components/contact"), { ssr: false })
 const Footer = dynamic(() => import("@/components/footer"), { ssr: false })
 const ChatWidget = dynamic(() => import("@/components/chat-widget"), { ssr: false })
@@ -52,9 +55,12 @@ export default function Home() {
       <div className="relative" style={{ zIndex: 2 }}>
         <Header />
         <Hero />
+        <HomeServicesOverview />
+        <IndustriesSection />
         <div id="mission-vision">
           <HomeMissionVision />
         </div>
+        <ValuesSection />
         <div id="approach">
           <HomeOurApproach />
         </div>
