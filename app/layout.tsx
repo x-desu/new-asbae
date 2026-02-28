@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -21,6 +21,12 @@ const inter = Inter({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asbaetech.com"
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "hsl(188 85% 53%)",
+}
+
 export const metadata: Metadata = {
   title: {
     default: "ASBAE - Software & IT Services",
@@ -31,8 +37,6 @@ export const metadata: Metadata = {
   generator: "ASBAE",
   keywords: ["software development", "IT services", "web development", "mobile apps", "cloud solutions"],
   authors: [{ name: "ASBAE" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "hsl(188 85% 53%)",
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: siteUrl,
@@ -76,15 +80,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" strategy="beforeInteractive" />
-        <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"
-          strategy="beforeInteractive"
-        />
         <style>{`
 html {
   font-family: ${inter.style.fontFamily};

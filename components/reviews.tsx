@@ -67,7 +67,7 @@ export default function Reviews() {
 
   return (
     <section id="reviews" className="py-20 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-primary/5" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-950/10" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -91,9 +91,8 @@ export default function Reviews() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`h-5 w-5 ${
-                        i < reviews[currentReview].rating ? "text-yellow-500 fill-current" : "text-gray-300"
-                      }`}
+                      className={`h-5 w-5 ${i < reviews[currentReview].rating ? "text-blue-500 fill-current" : "text-gray-300"
+                        }`}
                     />
                   ))}
                 </div>
@@ -121,9 +120,8 @@ export default function Reviews() {
                 {reviews.map((_, index) => (
                   <button
                     key={index}
-                    className={`h-2 w-8 rounded-full transition-all ${
-                      index === currentReview ? "bg-primary" : "bg-border"
-                    }`}
+                    className={`h-2 w-8 rounded-full transition-all ${index === currentReview ? "bg-primary" : "bg-border"
+                      }`}
                     onClick={() => setCurrentReview(index)}
                   />
                 ))}

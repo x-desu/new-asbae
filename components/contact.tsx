@@ -90,25 +90,25 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-20 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background" />
+    <section id="contact" className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-950/10 to-transparent" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center space-y-4 mb-16">
+        <div className="text-center space-y-4 mb-10 sm:mb-16">
           <Badge className="neomorphic bg-accent/10 text-accent border-accent/20">Get In Touch</Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold">Contact ASBAE Tech</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2 sm:px-0">
             We’re an AI-driven software services startup. Tell us about your use‑case—deployment, integrations, or
             custom builds—and we’ll respond quickly.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="neomorphic rounded-3xl p-8 lg:p-12 bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="neomorphic rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10">
             <div className="space-y-6">
-              <div className="flex items-center space-x-3 mb-8">
-                <MessageSquare className="h-6 w-6 text-primary" />
-                <h3 className="text-2xl font-serif font-semibold">Send us a message</h3>
+              <div className="flex items-center space-x-3 mb-6 sm:mb-8">
+                <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                <h3 className="text-xl sm:text-2xl font-serif font-semibold">Send us a message</h3>
               </div>
 
               {isSubmitted ? (
@@ -121,7 +121,7 @@ export default function Contact() {
                     </p>
                     <a
                       href={fallbackMailto}
-                      className="inline-flex items-center justify-center rounded-lg px-4 py-2 bg-amber-500 text-black hover:bg-amber-400 shadow-[0_0_30px_rgba(255,193,7,0.25)] hover:shadow-[0_0_40px_rgba(255,193,7,0.4)]"
+                      className="inline-flex items-center justify-center rounded-lg px-4 py-2 bg-blue-500 text-white hover:bg-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.25)] hover:shadow-[0_0_40px_rgba(59,130,246,0.4)]"
                     >
                       Open email client
                     </a>
@@ -206,7 +206,7 @@ export default function Contact() {
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="neomorphic-button w-full bg-amber-500 text-black hover:bg-amber-400 shadow-[0_0_30px_rgba(255,193,7,0.25)] hover:shadow-[0_0_40px_rgba(255,193,7,0.4)]"
+                    className="neomorphic-button w-full bg-blue-500 text-white hover:bg-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.25)] hover:shadow-[0_0_40px_rgba(59,130,246,0.4)]"
                   >
                     {isSubmitting ? (
                       <>
@@ -241,7 +241,7 @@ export default function Contact() {
                       <p className="text-foreground font-medium">
                         <a
                           href="mailto:hello@asbaetech.com"
-                          className="underline decoration-amber-400/50 hover:text-amber-300"
+                          className="underline decoration-blue-400/50 hover:text-blue-300"
                         >
                           {info.details}
                         </a>

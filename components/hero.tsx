@@ -1,203 +1,204 @@
 "use client";
-import { ArrowRight, Play } from "lucide-react";
-import type React from "react";
+import React, { useEffect, useRef } from "react";
+import { ArrowRight, Play, Shield, Zap, Database, Cloud, Network, Server, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { gsapAnimations } from "@/lib/gsap-animations";
-import { viewTransition } from "@/lib/view-transitions";
-import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, useScroll, useTransform } from "framer-motion";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
 
 export default function Hero() {
-  // Refs for animations
+  const containerRef = useRef<HTMLDivElement>(null);
   const title1Ref = useRef<HTMLSpanElement>(null);
-  const title2Ref = useRef<HTMLSpanElement>(null);
   const gradientTextRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const ctaContainerRef = useRef<HTMLDivElement>(null);
-  const primaryButtonRef = useRef<HTMLButtonElement>(null);
-  const secondaryButtonRef = useRef<HTMLButtonElement>(null);
-  const statsContainerRef = useRef<HTMLDivElement>(null);
-  const statRefs = useRef<HTMLDivElement[]>([]);
-  const setStatRef = (el: HTMLDivElement | null, index: number) => {
-    if (el) statRefs.current[index] = el;
-  };
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  // Right side GSAP ref
+  const rightDecorRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    gsapAnimations.initAllAnimations();
-    
-    // Create timeline for hero animations - faster sequence
-    const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-    
-    // Set initial states
-    gsap.set([title1Ref.current, title2Ref.current], { y: 20, opacity: 0 });
-    gsap.set(gradientTextRef.current, { y: 25, opacity: 0, scale: 0.97 });
-    gsap.set(descriptionRef.current, { y: 15, opacity: 0 });
-    gsap.set(ctaContainerRef.current, { opacity: 0, y: 20 });
-    gsap.set([primaryButtonRef.current, secondaryButtonRef.current], { y: 15, opacity: 0 });
-    gsap.set(statsContainerRef.current, { opacity: 0, y: 15 });
-    gsap.set(statRefs.current, { y: 10, opacity: 0 });
-    
-    // Faster animation sequence
-    tl.to(title1Ref.current, { y: 0, opacity: 1, duration: 0.5 })
-      .to(title2Ref.current, { y: 0, opacity: 1, duration: 0.4 }, '-=0.2')
-      .to(gradientTextRef.current, { 
-        y: 0, 
-        opacity: 1, 
-        scale: 1, 
-        duration: 0.5,
-        ease: 'back.out(1.5)'
-      }, '-=0.2')
-      .to(descriptionRef.current, { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.4 
-      }, '-=0.2')
-      .to(ctaContainerRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.4 
-      }, '-=0.2')
-      .to([primaryButtonRef.current, secondaryButtonRef.current], { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.4,
-        stagger: 0.05,
-        ease: 'back.out(1.2)'
-      }, '-=0.1')
-      // Animate stats container and items together
-      .to(statsContainerRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.4
-      }, '-=0.2')
-      // Animate individual stats with minimal stagger
-      .to(statRefs.current, {
-        y: 0,
-        opacity: 0.9,
-        duration: 0.3,
-        stagger: 0.05,
-        ease: 'power2.out'
-      }, '-=0.2');
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    gsap.set([title1Ref.current, gradientTextRef.current, descriptionRef.current, ctaContainerRef.current, statsRef.current], {
+      y: 30,
+      opacity: 0
+    });
+
+    tl.to(title1Ref.current, { y: 0, opacity: 1, duration: 0.6, delay: 0.2 })
+      .to(gradientTextRef.current, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3')
+      .to(descriptionRef.current, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4')
+      .to(ctaContainerRef.current, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4')
+      .to(statsRef.current, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4');
+
+    gsap.to(rightDecorRef.current, {
+      y: 100,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      }
+    });
 
     return () => {
-      gsapAnimations.cleanup();
-      tl.kill();
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
-  const handleGetStartedClick = async (e: React.MouseEvent) => {
+  const handleGetStartedClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    await viewTransition.transitionToSection("#services", { duration: 800 });
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleLearnMoreClick = async (e: React.MouseEvent) => {
+  const handleLearnMoreClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    await viewTransition.transitionToSection("#about", { duration: 800 });
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
+      ref={containerRef}
       id="home"
-      className="relative w-full min-h-screen flex items-center justify-center"
-      style={{ margin: 0, padding: 0 }}
+      className="relative w-full h-[100svh] min-h-[500px] flex items-center justify-center overflow-hidden bg-background pt-16 lg:pt-20"
     >
-      {/* Dark Veil Background - Full Width */}
-      <div
-        className="absolute inset-0 w-full h-full overflow-hidden"
-        style={{
-          width: "100%",
-          height: "100%",
-          margin: 0,
-          padding: 0,
-        }}
-      >
-        <DarkVeil
-          hueShift={201}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.5}
-          scanlineFrequency={0}
-          warpAmount={1}
-          resolutionScale={1}
-        />
-      </div>
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full h-full flex items-center">
+        {/* Modern 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">
 
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 py-16 md:py-24">
-        <div className="text-center space-y-10 md:space-y-14 max-w-4xl mx-auto">
-          <div className="space-y-6 md:space-y-8">
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight">
-              <span ref={title1Ref} className="hero-title-line text-foreground block mb-3 md:mb-4">
-                Your
+          {/* Left Column: Text & CTAs */}
+          <div className="text-center lg:text-left space-y-4 lg:space-y-6 max-w-2xl mx-auto lg:mx-0 z-20 relative">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
+              <span ref={title1Ref} className="block text-foreground mb-1 lg:mb-2">
+                Empowering Organizations with
               </span>
-              <span ref={title2Ref} className="hero-title-line text-foreground block mb-3 md:mb-4">
-                All In One
-              </span>
-              <div ref={gradientTextRef} className="hero-title-line block mt-6 md:mt-8">
+              <div ref={gradientTextRef} className="block mt-1 lg:mt-2 pb-1 lg:pb-2">
                 <GradientText
-                  colors={["#ff6b35", "#f7931e", "#ffaa40", "#f7931e", "#ff6b35"]}
-                  animationSpeed={4}
+                  colors={["#3b82f6", "#6366f1", "#60a5fa", "#6366f1", "#3b82f6"]}
+                  animationSpeed={8}
                   showBorder={false}
-                  className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold"
+                  className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold"
                 >
-                  Software System
+                  Intelligent IT Solutions
                 </GradientText>
               </div>
             </h1>
 
-            <p ref={descriptionRef} className="hero-description text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mt-8 md:mt-10">
-              Empowering businesses with innovative software solutions and
-              comprehensive IT services. From custom development to digital
-              transformation, we turn your vision into reality.
+            <p ref={descriptionRef} className="text-sm sm:text-base lg:text-lg text-muted-foreground/90 leading-relaxed max-w-lg mx-auto lg:mx-0">
+              At ASBAE TECHNOLOGIES, we help organisations streamline operations, secure data, and deliver seamless digital services. Our solutions combine enterprise IT, SaaS platforms, and cloud infrastructure to create a unified ecosystem.
             </p>
-          </div>
 
-          <div ref={ctaContainerRef} className="flex flex-col sm:flex-row gap-5 md:gap-6 justify-center items-center mt-10 md:mt-14 px-4">
-            <Button
-              ref={primaryButtonRef}
-              size="lg"
-              className="group w-full max-w-xs sm:w-auto font-medium px-8 py-4 text-lg md:text-xl bg-gradient-to-r from-orange-500/80 via-amber-500/80 to-yellow-500/80 hover:from-orange-600/90 hover:via-amber-600/90 hover:to-yellow-600/90 border border-orange-400/30 hover:border-orange-400/50 text-white hover:text-orange-100 shadow-lg hover:shadow-orange-400/30 transition-all duration-300 transform hover:scale-105 rounded-2xl relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-orange-400/20 before:via-amber-400/20 before:to-yellow-400/20 before:blur-xl before:-z-10 drop-shadow-[0_0_20px_rgba(255,165,0,0.3)] glow-orange"
-              onClick={handleGetStartedClick}
-            >
-              Get Started
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
-
-            <Button
-              ref={secondaryButtonRef}
-              size="lg"
-              variant="outline"
-              className="group w-full max-w-xs sm:w-auto font-medium px-8 py-4 text-lg md:text-xl bg-white/5 backdrop-blur-xl border-2 border-yellow-400/40 hover:border-yellow-400/60 text-foreground/90 hover:text-foreground transition-all duration-300 transform hover:scale-105 rounded-2xl hover:bg-white/10"
-              onClick={handleLearnMoreClick}
-            >
-              <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-              Learn More
-            </Button>
-          </div>
-
-          {/* Stats Section */}
-          <div ref={statsContainerRef} className="mt-10 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-5 text-sm md:text-base text-muted-foreground/80">
-            {[
-              { label: '25+ Projects', color: 'bg-orange-400/60' },
-              { label: '15+ Clients', color: 'bg-amber-400/60' },
-              { label: '10+ Years Experience', color: 'bg-yellow-400/60' },
-              { label: '100% Satisfaction', color: 'bg-green-400/60' }
-            ].map((stat, index) => (
-              <div 
-                key={stat.label}
-                ref={el => setStatRef(el, index)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-background/5 backdrop-blur-sm border border-white/5 hover:bg-white/5 transition-colors"
+            <div ref={ctaContainerRef} className="flex justify-center lg:justify-start pt-2 lg:pt-4">
+              <Button
+                size="lg"
+                className="group w-full sm:w-auto font-semibold px-8 py-6 text-base lg:text-lg bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-[0_0_30px_-5px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105"
+                onClick={handleGetStartedClick}
               >
-                <div className={`w-1.5 h-1.5 ${stat.color} rounded-full animate-pulse flex-shrink-0`} />
-                <span className="whitespace-nowrap">{stat.label}</span>
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Column: Abstract React Bits Style Tech Node */}
+          <div ref={rightDecorRef} className="relative w-full h-[350px] sm:h-[450px] lg:h-[500px] flex items-center justify-center perspective-1000 hidden md:flex z-10 scale-90 lg:scale-100">
+
+            {/* Pulsing Background Glow */}
+            <motion.div
+              className="absolute w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-indigo-600/20 blur-[100px] rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Central Morphing Core */}
+            <motion.div
+              className="absolute z-20 w-56 h-56 border border-blue-500/30 flex items-center justify-center bg-gradient-to-tr from-blue-900/10 to-indigo-900/10 backdrop-blur-xl"
+              style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}
+              animate={{
+                rotate: 360,
+                borderRadius: [
+                  '40% 60% 70% 30% / 40% 50% 60% 50%',
+                  '60% 40% 30% 70% / 50% 60% 40% 50%',
+                  '30% 70% 70% 30% / 30% 30% 70% 70%',
+                  '40% 60% 70% 30% / 40% 50% 60% 50%'
+                ]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="w-24 h-24 rounded-full border border-indigo-400/40 flex items-center justify-center bg-indigo-500/10 shadow-[0_0_50px_rgba(99,102,241,0.3)]">
+                <motion.div animate={{ rotate: -360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}>
+                  <Network className="w-10 h-10 text-blue-400 mix-blend-screen" />
+                </motion.div>
               </div>
-            ))}
+            </motion.div>
+
+            {/* Orbiting Satellite 1: Server */}
+            <motion.div
+              className="absolute z-30 w-16 h-16 bg-blue-950/60 backdrop-blur-md border border-blue-400/30 rounded-2xl flex flex-col items-center justify-center gap-1.5 shadow-2xl shadow-blue-900/20"
+              animate={{
+                y: [0, -20, 0],
+                x: [100, 110, 100],
+                rotate: [0, 10, 0]
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Server className="w-6 h-6 text-blue-300" />
+              <div className="bg-blue-500/20 h-1 w-8 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-blue-400"
+                  animate={{ width: ["0%", "100%", "0%"] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Orbiting Satellite 2: Database */}
+            <motion.div
+              className="absolute z-30 w-20 h-20 bg-indigo-950/60 backdrop-blur-md border border-indigo-400/30 rounded-full flex items-center justify-center shadow-2xl shadow-indigo-900/20"
+              animate={{
+                y: [60, 80, 60],
+                x: [-120, -100, -120],
+                rotate: [-10, 0, -10]
+              }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              <Database className="w-8 h-8 text-indigo-300" />
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-indigo-400/0 border-t-indigo-400/50"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              />
+            </motion.div>
+
+            {/* Orbiting Satellite 3: Cpu */}
+            <motion.div
+              className="absolute z-20 w-14 h-14 bg-emerald-950/60 backdrop-blur-md border border-emerald-400/30 rounded-xl flex items-center justify-center shadow-xl shadow-emerald-900/10"
+              style={{ rotate: 15 }}
+              animate={{
+                y: [-100, -80, -100],
+                x: [20, 30, 20],
+                rotate: [15, 25, 15]
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            >
+              <Cpu className="w-6 h-6 text-emerald-300" />
+            </motion.div>
+
+            {/* Abstract Tech Grid Background */}
+            <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #4f46e5 1px, transparent 1px), linear-gradient(to bottom, #4f46e5 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
           </div>
         </div>
       </div>
 
-      {/* Background effects - Full Width */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-background/80 via-transparent to-background/40 pointer-events-none" />
+      {/* Subtle bottom fade */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
     </section>
   );
 }

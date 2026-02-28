@@ -103,7 +103,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glassmorphic-strong glow-orange" : "bg-transparent"
+        isScrolled ? "glassmorphic-strong glow-blue" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -120,7 +120,7 @@ export default function Header() {
                   }`} 
                 />
               </div>
-              <h1 className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">ASBAE</h1>
+              <h1 className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">ASBAE</h1>
             </Link>
           </div>
 
@@ -133,7 +133,7 @@ export default function Header() {
                 className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-base cursor-pointer relative group px-3 py-2 rounded-lg hover:bg-primary/10"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-orange-accent transition-all duration-300 group-hover:w-full rounded-full glow-orange"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-orange-accent transition-all duration-300 group-hover:w-full rounded-full glow-blue"></span>
                 <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/5 to-orange-accent/5"></span>
               </a>
             ))}
@@ -187,7 +187,7 @@ export default function Header() {
                   </div>
                   <div className="pt-3 mt-2 border-t border-foreground/10">
                     <Button
-                      className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-medium rounded-lg py-3 text-base transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-medium rounded-lg py-3 text-base transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
                       onClick={(e) => {
                         handleCTAClick(e)
                         setIsDropdownOpen(false)

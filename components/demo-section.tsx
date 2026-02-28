@@ -55,7 +55,7 @@ Best regards`)
 
   return (
     <section id="demo" className="py-20 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-950/10 to-transparent" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -73,9 +73,8 @@ Best regards`)
             {demos.map((demo, index) => (
               <Card
                 key={index}
-                className={`neomorphic p-6 cursor-pointer transition-all duration-300 ${
-                  selectedDemo === index ? "ring-2 ring-primary/50 scale-105" : "hover:scale-102"
-                }`}
+                className={`neomorphic p-6 cursor-pointer transition-all duration-300 ${selectedDemo === index ? "ring-2 ring-primary/50 scale-105" : "hover:scale-102"
+                  }`}
                 onClick={() => setSelectedDemo(index)}
               >
                 <div className="space-y-3">
@@ -159,7 +158,7 @@ Best regards`)
         </div>
 
         {/* Device Preview Options */}
-       
+
       </div>
     </section>
   )

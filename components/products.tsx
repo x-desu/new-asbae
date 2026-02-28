@@ -65,7 +65,7 @@ export default function Products() {
 
   return (
     <section id="products" className="products-section py-20 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-950/10 to-transparent" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -85,9 +85,8 @@ export default function Products() {
             {products.map((product, index) => (
               <div
                 key={index}
-                className={`product-card neomorphic rounded-2xl p-6 cursor-pointer transition-all duration-300 ${
-                  activeProduct === index ? "ring-2 ring-accent/50 scale-105" : "hover:scale-102"
-                }`}
+                className={`product-card neomorphic rounded-2xl p-6 cursor-pointer transition-all duration-300 ${activeProduct === index ? "ring-2 ring-accent/50 scale-105" : "hover:scale-102"
+                  }`}
                 onClick={() => setActiveProduct(index)}
               >
                 <div className="flex items-start space-x-4">
@@ -104,7 +103,7 @@ export default function Products() {
 
                     <div className="flex items-center space-x-4 text-sm">
                       <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                        <Star className="h-4 w-4 text-blue-500 fill-current" />
                         <span>{product.rating}</span>
                       </div>
                       <div className="flex items-center space-x-1">

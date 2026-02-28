@@ -8,12 +8,13 @@ import { Button } from "@/components/ui/button"
 import { viewTransition } from "@/lib/view-transitions"
 import gsap from "gsap"
 import Link from "next/link"
+import ShinyText from "@/lib/TextAnimations/ShinyText/ShinyText"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  
+
   // Refs
   const dropdownRef = useRef<HTMLDivElement>(null)
   const dropdownContentRef = useRef<HTMLDivElement>(null)
@@ -22,13 +23,13 @@ export default function Header() {
   // GSAP Animations
   useEffect(() => {
     if (!dropdownContentRef.current) return
-    
+
     tl.current = gsap.timeline({ paused: true })
-      .fromTo(dropdownContentRef.current, 
+      .fromTo(dropdownContentRef.current,
         { y: -20, opacity: 0, display: 'none' },
-        { 
-          y: 0, 
-          opacity: 1, 
+        {
+          y: 0,
+          opacity: 1,
           display: 'block',
           duration: 0.3,
           ease: 'power2.out',
@@ -45,7 +46,7 @@ export default function Header() {
   // Toggle dropdown animation
   useEffect(() => {
     if (!tl.current) return
-    
+
     if (isDropdownOpen) {
       document.body.style.overflow = 'hidden'
       tl.current.play()
@@ -103,54 +104,74 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glassmorphic-strong glow-orange" : "bg-transparent"
-      }`}
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isScrolled
+        ? "top-4 mx-auto max-w-4xl px-2"
+        : "top-0 max-w-full px-0"
+        }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div
+        className={`transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isScrolled
+          ? "bg-background/60 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_80px_rgba(59,130,246,0.06)] rounded-full px-6"
+          : "bg-transparent rounded-none px-4 sm:px-6 lg:px-8"
+          }`}
+      >
+        <div className={`flex items-center justify-between transition-all duration-500 ${isScrolled ? "h-14" : "h-16 lg:h-20"
+          } ${!isScrolled ? "container mx-auto" : ""}`}>
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 shadow-sm">
-                <img 
-                  src="/images/asbae-logo.png" 
-                  alt="ASBAE Logo" 
-                  className={`h-7 w-7 lg:h-9 lg:w-9 transition-transform duration-300 ${
-                    isScrolled ? 'scale-100' : 'scale-110'
-                  }`} 
+            <Link href="/" className="flex items-center space-x-2">
+              <div className={`rounded-full bg-white/10 backdrop-blur-sm border border-white/15 transition-all duration-500 ${isScrolled ? "p-1" : "p-1.5"
+                }`}>
+                <img
+                  src="/images/asbae-logo.png"
+                  alt="ASBAE Logo"
+                  className={`transition-all duration-500 invert brightness-125 ${isScrolled ? 'h-6 w-6' : 'h-7 w-7 lg:h-9 lg:w-9'
+                    }`}
                 />
               </div>
-              <h1 className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">ASBAE</h1>
+              <ShinyText
+                className={`font-serif font-bold tracking-wide transition-all duration-500 ${isScrolled ? "text-xl" : "text-2xl md:text-3xl"}`}
+                baseColor="rgba(96, 165, 250, 0.9)"
+                shineColor="rgba(255, 255, 255, 0.95)"
+                shimmerWidth={120}
+                speed={4}
+              >
+                ASBAE
+              </ShinyText>
             </Link>
           </div>
 
-          <nav className="hidden lg:flex items-center space-x-12">
+          <nav className={`hidden lg:flex items-center transition-all duration-500 ${isScrolled ? "space-x-6" : "space-x-12"
+            }`}>
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-base cursor-pointer relative group px-3 py-2 rounded-lg hover:bg-primary/10"
+                className={`text-foreground/80 hover:text-primary transition-all duration-300 font-medium cursor-pointer relative group rounded-lg hover:bg-primary/10 ${isScrolled ? "text-sm px-2 py-1.5" : "text-base px-3 py-2"
+                  }`}
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-orange-accent transition-all duration-300 group-hover:w-full rounded-full glow-orange"></span>
-                <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/5 to-orange-accent/5"></span>
+                <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-300 group-hover:w-3/4 rounded-full"></span>
               </a>
             ))}
           </nav>
 
-          <div className="hidden lg:flex">
-            <Button className="btn-primary-glow font-bold px-12 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-2xl" onClick={handleCTAClick}>
+          <div className="hidden lg:flex items-center">
+            <Button
+              className={`btn-primary-glow font-bold rounded-full transform hover:scale-105 transition-all duration-500 shadow-2xl ${isScrolled ? "px-6 py-2 text-sm" : "px-2 lg:px-12 py-2 lg:py-4 text-sm lg:text-lg"
+                }`}
+              onClick={handleCTAClick}
+            >
               Get Started
             </Button>
           </div>
 
           {/* Mobile Navigation */}
           <div className="lg:hidden relative" ref={dropdownRef}>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               className="neomorphic-button relative z-50"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
@@ -160,14 +181,15 @@ export default function Header() {
                 <Menu className="h-6 w-6" />
               )}
             </Button>
-            
+
             {/* Dropdown Menu */}
-            <div 
+            <div
               ref={dropdownContentRef}
-              className="fixed left-0 right-0 top-16 z-50 hidden"
+              className={`fixed left-0 right-0 z-50 hidden ${isScrolled ? "top-20" : "top-16"
+                }`}
             >
               <div className="container mx-auto px-4 py-3">
-                <div className="dropdown-glass p-4">
+                <div className="dropdown-glass p-4 rounded-2xl">
                   <div className="space-y-2">
                     {navItems.map((item) => (
                       <a
@@ -188,7 +210,7 @@ export default function Header() {
                   </div>
                   <div className="pt-3 mt-2 border-t border-foreground/10">
                     <Button
-                      className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-medium rounded-lg py-3 text-base transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-medium rounded-lg py-3 text-base transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
                       onClick={(e) => {
                         handleCTAClick(e)
                         setIsDropdownOpen(false)

@@ -1,5 +1,5 @@
 /*
-	Installed from https://reactbits.dev/ts/tailwind/
+  Installed from https://reactbits.dev/ts/tailwind/
 */
 
 import { useRef, useEffect } from "react";
@@ -103,7 +103,7 @@ export default function DarkVeil({
 
     // Performance optimizations
     const renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio, 1.2), // Further reduced to 1.2
+      dpr: Math.min(window.devicePixelRatio, 1.0), // Cap at 1.0 for background shader
       canvas,
       alpha: true,
       antialias: false, // Disable antialiasing for better performance
@@ -151,7 +151,7 @@ export default function DarkVeil({
     let lastTime = 0;
 
     // Advanced frame management for minimal main thread blocking
-    const targetFPS = 24; // Further reduced to 24 FPS for better performance
+    const targetFPS = 20; // 20 FPS is sufficient for a background shader
     const frameInterval = 1000 / targetFPS;
     let isVisible = true;
 

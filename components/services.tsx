@@ -36,7 +36,7 @@ const Services = () => {
   // Enhanced hover animation function - only on non-touch devices
   const handleCardHover = (index: number, isEntering: boolean) => {
     if ('ontouchstart' in window) return;
-    
+
     const card = cardsRef.current[index];
     if (!card) return;
 
@@ -109,17 +109,17 @@ const Services = () => {
       const ctaSection = ctaRef.current as Element | null;
 
       // Set initial states
-      gsap.set([badge, title, description, ctaSection].filter(Boolean), { 
-        opacity: 0, 
+      gsap.set([badge, title, description, ctaSection].filter(Boolean), {
+        opacity: 0,
         y: 20,
         visibility: "visible"
       });
-      
+
       if (serviceCards.length) {
-        gsap.set(serviceCards, { 
-          opacity: 0, 
+        gsap.set(serviceCards, {
+          opacity: 0,
           y: 30,
-          visibility: "visible" 
+          visibility: "visible"
         });
       }
 
@@ -203,15 +203,15 @@ const Services = () => {
 
   return (
     <div ref={sectionRef} id="services" className="services-section py-12 sm:py-20 lg:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-primary/5" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-950/10" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div ref={headerRef} className="text-center space-y-4 mb-12 sm:mb-16 px-2">
-          <div className="neomorphic inline-block px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg font-semibold bg-gradient-to-r from-yellow-500/80 via-amber-500/80 to-orange-500/80 backdrop-blur-xl border border-yellow-400/30 hover:border-yellow-400/50 text-white shadow-xl hover:shadow-yellow-400/30 transition-all duration-300 transform hover:scale-105 rounded-full drop-shadow-[0_0_15px_rgba(255,193,7,0.4)]">
+          <div className="neomorphic inline-block px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg font-semibold bg-gradient-to-r from-blue-500/80 via-blue-600/80 to-indigo-500/80 backdrop-blur-xl border border-blue-400/30 hover:border-blue-400/50 text-white shadow-xl hover:shadow-blue-400/30 transition-all duration-300 transform hover:scale-105 rounded-full drop-shadow-[0_0_15px_rgba(59,130,246,0.4)]">
             Our Services
           </div>
-          <h2 className="services-title text-2xl sm:text-4xl lg:text-5xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 bg-clip-text text-transparent px-2">
+          <h2 className="services-title text-2xl sm:text-4xl lg:text-5xl font-serif font-bold bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent px-2">
             Comprehensive IT Solutions
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
@@ -230,9 +230,8 @@ const Services = () => {
                 ref={el => {
                   if (el) cardsRef.current[index] = el;
                 }}
-                className={`service-card bg-black/80 backdrop-blur-xl border border-yellow-500/30 hover:border-yellow-400/60 rounded-2xl p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-yellow-400/20 hover:drop-shadow-[0_4px_15px_rgba(255,193,7,0.2)] ${
-                  activeService === index ? "ring-1 ring-yellow-400/50 shadow-yellow-400/20" : ""
-                }`}
+                className={`service-card bg-black/80 backdrop-blur-xl border border-blue-500/30 hover:border-blue-400/60 rounded-2xl p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-blue-400/20 hover:drop-shadow-[0_4px_15px_rgba(255,193,7,0.2)] ${activeService === index ? "ring-1 ring-blue-400/50 shadow-blue-400/20" : ""
+                  }`}
                 onMouseEnter={() => {
                   setActiveService(index);
                   handleCardHover(index, true);
@@ -243,7 +242,7 @@ const Services = () => {
                 <div className="space-y-4 sm:space-y-6">
                   <div className="flex items-center space-x-3 sm:space-x-4">
                     <div
-                      className={`service-icon p-3 sm:p-4 rounded-xl bg-yellow-500/10 backdrop-blur-sm border border-yellow-500/30 hover:border-yellow-400/50 transition-all duration-200 ${service.color}`}
+                      className={`service-icon p-3 sm:p-4 rounded-xl bg-blue-500/10 backdrop-blur-sm border border-blue-500/30 hover:border-blue-400/50 transition-all duration-200 ${service.color}`}
                     >
                       <ServiceIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
@@ -268,7 +267,7 @@ const Services = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="group w-full sm:w-auto px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-transparent hover:bg-yellow-500/10 border border-yellow-500/30 hover:border-yellow-400/50 rounded-lg transition-all duration-200 active:scale-95 sm:hover:scale-105 sm:hover:shadow-md hover:shadow-yellow-400/10 text-white hover:text-yellow-300"
+                    className="group w-full sm:w-auto px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-transparent hover:bg-blue-500/10 border border-blue-500/30 hover:border-blue-400/50 rounded-lg transition-all duration-200 active:scale-95 sm:hover:scale-105 sm:hover:shadow-md hover:shadow-blue-400/10 text-white hover:text-blue-300"
                   >
                     Learn More
                     <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-0.5 group-hover:rotate-12 transition-transform duration-300" />
@@ -283,7 +282,7 @@ const Services = () => {
         <div className="mt-16 sm:mt-20 lg:mt-24 px-2 sm:px-0">
           <div
             ref={ctaRef}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 hover:border-orange-400/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 xl:p-12 text-center shadow-xl hover:shadow-orange-400/10 transition-all duration-300 mx-2 sm:mx-0 transform-gpu will-change-transform"
+            className="bg-white/5 backdrop-blur-xl border border-white/10 hover:border-blue-400/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 xl:p-12 text-center shadow-xl hover:shadow-blue-400/10 transition-all duration-300 mx-2 sm:mx-0 transform-gpu will-change-transform"
           >
             <div className="space-y-4 sm:space-y-6">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold">
@@ -295,7 +294,7 @@ const Services = () => {
               </p>
               <Button
                 size="lg"
-                className="mt-2 sm:mt-4 group bg-gradient-to-r from-orange-500/80 via-amber-500/80 to-yellow-500/80 hover:from-orange-600/90 hover:via-amber-600/90 hover:to-yellow-600/90 border border-orange-400/30 hover:border-orange-400/50 text-white hover:text-orange-100 shadow-lg hover:shadow-orange-400/30 transition-all duration-300 transform hover:scale-105 rounded-2xl px-8 py-6 text-base sm:text-lg font-medium"
+                className="mt-2 sm:mt-4 group bg-gradient-to-r from-blue-500/80 via-blue-600/80 to-indigo-500/80 hover:from-blue-600/90 hover:via-blue-700/90 hover:to-indigo-600/90 border border-blue-400/30 hover:border-blue-400/50 text-white hover:text-blue-100 shadow-lg hover:shadow-blue-400/30 transition-all duration-300 transform hover:scale-105 rounded-2xl px-8 py-6 text-base sm:text-lg font-medium"
                 onClick={(e) => {
                   e.preventDefault();
                   const contactSection = document.getElementById('contact');
