@@ -63,7 +63,7 @@ export default function IndustriesSection() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 max-w-6xl mx-auto">
                     {industries.map((item, index) => (
                         <motion.div
                             key={item.title}
@@ -71,27 +71,27 @@ export default function IndustriesSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.15 }}
-                            whileHover={{ y: -6, scale: 1.02 }}
-                            className={`group relative p-8 rounded-3xl bg-gradient-to-br ${item.gradient} ${item.borderColor} border backdrop-blur-sm overflow-hidden cursor-pointer`}
+                            whileHover={{ y: -4, scale: 1.02 }}
+                            className={`group relative p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${item.gradient} ${item.borderColor} border backdrop-blur-sm overflow-hidden cursor-pointer`}
                         >
                             <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             
                             <motion.div
                                 whileHover={{ scale: 1.1, rotate: 5 }}
-                                className={`w-14 h-14 rounded-2xl ${item.iconBg} ${item.borderColor} border flex items-center justify-center mb-6 ${item.iconColor}`}
+                                className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl ${item.iconBg} ${item.borderColor} border flex items-center justify-center mb-4 sm:mb-5 lg:mb-6 ${item.iconColor}`}
                             >
-                                <item.icon className="w-7 h-7" />
+                                <item.icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                             </motion.div>
 
-                            <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-300 transition-colors">
+                            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white group-hover:text-blue-300 transition-colors">
                                 {item.title}
                             </h3>
-                            <p className="text-blue-200/50 leading-relaxed mb-6">
+                            <p className="text-blue-200/50 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                                 {item.description}
                             </p>
 
-                            <button className="flex items-center gap-2 text-sm font-semibold text-blue-400 group/btn">
-                                Learn More <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                            <button className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-blue-400 group/btn">
+                                Learn More <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform" />
                             </button>
                         </motion.div>
                     ))}

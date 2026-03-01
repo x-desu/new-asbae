@@ -77,7 +77,7 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 lg:gap-8 max-w-6xl mx-auto mt-16 sm:mt-20">
           {redirectCards.map((card, index) => (
             <motion.div
               key={index}
@@ -85,28 +85,28 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className={`group relative p-8 rounded-3xl bg-gradient-to-br ${card.gradient} ${card.borderColor} border backdrop-blur-sm overflow-hidden cursor-pointer`}
+              whileHover={{ y: -4, scale: 1.01 }}
+              className={`group relative p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${card.gradient} ${card.borderColor} border backdrop-blur-sm overflow-hidden cursor-pointer`}
               onClick={() => window.location.href = card.link}
             >
               <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                className={`w-16 h-16 rounded-2xl ${card.iconBg} ${card.borderColor} border flex items-center justify-center mb-6 ${card.iconColor}`}
+                className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl ${card.iconBg} ${card.borderColor} border flex items-center justify-center mb-4 sm:mb-5 lg:mb-6 ${card.iconColor}`}
               >
-                <card.icon className="w-8 h-8" />
+                <card.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8" />
               </motion.div>
               
-              <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors mb-3">
+              <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white group-hover:text-blue-300 transition-colors mb-2 sm:mb-3">
                 {card.title}
               </h3>
-              <p className="text-blue-200/50 text-sm leading-relaxed mb-6">
+              <p className="text-blue-200/50 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                 {card.description}
               </p>
               
-              <div className="flex items-center text-sm font-semibold text-blue-400 group/btn">
-                Connect <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+              <div className="flex items-center text-xs sm:text-sm font-semibold text-blue-400 group/btn">
+                Connect <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4 group-hover/btn:translate-x-1 transition-transform" />
               </div>
             </motion.div>
           ))}
