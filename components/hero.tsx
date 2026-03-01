@@ -131,11 +131,11 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Abstract React Bits Style Tech Node */}
-          <div ref={rightDecorRef} className="relative w-full min-h-[200px] sm:min-h-[250px] md:min-h-[350px] lg:min-h-[700px] flex items-center justify-center perspective-1000 z-10 scale-[0.4] sm:scale-[0.5] md:scale-[0.6] lg:scale-[1.5] xl:scale-[1.8] mt-2 md:mt-4 lg:mt-0">
+          <div ref={rightDecorRef} className="relative w-full h-[280px] sm:h-[320px] md:h-[400px] lg:h-[700px] flex items-center justify-center perspective-1000 z-10 scale-100 sm:scale-110 md:scale-100 lg:scale-[1.4] xl:scale-[1.6] mt-6 sm:mt-8 md:mt-0 lg:mt-0">
 
             {/* Pulsing Background Glow */}
             <motion.div
-              className="absolute w-[150px] sm:w-[200px] md:w-[250px] lg:w-[350px] xl:w-[400px] h-[150px] sm:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[400px] bg-indigo-600/20 blur-[80px] sm:blur-[100px] rounded-full"
+              className="absolute w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px] h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] bg-indigo-600/20 blur-[60px] sm:blur-[80px] lg:blur-[100px] rounded-full"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -145,7 +145,7 @@ export default function Hero() {
 
             {/* Central Morphing Core */}
             <motion.div
-              className="absolute z-20 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 xl:w-64 xl:h-64 border border-blue-500/30 flex items-center justify-center bg-gradient-to-tr from-blue-900/10 to-indigo-900/10 backdrop-blur-xl"
+              className="absolute z-20 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 border border-blue-500/30 flex items-center justify-center bg-gradient-to-tr from-blue-900/10 to-indigo-900/10 backdrop-blur-xl"
               style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}
               animate={{
                 rotate: 360,
@@ -158,25 +158,25 @@ export default function Hero() {
               }}
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             >
-              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full border border-indigo-400/40 flex items-center justify-center bg-indigo-500/10 shadow-[0_0_30px_sm:shadow-[0_0_40px]_rgba(99,102,241,0.3)">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full border border-indigo-400/40 flex items-center justify-center bg-indigo-500/10 shadow-[0_0_40px_rgba(99,102,241,0.3)]">
                 <motion.div animate={{ rotate: -360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}>
-                  <Network className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-10 xl:h-10 text-blue-400 mix-blend-screen" />
+                  <Network className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-8 lg:h-8 xl:w-10 xl:h-10 text-blue-400 mix-blend-screen" />
                 </motion.div>
               </div>
             </motion.div>
 
             {/* Orbiting Satellite 1: Server */}
             <motion.div
-              className="absolute z-30 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-16 xl:h-16 bg-blue-950/60 backdrop-blur-md border border-blue-400/30 rounded-2xl flex flex-col items-center justify-center gap-1 sm:gap-1.5 shadow-xl sm:shadow-2xl shadow-blue-900/20"
+              className="absolute z-30 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-16 lg:h-16 xl:w-16 xl:h-16 bg-blue-950/60 backdrop-blur-md border border-blue-400/30 rounded-2xl flex flex-col items-center justify-center gap-1 shadow-xl lg:shadow-2xl shadow-blue-900/20"
               animate={{
-                y: [0, -15, 0],
-                x: [60, 70, 60],
-                rotate: [0, 10, 0]
+                y: [0, -12, 0],
+                x: [50, 60, 50],
+                rotate: [0, 8, 0]
               }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Server className="w-4 h-4 sm:w-5 sm:h-5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-6 xl:h-6 text-blue-300" />
-              <div className="bg-blue-500/20 h-0.5 sm:h-1 w-4 sm:w-6 md:w-7 lg:w-8 xl:w-8 rounded-full overflow-hidden">
+              <Server className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-6 lg:h-6 text-blue-300" />
+              <div className="bg-blue-500/20 h-0.5 sm:h-1 w-5 sm:w-6 md:w-7 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-blue-400"
                   animate={{ width: ["0%", "100%", "0%"] }}
@@ -187,17 +187,17 @@ export default function Hero() {
 
             {/* Orbiting Satellite 2: Database */}
             <motion.div
-              className="absolute z-30 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-20 xl:h-20 bg-indigo-950/60 backdrop-blur-md border border-indigo-400/30 rounded-full flex items-center justify-center shadow-xl sm:shadow-2xl shadow-indigo-900/20"
+              className="absolute z-30 w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-20 xl:h-20 bg-indigo-950/60 backdrop-blur-md border border-indigo-400/30 rounded-full flex items-center justify-center shadow-xl lg:shadow-2xl shadow-indigo-900/20"
               animate={{
-                y: [40, 50, 40],
-                x: [-80, -70, -80],
-                rotate: [-10, 0, -10]
+                y: [35, 45, 35],
+                x: [-65, -55, -65],
+                rotate: [-8, 0, -8]
               }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              <Database className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-8 xl:h-8 text-indigo-300" />
+              <Database className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-8 lg:h-8 text-indigo-300" />
               <motion.div
-                className="absolute inset-0 rounded-full border sm:border-2 border-indigo-400/0 border-t-indigo-400/50"
+                className="absolute inset-0 rounded-full border-2 border-indigo-400/0 border-t-indigo-400/50"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               />
@@ -205,16 +205,16 @@ export default function Hero() {
 
             {/* Orbiting Satellite 3: Cpu */}
             <motion.div
-              className="absolute z-20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-14 xl:h-14 bg-sky-950/60 backdrop-blur-md border border-sky-400/30 rounded-xl flex items-center justify-center shadow-lg sm:shadow-xl shadow-sky-900/10"
+              className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-14 lg:h-14 xl:w-14 xl:h-14 bg-sky-950/60 backdrop-blur-md border border-sky-400/30 rounded-xl flex items-center justify-center shadow-lg lg:shadow-xl shadow-sky-900/10"
               style={{ rotate: 15 }}
               animate={{
-                y: [-60, -50, -60],
-                x: [15, 20, 15],
-                rotate: [15, 25, 15]
+                y: [-55, -45, -55],
+                x: [12, 18, 12],
+                rotate: [12, 20, 12]
               }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              <Cpu className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-6 xl:h-6 text-sky-300" />
+              <Cpu className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-6 lg:h-6 text-sky-300" />
             </motion.div>
 
             {/* Abstract Tech Grid Background */}
