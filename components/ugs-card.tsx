@@ -124,23 +124,20 @@ export default function UGS_Card({ title, description, icon, features }: UGS_Car
                     </p>
                     <ul className="space-y-1.5">
                         {features.slice(0, 3).map((feature, index) => (
-                            <motion.li
+                            <li
                                 key={index}
-                                initial={{ opacity: 0, x: -8 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.3, delay: index * 0.05 }}
                                 className="flex items-center gap-2 text-sm text-white/70"
                             >
                                 <CheckCircle className="w-3.5 h-3.5 text-blue-500/60 flex-shrink-0" />
                                 <span className="truncate">{feature}</span>
-                            </motion.li>
+                            </li>
                         ))}
                     </ul>
                 </div>
 
                 {/* Action button */}
                 <div className="mt-4 pt-4 border-t border-white/10">
-                    <motion.button
+                    <button
                         className={`
                             w-full 
                             py-2.5 
@@ -155,10 +152,9 @@ export default function UGS_Card({ title, description, icon, features }: UGS_Car
                                 : 'bg-white/5 text-white/70 hover:bg-white/10'
                             }
                         `}
-                        whileTap={{ scale: 0.98 }}
                     >
                         Learn More
-                    </motion.button>
+                    </button>
                 </div>
             </div>
         </motion.div>

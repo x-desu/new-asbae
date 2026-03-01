@@ -208,27 +208,31 @@ export default function Hero() {
             <div className="flex lg:grid lg:grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg mx-auto lg:mx-0 mt-6 sm:mt-8 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory scrollbar-hide">
               <motion.div
                 whileHover={{ y: -3, borderColor: "rgba(59, 130, 246, 0.5)" }}
-                whileTap={{ scale: 0.98 }}
-                className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-blue-500/5 border border-white/5 backdrop-blur-sm hover:bg-blue-500/10 transition-all cursor-pointer group flex flex-col items-start text-left snap-start"
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2 }}
+                className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-blue-500/5 border border-white/5 backdrop-blur-sm hover:bg-blue-500/10 transition-colors cursor-pointer group flex flex-col items-start text-left snap-start"
                 onClick={() => window.location.href = '/services'}
+                style={{ willChange: "transform" }}
               >
-                <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
+                <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform duration-300">
                   <Shield className="w-5 h-5 text-blue-400" />
                 </div>
-                <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Documentation</h3>
+                <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors duration-300">Documentation</h3>
                 <p className="text-[11px] text-muted-foreground leading-tight mt-1">Enterprise-grade IT documentation service.</p>
               </motion.div>
 
               <motion.div
                 whileHover={{ y: -3, borderColor: "rgba(99, 102, 241, 0.5)" }}
-                whileTap={{ scale: 0.98 }}
-                className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-indigo-500/5 border border-white/5 backdrop-blur-sm hover:bg-indigo-500/10 transition-all cursor-pointer group flex flex-col items-start text-left snap-start"
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2 }}
+                className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-indigo-500/5 border border-white/5 backdrop-blur-sm hover:bg-indigo-500/10 transition-colors cursor-pointer group flex flex-col items-start text-left snap-start"
                 onClick={() => window.location.href = '/services'}
+                style={{ willChange: "transform" }}
               >
-                <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform">
+                <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform duration-300">
                   <Zap className="w-5 h-5 text-indigo-400" />
                 </div>
-                <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Governance</h3>
+                <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">Governance</h3>
                 <p className="text-[11px] text-muted-foreground leading-tight mt-1">Unified Governance & Compliance Platform.</p>
               </motion.div>
             </div>
