@@ -4,7 +4,6 @@ import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModalProvider } from "@/components/modal-context"
-import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 
 const poppins = Poppins({
@@ -121,7 +120,6 @@ html {
             {children}
           </ModalProvider>
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   )
