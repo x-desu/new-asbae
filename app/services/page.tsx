@@ -227,7 +227,7 @@ export default function ServicesPage() {
                     </div>
                     
                     <div className="container mx-auto">
-                        <div className="text-center max-w-4xl mx-auto mb-20 animate-fade-in px-4">
+                        <div className="text-center max-w-4xl mx-auto mb-12 animate-fade-in px-4">
                             <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 tracking-tighter">
                                 Unified Governance{" "}
                                 <GradientText
@@ -239,9 +239,51 @@ export default function ServicesPage() {
                                     Solutions
                                 </GradientText>
                             </h2>
-                            <p className="text-lg md:text-xl text-slate-200 font-light leading-relaxed max-w-2xl mx-auto">
-                                Our Unified Governance Solutions provide enterprise-grade compliance, workflow automation, and real-time analytics for modern organizations.
-                            </p>
+            
+                            {/* Why UGS Section - Card Grid Layout */}
+                            <div className="mt-16 lg:mt-20 mb-16">
+                                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-8 text-center">
+                                    Why <span className="text-blue-400">Unified Governance</span>?
+                                </h3>
+                
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {/* Card 1 */}
+                                    <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border border-blue-500/20 backdrop-blur-sm">
+                                        <h4 className="text-lg font-bold text-white mb-2">Modular & Scalable</h4>
+                                        <p className="text-sm text-white/70">Configurable enterprise platform supporting large-scale digital transformation across government and enterprise ecosystems.</p>
+                                    </div>
+                    
+                                    {/* Card 2 */}
+                                    <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 backdrop-blur-sm">
+                                        <h4 className="text-lg font-bold text-white mb-2">Governance-Ready</h4>
+                                        <p className="text-sm text-white/70">Digital backbone enabling secure access control, workflow automation, and compliance monitoring within a unified framework.</p>
+                                    </div>
+                    
+                                    {/* Card 3 */}
+                                    <div className="p-5 rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 backdrop-blur-sm">
+                                        <h4 className="text-lg font-bold text-white mb-2">Rapid Deployment</h4>
+                                        <p className="text-sm text-white/70">Configuration-driven platform requiring no development from scratch, reducing implementation risk and ensuring faster timelines.</p>
+                                    </div>
+                    
+                                    {/* Card 4 */}
+                                    <div className="p-5 rounded-2xl bg-gradient-to-br from-sky-500/10 to-blue-500/10 border border-sky-500/20 backdrop-blur-sm">
+                                        <h4 className="text-lg font-bold text-white mb-2">Cloud/Hybrid Ready</h4>
+                                        <p className="text-sm text-white/70">Supports Cloud, On-Premise, or Hybrid deployment with secure API-based integrations and role-based access controls.</p>
+                                    </div>
+                    
+                                    {/* Card 5 */}
+                                    <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-500/10 to-sky-500/10 border border-teal-500/20 backdrop-blur-sm">
+                                        <h4 className="text-lg font-bold text-white mb-2">Enterprise Security</h4>
+                                        <p className="text-sm text-white/70">Built-in encryption and data protection mechanisms with high availability and scalability for mission-critical operations.</p>
+                                    </div>
+                    
+                                    {/* Card 6 */}
+                                    <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 backdrop-blur-sm">
+                                        <h4 className="text-lg font-bold text-white mb-2">Future-Proof</h4>
+                                        <p className="text-sm text-white/70">Extensible architecture ensuring seamless integration with third-party platforms and future enhancements.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         {/* UGS Services Grid */}
@@ -268,6 +310,86 @@ export default function ServicesPage() {
                                     />
                                 </motion.div>
                             ))}
+                        </div>
+
+                        {/* UGP Platform Overview */}
+                        <div className="mt-24 max-w-5xl mx-auto">
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
+                                viewport={{ once: true }}
+                                className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12"
+                            >
+                                {/* Introduction */}
+                                <div className="text-center mb-12">
+                                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+                                        Unified Governance <span className="text-blue-400">Platform</span>
+                                    </h3>
+                                    <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-3xl mx-auto mb-4">
+                                        The Unified Governance Platform (UGP) is a configurable, modular enterprise platform designed to support large-scale digital transformation initiatives across government and enterprise ecosystems.
+                                    </p>
+                                    <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-3xl mx-auto mb-4">
+                                        UGP provides a governance-ready digital backbone that enables secure access control, workflow automation, compliance monitoring, document management, analytics, and system integration within a unified framework.
+                                    </p>
+                                    <p className="text-sm sm:text-base text-white/60 max-w-3xl mx-auto">
+                                        The platform is configuration-driven and does not require development from scratch, thereby reducing implementation risk and ensuring faster deployment timelines.
+                                    </p>
+                                </div>
+
+                                {/* Why Unified Governance */}
+                                <div className="mb-10">
+                                    <h4 className="text-lg sm:text-xl font-bold text-white mb-6 flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                                            <Zap className="w-4 h-4 text-blue-400" />
+                                        </div>
+                                        Why Unified Governance?
+                                    </h4>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {[
+                                            "Modular & Scalable Architecture",
+                                            "Governance-Ready Design",
+                                            "Tender-Compliant Documentation Support",
+                                            "Enterprise Security Framework",
+                                            "Built for Large-Scale Digital Ecosystems"
+                                        ].map((item, idx) => (
+                                            <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                                                <div>
+                                                    <h5 className="text-sm font-semibold text-white">{item}</h5>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Technical Architecture */}
+                                <div className="mb-10">
+                                    <h4 className="text-lg sm:text-xl font-bold text-white mb-6 flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                                            <Globe className="w-4 h-4 text-indigo-400" />
+                                        </div>
+                                        Technical Architecture
+                                    </h4>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                        {[
+                                            "Cloud, On-Premise, or Hybrid deployment",
+                                            "Secure API-based integrations",
+                                            "Role-based access controls",
+                                            "Encryption and data protection mechanisms",
+                                            "High availability and scalability"
+                                        ].map((item, idx) => (
+                                            <div key={idx} className="flex items-center gap-2 text-sm text-white/70 p-2">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                                                {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <p className="text-sm text-white/60 mt-4">
+                                        The architecture ensures extensibility for future enhancements and integration with third-party platforms.
+                                    </p>
+                                </div>
+                            </motion.div>
                         </div>
                     </div>
                 </section>

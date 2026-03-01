@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { Users, Shield, Layers, BarChart } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -11,34 +12,37 @@ const approachItems = [
         Icon: Users,
         title: "Client-Centric Design",
         description: "Tailored solutions for your workflows",
-        color: "from-blue-400 to-cyan-300",
-        bgClass: "bg-blue-500/10",
-        iconColor: "text-cyan-400",
+        gradient: "from-blue-600/20 to-blue-500/10",
+        borderColor: "border-blue-500/20",
+        iconBg: "bg-blue-500/10",
+        iconColor: "text-blue-400",
     },
     {
         Icon: Shield,
-        title: "Secure & Compliant Systems",
+        title: "Secure & Compliant",
         description: "Advanced encryption and audit-ready platforms",
-        color: "from-indigo-400 to-purple-300",
-        bgClass: "bg-indigo-500/10",
+        gradient: "from-indigo-600/20 to-indigo-500/10",
+        borderColor: "border-indigo-500/20",
+        iconBg: "bg-indigo-500/10",
         iconColor: "text-indigo-400",
     },
     {
         Icon: Layers,
         title: "Scalable Technology",
         description: "Solutions that grow with your organization",
-        color: "from-violet-400 to-fuchsia-300",
-        bgClass: "bg-violet-500/10",
-        iconColor: "text-violet-400",
+        gradient: "from-sky-600/20 to-sky-500/10",
+        borderColor: "border-sky-500/20",
+        iconBg: "bg-sky-500/10",
+        iconColor: "text-sky-400",
     },
     {
         Icon: BarChart,
         title: "Insight & Intelligence",
-        description:
-            "Dashboards, analytics, and KPI tracking for data-driven decisions",
-        color: "from-sky-400 to-blue-300",
-        bgClass: "bg-sky-500/10",
-        iconColor: "text-sky-400",
+        description: "Dashboards, analytics, and KPI tracking",
+        gradient: "from-cyan-600/20 to-cyan-500/10",
+        borderColor: "border-cyan-500/20",
+        iconBg: "bg-cyan-500/10",
+        iconColor: "text-cyan-400",
     },
 ];
 
@@ -104,35 +108,37 @@ export default function HomeOurApproach() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
                     {approachItems.map((item, index) => {
                         const Icon = item.Icon;
                         return (
-                            <div
+                            <motion.div
                                 key={index}
-                                className="approach-card group relative p-[1px] rounded-3xl overflow-hidden w-full"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                whileHover={{ y: -4, scale: 1.02 }}
+                                className={`approach-card group relative p-6 rounded-2xl bg-gradient-to-br ${item.gradient} ${item.borderColor} border backdrop-blur-sm overflow-hidden cursor-pointer`}
                             >
-                                {/* Hover gradient background effect */}
-                                <div
-                                    className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                                />
-
-                                <div className="relative h-full bg-white/[0.03] backdrop-blur-sm border border-white/5 rounded-[23px] p-6 hover:bg-white/[0.06] hover:border-white/15 transition-all duration-500 flex flex-row items-center text-left sm:flex-col sm:items-center sm:text-center lg:items-start lg:text-left">
-                                    <div
-                                        className={`w-12 h-12 flex-shrink-0 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.bgClass} flex items-center justify-center mr-4 sm:mr-0 sm:mb-6 group-hover:scale-110 transition-transform duration-500`}
+                                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                
+                                <div className="relative z-10">
+                                    <motion.div
+                                        whileHover={{ rotate: 360, scale: 1.1 }}
+                                        transition={{ duration: 0.5 }}
+                                        className={`w-12 h-12 rounded-xl ${item.iconBg} border ${item.borderColor} flex items-center justify-center mb-4 ${item.iconColor}`}
                                     >
-                                        <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${item.iconColor}`} />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-3 text-white">
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-blue-100/60 leading-relaxed font-light text-sm sm:text-base">
-                                            {item.description}
-                                        </p>
-                                    </div>
+                                        <Icon className="w-6 h-6" />
+                                    </motion.div>
+                                    <h3 className="text-lg font-bold mb-2 text-white group-hover:text-blue-300 transition-colors">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-blue-200/50 text-sm leading-relaxed">
+                                        {item.description}
+                                    </p>
                                 </div>
-                            </div>
+                            </motion.div>
                         );
                     })}
                 </div>

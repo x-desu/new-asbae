@@ -12,22 +12,31 @@ export default function Contact() {
       title: "Direct Consultation",
       description: "Speak directly with our technical experts about your project requirements and governance needs.",
       link: "/contact",
-      color: "blue"
+      gradient: "from-blue-600/20 to-blue-500/10",
+      borderColor: "border-blue-500/20",
+      iconBg: "bg-blue-500/10",
+      iconColor: "text-blue-400",
     },
     {
       icon: Globe,
       title: "Global Reach",
       description: "We support organizations worldwide with specialized IT documentation and e-Governance solutions.",
       link: "/contact",
-      color: "indigo"
+      gradient: "from-indigo-600/20 to-indigo-500/10",
+      borderColor: "border-indigo-500/20",
+      iconBg: "bg-indigo-500/10",
+      iconColor: "text-indigo-400",
     },
     {
       icon: Shield,
       title: "Secure Partnership",
       description: "Enterprise-grade security and NDA-ready processes for high-stakes government and private contracts.",
       link: "/contact",
-      color: "blue"
-    }
+      gradient: "from-sky-600/20 to-sky-500/10",
+      borderColor: "border-sky-500/20",
+      iconBg: "bg-sky-500/10",
+      iconColor: "text-sky-400",
+    },
   ]
 
   return (
@@ -49,10 +58,11 @@ export default function Contact() {
           </Badge>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
             Ready to Elevate Your <br />
-            <span className="text-blue-500">Infrastructure?</span>
+            <span className="text-blue-400">Infrastructure?</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground/80 leading-relaxed max-w-2xl mx-auto italic">
-            "We don't just write documentation; we build the governance framework for your digital future."
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full" />
+          <p className="text-lg sm:text-xl text-blue-100/60 leading-relaxed max-w-2xl mx-auto">
+            We don't just write documentation; we build the governance framework for your digital future.
           </p>
 
           <div className="pt-4">
@@ -74,25 +84,29 @@ export default function Contact() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="relative group cursor-pointer"
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className={`group relative p-8 rounded-3xl bg-gradient-to-br ${card.gradient} ${card.borderColor} border backdrop-blur-sm overflow-hidden cursor-pointer`}
               onClick={() => window.location.href = card.link}
             >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-500" />
-              <div className="relative h-full glassmorphic rounded-3xl p-8 bg-white/5 border border-white/10 backdrop-blur-xl flex flex-col items-center text-center">
-                <div className={`p-4 rounded-full bg-${card.color}-500/10 text-${card.color}-400 group-hover:bg-${card.color}-500/20 transition-all mb-6 group-hover:scale-110 duration-300`}>
-                  <card.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {card.description}
-                </p>
-                <div className="mt-6 flex items-center text-blue-400/0 group-hover:text-blue-400 transition-all duration-300 font-semibold text-xs uppercase tracking-widest">
-                  Connect <ArrowRight className="ml-1 h-3 w-3" />
-                </div>
+              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                className={`w-16 h-16 rounded-2xl ${card.iconBg} ${card.borderColor} border flex items-center justify-center mb-6 ${card.iconColor}`}
+              >
+                <card.icon className="w-8 h-8" />
+              </motion.div>
+              
+              <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors mb-3">
+                {card.title}
+              </h3>
+              <p className="text-blue-200/50 text-sm leading-relaxed mb-6">
+                {card.description}
+              </p>
+              
+              <div className="flex items-center text-sm font-semibold text-blue-400 group/btn">
+                Connect <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
               </div>
             </motion.div>
           ))}
