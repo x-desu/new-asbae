@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Shield, FileText, Zap, Database, BarChart3, Workflow, Users, Map, Briefcase, CheckCircle2, Smartphone } from "lucide-react";
-import ServiceModal from "@/components/service-modal";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import { useModal } from "@/components/modal-context";
 
 interface UGS_CardProps {
     title: string;
@@ -121,14 +121,19 @@ const serviceDetails: Record<string, {
 
 export default function UGS_Card({ title, description, icon, features }: UGS_CardProps) {
     const [isHovered, setIsHovered] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
+    const { openModal } = useModal();
 
-    const handleOpenModal = () => {
-        setModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setModalOpen(false);
+    const handleOpenModal = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        const serviceInfo = serviceDetails[title] || { details: [], color: "blue" };
+        openModal({
+            title,
+            description,
+            icon,
+            features,
+            details: serviceInfo.details,
+            color: serviceInfo.color
+        });
     };
 
     const serviceInfo = serviceDetails[title] || { details: [], color: "blue" };
@@ -278,17 +283,6 @@ export default function UGS_Card({ title, description, icon, features }: UGS_Car
                     </div>
                 </div>
             </motion.div>
-
-            <ServiceModal
-                isOpen={modalOpen}
-                onClose={handleCloseModal}
-                title={title}
-                description={description}
-                icon={icon}
-                features={features}
-                details={serviceInfo.details}
-                color={serviceInfo.color}
-            />
         </>
     );
 }

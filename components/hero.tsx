@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight, Play, Shield, Zap, Database, Cloud, Network, Server, Cpu } from "lucide-react";
+import { ArrowRight, Shield, Zap, Database, Cloud, Network, Server, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
-import ServiceModal from "@/components/service-modal";
+import { useModal } from "@/components/modal-context";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,27 +18,7 @@ export default function Hero() {
 
   // Right side GSAP ref
   const rightDecorRef = useRef<HTMLDivElement>(null);
-
-  // Modal state
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<{
-    title: string;
-    description: string;
-    icon: React.ReactNode;
-    features: string[];
-    details: string[];
-    color: string;
-  } | null>(null);
-
-  const openModal = (service: typeof selectedService) => {
-    setSelectedService(service);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setTimeout(() => setSelectedService(null), 300);
-  };
+  const { openModal } = useModal();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -286,20 +266,6 @@ export default function Hero() {
 
         </div>
       </div>
-
-      {/* Service Modal */}
-      {selectedService && (
-        <ServiceModal
-          isOpen={modalOpen}
-          onClose={closeModal}
-          title={selectedService.title}
-          description={selectedService.description}
-          icon={selectedService.icon}
-          features={selectedService.features}
-          details={selectedService.details}
-          color={selectedService.color}
-        />
-      )}
 
       {/* Subtle bottom fade */}
       <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />

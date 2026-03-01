@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ModalProvider } from "@/components/modal-context"
 import Script from "next/script"
 
 const poppins = Poppins({
@@ -115,7 +116,9 @@ html {
       </head>
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          {children}
+          <ModalProvider>
+            {children}
+          </ModalProvider>
         </ThemeProvider>
       </body>
     </html>
