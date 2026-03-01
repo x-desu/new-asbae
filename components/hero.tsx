@@ -111,8 +111,8 @@ export default function Hero() {
                   <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
                     <Shield className="w-5 h-5 text-blue-400" />
                   </div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">DaaS</h3>
-                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Enterprise-grade IT documentation.</p>
+                  <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Documentation</h3>
+                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Enterprise-grade IT documentation service.</p>
                 </motion.div>
 
                 <motion.div
@@ -123,8 +123,8 @@ export default function Hero() {
                   <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform">
                     <Zap className="w-5 h-5 text-indigo-400" />
                   </div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">UGP</h3>
-                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Unified Governance & Compliance.</p>
+                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Governance</h3>
+                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Unified Governance & Compliance Platform.</p>
                 </motion.div>
               </div>
             </div>

@@ -11,8 +11,8 @@ export default function Footer() {
 
   const footerLinks = {
     services: [
-      { name: "Documentation as a Service", href: "/services" },
-      { name: "Unified Governance Solutions (UGS)", href: "/services" },
+      { name: "Documentation Service", href: "/services" },
+      { name: "Unified Governance Solutions", href: "/services" },
     ],
     company: [
       { name: "About ASBAE", href: "/about" },

@@ -34,9 +34,9 @@ import UGS_Card from "@/components/ugs-card";
 const UGS_SERVICES = [
     {
         title: "Identity & Access Control",
-        description: "Enterprise-grade security framework with RBAC and SSO.",
+        description: "Enterprise-grade security framework with Role-Based Access Control and Single Sign-On.",
         icon: <Shield className="w-8 h-8 text-blue-400" />,
-        features: ["RBAC", "SSO", "MFA", "Audit Logs"],
+        features: ["Role-Based Access Control", "Single Sign-On", "Multi-Factor Authentication", "Audit Logs"],
         gradient: "from-blue-500/20 to-transparent"
     },
     {
@@ -117,7 +117,7 @@ const ENGAGEMENT_MODELS = [
         icon: <CheckCircle2 className="w-8 h-8 text-blue-500" />
     },
     {
-        title: "Retainer (DaaS)",
+        title: "Retainer (Documentation Service)",
         description: "Ongoing documentation support to work as an extension of your delivery team.",
         icon: <Clock className="w-8 h-8 text-indigo-500" />
     },
@@ -128,21 +128,21 @@ const ENGAGEMENT_MODELS = [
     }
 ];
 
-const DaaS_CATEGORIES = [
+const DOCUMENTATION_CATEGORIES = [
     {
         title: "Business Documentation",
         icon: <Briefcase className="w-8 h-8 text-blue-400" />,
-        items: ["BRD/FRD/SRS", "Use Cases & User Stories", "Process Flow (BPMN)", "Gap Analysis Docs"]
+        items: ["Business Requirement Documents", "Functional Requirement Documents", "Software Requirement Specifications", "Use Cases & User Stories", "Process Flow (BPMN)", "Gap Analysis Documents"]
     },
     {
         title: "Technical Documentation",
         icon: <Code2 className="w-8 h-8 text-indigo-400" />,
-        items: ["System Architecture", "API Specifications", "Database Design (ERD)", "High & Low Level Design"]
+        items: ["System Architecture", "API Specifications", "Database Design", "High & Low Level Design"]
     },
     {
         title: "Tender & Bid Support",
         icon: <FileSearch className="w-8 h-8 text-sky-400" />,
-        items: ["RFP Response Prep", "Bill of Quantities (BOQ)", "Technical Presentations", "Compliance Matrix"]
+        items: ["RFP Response Prep", "Bill of Quantities", "Technical Presentations", "Compliance Matrix"]
     },
     {
         title: "Governance & SOPs",
@@ -217,10 +217,17 @@ export default function ServicesPage() {
 
                 <ServicesHero />
 
-                {/* UGS Section with 3D Grid */}
-                <section id="ugs-section" className="py-24 px-6 relative bg-transparent overflow-hidden">
+                {/* UGS Section with Modern Grid */}
+                <section id="ugs-section" className="py-24 px-6 relative bg-gradient-to-br from-slate-900/50 via-blue-900/20 to-slate-900/50 overflow-hidden">
+                    {/* Animated Background Elements */}
+                    <div className="absolute inset-0">
+                        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+                        <div className="absolute top-20 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-2xl animate-pulse delay-1000" />
+                        <div className="absolute bottom-20 left-1/2 w-80 h-80 bg-sky-500/10 rounded-full blur-2xl animate-pulse delay-2000" />
+                    </div>
+                    
                     <div className="container mx-auto">
-                        <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in px-4">
+                        <div className="text-center max-w-4xl mx-auto mb-20 animate-fade-in px-4">
                             <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 tracking-tighter">
                                 Unified Governance{" "}
                                 <GradientText
@@ -229,30 +236,45 @@ export default function ServicesPage() {
                                     showBorder={false}
                                     className="inline-block"
                                 >
-                                    Solutions (UGS)
+                                    Solutions
                                 </GradientText>
                             </h2>
-                            <p className="text-lg md:text-xl text-muted-foreground/60 font-light leading-relaxed max-w-2xl mx-auto">
-                                Our Unified Governance Solutions provide a standardized framework to manage compliance, workflows, and analytics across large-scale programs.
+                            <p className="text-lg md:text-xl text-slate-200 font-light leading-relaxed max-w-2xl mx-auto">
+                                Our Unified Governance Solutions provide enterprise-grade compliance, workflow automation, and real-time analytics for modern organizations.
                             </p>
                         </div>
-
-                        <div className="flex overflow-x-auto gap-8 pb-12 px-4 snap-x snap-mandatory scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-blue-500/30 hover:scrollbar-thumb-blue-500/50">
+                        
+                        {/* UGS Services Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                             {UGS_SERVICES.map((service, index) => (
-                                <UGS_Card key={index} {...service} />
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <UGS_Card
+                                        title={service.title}
+                                        description={service.description}
+                                        icon={service.icon}
+                                        features={service.features}
+                                        gradient={service.gradient}
+                                    />
+                                </motion.div>
                             ))}
                         </div>
                     </div>
                 </section>
 
-                {/* DaaS Section */}
-                <section id="daas" className="py-24 px-6 relative overflow-hidden bg-white/[0.01] border-y border-white/5">
+                {/* Documentation Service Section */}
+                <section id="documentation-service" className="py-24 px-6 relative overflow-hidden bg-white/[0.01] border-y border-white/5">
                     <div className="container mx-auto">
                         <div className="flex flex-col lg:flex-row items-center justify-between mb-20 gap-10">
                             <div className="max-w-2xl text-center lg:text-left">
                                 <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-                                    Documentation as a{" "}
-                                    <span className="text-blue-500">Service (DaaS)</span>
+                                    Documentation{" "}
+                                    <span className="text-blue-500">Service</span>
                                 </h2>
                                 <p className="text-lg md:text-xl text-muted-foreground/80 leading-relaxed italic">
                                     Governance-Grade Documentation for specialized IT & e-Governance entities.
@@ -261,10 +283,10 @@ export default function ServicesPage() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {DaaS_CATEGORIES.map((cat, idx) => (
+                            {DOCUMENTATION_CATEGORIES.map((cat, idx) => (
                                 <div
                                     key={idx}
-                                    className="daas-card p-10 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-all duration-300 group hover:-translate-y-1"
+                                    className="documentation-card p-10 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-all duration-300 group hover:-translate-y-1"
                                 >
                                     <div className="mb-6 group-hover:scale-110 transition-transform">{cat.icon}</div>
                                     <h3 className="text-xl font-bold mb-6 text-white">{cat.title}</h3>

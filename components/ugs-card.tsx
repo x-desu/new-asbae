@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 interface UGS_CardProps {
     title: string;
@@ -11,114 +12,155 @@ interface UGS_CardProps {
     gradient?: string;
 }
 
-const springValues = {
-    damping: 20,
-    stiffness: 100,
-    mass: 1.5,
-};
-
 export default function UGS_Card({ title, description, icon, features }: UGS_CardProps) {
-    const cardRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
-
-    // 3D Tilt Values
-    const rotateX = useSpring(useMotionValue(0), springValues);
-    const rotateY = useSpring(useMotionValue(0), springValues);
-    const scale = useSpring(1, springValues);
-
-    // Spotlight Positions
-    const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 });
-    const [opacity, setOpacity] = useState(0);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
-
-        const rect = cardRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        // Calculate rotation
-        const rotateXVal = ((e.clientY - centerY) / (rect.height / 2)) * -10;
-        const rotateYVal = ((e.clientX - centerX) / (rect.width / 2)) * 10;
-
-        rotateX.set(rotateXVal);
-        rotateY.set(rotateYVal);
-
-        // Update spotlight position
-        setSpotlightPos({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-        });
-    };
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-        setOpacity(0.5);
-        scale.set(1.02);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-        setOpacity(0);
-        scale.set(1);
-        rotateX.set(0);
-        rotateY.set(0);
-    };
 
     return (
         <motion.div
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                rotateX,
-                rotateY,
-                scale,
-                transformStyle: "preserve-3d",
-            }}
-            className="group relative h-[450px] min-w-[320px] md:min-w-[400px] rounded-2xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm transition-colors duration-500 hover:border-blue-500/50 snap-center shrink-0"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className={`
+                relative 
+                w-full 
+                h-full 
+                min-h-[340px] 
+                sm:min-h-[360px] 
+                md:min-h-[320px]
+                rounded-xl 
+                border 
+                ${isHovered ? 'border-blue-500/40' : 'border-white/10'} 
+                bg-white/[0.03] 
+                backdrop-blur-sm
+                p-5 
+                sm:p-6
+                transition-all 
+                duration-300 
+                ${isHovered ? 'shadow-lg shadow-blue-500/10' : ''}
+                cursor-pointer
+                group
+            `}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
         >
-            {/* Spotlight Gradient */}
-            <div
-                className="pointer-events-none absolute inset-0 transition-opacity duration-300 pointer-events-none"
-                style={{
-                    opacity,
-                    background: `radial-gradient(600px circle at ${spotlightPos.x}px ${spotlightPos.y}px, rgba(59, 130, 246, 0.15), transparent 80%)`,
-                }}
-            />
+            {/* Subtle gradient overlay */}
+            <div className={`
+                absolute 
+                inset-0 
+                rounded-xl 
+                bg-gradient-to-br 
+                from-blue-500/5 
+                via-transparent 
+                to-indigo-500/5 
+                opacity-0 
+                group-hover:opacity-100 
+                transition-opacity 
+                duration-300 
+                pointer-events-none
+            `} />
 
-            {/* Content with Z-axis offset */}
-            <div style={{ transform: "translateZ(30px)" }} className="relative z-10 flex h-full flex-col">
-                <div className="mb-6 inline-flex items-center justify-center rounded-xl bg-blue-500/10 p-4 text-blue-400">
-                    {icon}
+            {/* Content container */}
+            <div className="relative z-10 h-full flex flex-col">
+                {/* Icon section */}
+                <div className="flex items-start justify-between mb-4">
+                    <div className={`
+                        w-10 
+                        h-10 
+                        sm:w-12 
+                        sm:h-12 
+                        rounded-lg 
+                        bg-blue-500/10 
+                        border 
+                        ${isHovered ? 'border-blue-500/30' : 'border-white/10'} 
+                        flex 
+                        items-center 
+                        justify-center 
+                        transition-colors 
+                        duration-300
+                    `}>
+                        <div className="text-blue-400">
+                            {icon}
+                        </div>
+                    </div>
+
+                    {/* Arrow indicator */}
+                    <motion.div
+                        animate={{ x: isHovered ? 4 : 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <ArrowRight className={`
+                            w-5 
+                            h-5 
+                            ${isHovered ? 'text-blue-400' : 'text-white/30'} 
+                            transition-colors 
+                            duration-300
+                        `} />
+                    </motion.div>
                 </div>
 
-                <h3 className="mb-3 text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
+                {/* Title */}
+                <h3 className={`
+                    text-lg 
+                    sm:text-xl 
+                    font-semibold 
+                    text-white 
+                    mb-2 
+                    ${isHovered ? 'text-blue-300' : ''} 
+                    transition-colors 
+                    duration-300
+                    line-clamp-2
+                `}>
                     {title}
                 </h3>
 
-                <p className="mb-6 text-sm leading-relaxed text-muted-foreground/80">
+                {/* Description */}
+                <p className="text-sm text-white/60 mb-4 line-clamp-2 flex-grow">
                     {description}
                 </p>
 
-                <div className="mt-auto">
-                    <div className="mb-3 text-[10px] font-bold uppercase tracking-widest text-blue-500/60">
-                        Key Features
-                    </div>
-                    <ul className="grid grid-cols-1 gap-2">
-                        {features.map((feature, i) => (
-                            <li key={i} className="flex items-center gap-2 text-xs text-muted-foreground/60">
-                                <div className="h-1 w-1 rounded-full bg-blue-500/40" />
-                                {feature}
-                            </li>
+                {/* Features section */}
+                <div className="space-y-2">
+                    <p className="text-xs font-medium text-white/40 uppercase tracking-wider">
+                        Features
+                    </p>
+                    <ul className="space-y-1.5">
+                        {features.slice(0, 3).map((feature, index) => (
+                            <motion.li
+                                key={index}
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.3, delay: index * 0.05 }}
+                                className="flex items-center gap-2 text-sm text-white/70"
+                            >
+                                <CheckCircle className="w-3.5 h-3.5 text-blue-500/60 flex-shrink-0" />
+                                <span className="truncate">{feature}</span>
+                            </motion.li>
                         ))}
                     </ul>
                 </div>
-            </div>
 
-            {/* Glassy Overlay for edge highlight */}
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 group-hover:ring-blue-500/20" />
+                {/* Action button */}
+                <div className="mt-4 pt-4 border-t border-white/10">
+                    <motion.button
+                        className={`
+                            w-full 
+                            py-2.5 
+                            px-4 
+                            rounded-lg 
+                            text-sm 
+                            font-medium 
+                            transition-all 
+                            duration-300 
+                            ${isHovered 
+                                ? 'bg-blue-600 text-white' 
+                                : 'bg-white/5 text-white/70 hover:bg-white/10'
+                            }
+                        `}
+                        whileTap={{ scale: 0.98 }}
+                    >
+                        Learn More
+                    </motion.button>
+                </div>
+            </div>
         </motion.div>
     );
 }

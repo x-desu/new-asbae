@@ -17,9 +17,14 @@ export const quickOptions: QuickOption[] = [
     message: "What services does ASBAE Tech offer?",
   },
   {
-    id: "pricing",
-    label: "Pricing Info",
-    message: "How much do your services cost?",
+    id: "documentation",
+    label: "Documentation Service",
+    message: "Tell me about your Documentation Service",
+  },
+  {
+    id: "governance",
+    label: "Governance Solutions",
+    message: "What are your Unified Governance Solutions?",
   },
   {
     id: "contact",
@@ -37,37 +42,43 @@ export const knowledgeBase: KnowledgeItem[] = [
   {
     keywords: ["hello", "hi", "hey"],
     response:
-      "Hello! I'm ASBAE Tech's AI assistant, integrated right here on our website. I can help you with information about our software development services, IT solutions, pricing, or connect you with our team in India. What would you like to know?",
+      "Hello! I'm ASBAE Tech's AI assistant, integrated right here on our website. I can help you with information about our Documentation Service, Unified Governance Solutions, IT solutions, or connect you with our team. What would you like to know?",
     category: "greeting",
   },
   {
     keywords: ["contact info", "contact details", "how to contact", "email", "phone"],
     response:
-      "You can contact ASBAE Tech:\n📧 Email: hello@asbaetech.com\n📞 Phone: +91 97534 98392 or +91 80751 98043\n🌍 Based in India\n\nWould you like me to help you schedule a consultation or have specific questions about our services?",
+      "You can contact ASBAE Tech:\n📧 Email: hello@asbaetech.com\n📞 Phone: +91 97534 98392 or +91 80751 98043\n🌍 Based in India\n\nWould you like me to help you schedule a consultation or have specific questions about our Documentation or Governance services?",
     category: "contact",
   },
   {
-    keywords: ["basic pricing", "general pricing", "cost", "price"],
+    keywords: ["documentation", "documentation service", "enterprise documentation"],
     response:
-      "As a growing startup, we offer competitive pricing with free consultations and custom quotes based on your specific needs. Our India-based team provides cost-effective solutions without compromising quality. Would you like to schedule a consultation to discuss your project?",
-    category: "pricing",
+      "Our Documentation Service is our flagship offering that provides:\n\n📋 **Enterprise-grade IT Documentation**\n• Comprehensive system documentation\n• Process documentation\n• Technical manuals\n• API documentation\n• User guides\n\n🎯 **Benefits**\n• Streamlined operations\n• Improved knowledge sharing\n• Reduced onboarding time\n• Better compliance management\n\nPerfect for growing businesses that need professional documentation without the overhead of maintaining an in-house team. Would you like to discuss your documentation needs?",
+    category: "services",
   },
   {
     keywords: ["services", "what do you do", "offerings", "solutions"],
     response:
-      "ASBAE Tech provides comprehensive software and IT solutions:\n• Custom Software Development (Web & Mobile)\n• IT Infrastructure & Cloud Solutions\n• Database Design & Management\n• API Development & Integration\n• DevOps & Automation\n• Cybersecurity Solutions\n• Technical Consulting\n\nAs a startup, we focus on delivering innovative solutions tailored to your business needs. Which service interests you most?",
+      "ASBAE Tech provides comprehensive IT and documentation solutions:\n\n🔹 **Documentation Service**\nEnterprise-grade IT documentation services for streamlined operations.\n\n🔹 **Unified Governance Solutions**\nUnified governance and compliance solutions for businesses.\n\n🔹 **Additional Services**\n• Tender & RFP Documentation\n• Technical Writing & Case Studies\n• IT Consulting\n• Web Development\n• Mobile Applications\n• Cloud Solutions\n• Database Management\n• Cybersecurity\n\nWhich service interests you most?",
+    category: "services",
+  },
+  {
+    keywords: ["governance", "unified governance", "governance solutions", "compliance", "governance"],
+    response:
+      "Our Unified Governance Solutions help businesses with:\n\n🔐 **Unified Governance & Compliance**\n• Centralized policy management\n• Compliance tracking\n• Risk assessment\n• Audit trail management\n• Regulatory compliance\n\n📊 **Key Features**\n• Real-time monitoring\n• Automated reporting\n• Custom workflows\n• Integration with existing systems\n\nIdeal for organizations needing to maintain compliance across multiple regulations and standards. Want to learn how our Governance Solutions can help your business?",
     category: "services",
   },
   {
     keywords: ["consultation", "meeting", "schedule", "appointment", "demo"],
     response:
-      "Yes! We offer free consultations to discuss your project needs. You can:\n• Fill out our contact form on this website\n• Call us at +91 97534 98392 or +91 80751 98043\n• Email hello@asbaetech.com\n\nOur India-based team will get back to you within 24 hours to schedule a convenient time for a 1:1 consultation.",
+      "Yes! We offer free consultations to discuss your Documentation, Governance, or other IT needs. You can:\n• Fill out our contact form on this website\n• Call us at +91 97534 98392 or +91 80751 98043\n• Email hello@asbaetech.com\n\nOur team will get back to you within 24 hours to schedule a convenient time for a 1:1 consultation about your specific requirements.",
     category: "consultation",
   },
   {
-    keywords: ["about", "company", "team", "who are you", "asbae", "startup"],
+    keywords: ["about", "company", "team", "who are you", "asbae"],
     response:
-      "ASBAE Tech is an innovative software and IT solutions startup based in India. We specialize in helping businesses transform through technology with custom software development, cloud solutions, and technical consulting. As a growing company, we're passionate about delivering cutting-edge solutions with personalized service and competitive pricing.",
+      "ASBAE Tech is an innovative IT solutions company specializing in:\n\n🎯 **Core Focus Areas**\n• Documentation Service\n• Unified Governance Solutions\n• Enterprise IT Solutions\n\n🌍 **Based in India**, we help businesses streamline operations, ensure compliance, and improve documentation quality. Our team combines technical expertise with business understanding to deliver solutions that drive real results.\n\nLearn more about our services or schedule a consultation to see how we can help your business.",
     category: "about",
   },
 ]
