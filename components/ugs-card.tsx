@@ -11,6 +11,7 @@ interface UGS_CardProps {
     icon: React.ReactNode;
     features: string[];
     gradient?: string;
+    compact?: boolean;
 }
 
 // Service details mapping for modals

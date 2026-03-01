@@ -286,8 +286,40 @@ export default function ServicesPage() {
                             </div>
                         </div>
                         
-                        {/* UGS Services Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+                        {/* UGS Services Grid - Horizontal scroll on mobile, grid on desktop */}
+                        <div className="md:hidden mb-4">
+                            <p className="text-sm text-blue-300/50 mb-3 text-center">Swipe to explore all services</p>
+                            <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
+                                {UGS_SERVICES.map((service, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                                        viewport={{ once: true }}
+                                        className="flex-shrink-0 w-[280px] snap-start"
+                                    >
+                                        <UGS_Card
+                                            title={service.title}
+                                            description={service.description}
+                                            icon={service.icon}
+                                            features={service.features.slice(0, 2)}
+                                            gradient={service.gradient}
+                                            compact
+                                        />
+                                    </motion.div>
+                                ))}
+                            </div>
+                            {/* Dots indicator */}
+                            <div className="flex justify-center gap-1.5 mt-2">
+                                {UGS_SERVICES.map((_, i) => (
+                                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-blue-500/30" />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Desktop Grid - Hidden on mobile */}
+                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                             {UGS_SERVICES.map((service, index) => (
                                 <motion.div
                                     key={index}
