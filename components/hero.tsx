@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, Play, Shield, Zap, Database, Cloud, Network, Server, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll, useTransform } from "framer-motion";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
+import ServiceModal from "@/components/service-modal";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,27 @@ export default function Hero() {
 
   // Right side GSAP ref
   const rightDecorRef = useRef<HTMLDivElement>(null);
+
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<{
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    features: string[];
+    details: string[];
+    color: string;
+  } | null>(null);
+
+  const openModal = (service: typeof selectedService) => {
+    setSelectedService(service);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setTimeout(() => setSelectedService(null), 300);
+  };
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -56,7 +78,7 @@ export default function Hero() {
 
   const handleLearnMoreClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+    window.location.href = '/about';
   };
 
   return (
@@ -211,7 +233,19 @@ export default function Hero() {
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2 }}
                 className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-blue-500/5 border border-white/5 backdrop-blur-sm hover:bg-blue-500/10 transition-colors cursor-pointer group flex flex-col items-start text-left snap-start"
-                onClick={() => window.location.href = '/services'}
+                onClick={() => openModal({
+                  title: "Documentation Service",
+                  description: "Comprehensive enterprise-grade IT documentation solutions that streamline operations and ensure knowledge continuity.",
+                  icon: <Shield className="w-6 h-6" />,
+                  features: ["Technical Writing", "Process Documentation", "API Documentation", "User Guides", "System Architecture"],
+                  details: [
+                    "Create comprehensive documentation for all your IT systems and processes",
+                    "Maintain up-to-date technical specifications and API documentation",
+                    "Develop user-friendly guides and training materials",
+                    "Ensure compliance with industry standards and regulations"
+                  ],
+                  color: "blue"
+                })}
                 style={{ willChange: "transform" }}
               >
                 <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -226,7 +260,19 @@ export default function Hero() {
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2 }}
                 className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-indigo-500/5 border border-white/5 backdrop-blur-sm hover:bg-indigo-500/10 transition-colors cursor-pointer group flex flex-col items-start text-left snap-start"
-                onClick={() => window.location.href = '/services'}
+                onClick={() => openModal({
+                  title: "Unified Governance Solutions",
+                  description: "Centralized governance and compliance platform to manage policies, workflows, and regulatory requirements across your organization.",
+                  icon: <Zap className="w-6 h-6" />,
+                  features: ["Policy Management", "Compliance Tracking", "Audit Trails", "Risk Assessment", "Workflow Automation"],
+                  details: [
+                    "Centralize all governance policies and procedures in one platform",
+                    "Track compliance with regulatory requirements in real-time",
+                    "Automate audit processes and generate comprehensive reports",
+                    "Streamline approval workflows and reduce operational overhead"
+                  ],
+                  color: "indigo"
+                })}
                 style={{ willChange: "transform" }}
               >
                 <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -240,6 +286,20 @@ export default function Hero() {
 
         </div>
       </div>
+
+      {/* Service Modal */}
+      {selectedService && (
+        <ServiceModal
+          isOpen={modalOpen}
+          onClose={closeModal}
+          title={selectedService.title}
+          description={selectedService.description}
+          icon={selectedService.icon}
+          features={selectedService.features}
+          details={selectedService.details}
+          color={selectedService.color}
+        />
+      )}
 
       {/* Subtle bottom fade */}
       <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
