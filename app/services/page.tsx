@@ -524,8 +524,10 @@ export default function ServicesPage() {
                     </div>
                 </section >
 
-            </div >
-            <Footer />
+            </div>
+            <div className="relative z-50">
+                <Footer />
+            </div>
         </main >
     );
 }
