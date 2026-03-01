@@ -289,7 +289,7 @@ export default function ServicesPage() {
                         {/* UGS Services Grid - Horizontal scroll on mobile, grid on desktop */}
                         <div className="md:hidden mb-4">
                             <p className="text-sm text-blue-300/50 mb-3 text-center">Swipe to explore all services</p>
-                            <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
+                            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-[calc((100vw-280px)/2)] sm:px-[calc((100vw-280px)/2)]">
                                 {UGS_SERVICES.map((service, index) => (
                                     <motion.div
                                         key={index}
@@ -297,7 +297,7 @@ export default function ServicesPage() {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.3, delay: index * 0.05 }}
                                         viewport={{ once: true }}
-                                        className="flex-shrink-0 w-[280px] snap-start"
+                                        className="flex-shrink-0 w-[280px] snap-center first:pl-0 last:pr-0"
                                     >
                                         <UGS_Card
                                             title={service.title}
