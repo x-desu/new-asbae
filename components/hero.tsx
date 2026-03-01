@@ -63,79 +63,38 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative w-full flex items-center justify-center bg-background pt-24 lg:pt-28 pb-10"
+      className="relative w-full bg-background pt-20 sm:pt-24 lg:pt-28 pb-8 sm:pb-10 overflow-hidden"
     >
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full flex items-center">
-        {/* Modern 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">
-
-          {/* Left Column: Text & CTAs */}
-          <div className="text-center lg:text-left space-y-4 lg:space-y-6 max-w-2xl mx-auto lg:mx-0 z-20 relative">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
-              <span ref={title1Ref} className="block text-foreground mb-1 lg:mb-2">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full">
+        
+        {/* Mobile-First Layout */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+          
+          {/* Title Section - Mobile Optimized */}
+          <div className="text-center lg:text-left space-y-3 sm:space-y-4 lg:space-y-6 max-w-2xl mx-auto lg:mx-0 z-20 relative order-1">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
+              <span ref={title1Ref} className="block text-foreground text-lg sm:text-xl md:text-2xl mb-1 lg:mb-2 text-white/80">
                 Empowering Organizations with
               </span>
-              <div ref={gradientTextRef} className="block mt-1 lg:mt-2 pb-1 lg:pb-2">
+              <div ref={gradientTextRef} className="block mt-1 lg:mt-2">
                 <GradientText
                   colors={["#3b82f6", "#6366f1", "#60a5fa", "#6366f1", "#3b82f6"]}
                   animationSpeed={8}
                   showBorder={false}
-                  className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold"
+                  className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold"
                 >
                   Intelligent IT Solutions
                 </GradientText>
               </div>
             </h1>
-
-            <p ref={descriptionRef} className="text-sm sm:text-base lg:text-lg text-muted-foreground/90 leading-relaxed max-w-lg mx-auto lg:mx-0">
-              Streamline operations, secure data, and deliver seamless digital services. We unify enterprise IT, SaaS, and cloud into a single, powerful ecosystem.
-            </p>
-
-            <div ref={ctaContainerRef} className="flex flex-col items-center lg:items-start gap-8 pt-2 lg:pt-4">
-              <Button
-                size="lg"
-                className="group w-full sm:w-auto font-semibold px-8 py-6 text-base lg:text-lg bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-[0_0_30px_-5px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105"
-                onClick={handleGetStartedClick}
-              >
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-
-              {/* Featured Cards */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg">
-                <motion.div
-                  whileHover={{ y: -5, borderColor: "rgba(59, 130, 246, 0.5)" }}
-                  className="p-4 rounded-2xl bg-blue-500/5 border border-white/5 backdrop-blur-sm hover:bg-blue-500/10 transition-all cursor-pointer group flex flex-col items-start text-left"
-                  onClick={() => window.location.href = '/services'}
-                >
-                  <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
-                    <Shield className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Documentation</h3>
-                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Enterprise-grade IT documentation service.</p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ y: -5, borderColor: "rgba(99, 102, 241, 0.5)" }}
-                  className="p-4 rounded-2xl bg-indigo-500/5 border border-white/5 backdrop-blur-sm hover:bg-indigo-500/10 transition-all cursor-pointer group flex flex-col items-start text-left"
-                  onClick={() => window.location.href = '/services'}
-                >
-                  <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform">
-                    <Zap className="w-5 h-5 text-indigo-400" />
-                  </div>
-                  <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Governance</h3>
-                  <p className="text-[11px] text-muted-foreground leading-tight mt-1">Unified Governance & Compliance Platform.</p>
-                </motion.div>
-              </div>
-            </div>
           </div>
 
-          {/* Right Column: Abstract React Bits Style Tech Node */}
-          <div ref={rightDecorRef} className="relative w-full h-[280px] sm:h-[320px] md:h-[400px] lg:h-[700px] flex items-center justify-center perspective-1000 z-10 scale-100 sm:scale-110 md:scale-100 lg:scale-[1.4] xl:scale-[1.6] mt-6 sm:mt-8 md:mt-0 lg:mt-0">
+          {/* 3D Visual - Prominent on Mobile */}
+          <div ref={rightDecorRef} className="relative w-full h-[240px] sm:h-[300px] md:h-[350px] lg:h-[600px] flex items-center justify-center perspective-1000 z-10 order-2 my-4 sm:my-6 lg:my-0">
 
             {/* Pulsing Background Glow */}
             <motion.div
-              className="absolute w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px] h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] xl:h-[400px] bg-indigo-600/20 blur-[60px] sm:blur-[80px] lg:blur-[100px] rounded-full"
+              className="absolute w-[180px] sm:w-[220px] md:w-[280px] lg:w-[350px] xl:w-[400px] h-[180px] sm:h-[220px] md:h-[280px] lg:h-[350px] xl:h-[400px] bg-indigo-600/20 blur-[50px] sm:blur-[70px] lg:blur-[100px] rounded-full"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -145,7 +104,7 @@ export default function Hero() {
 
             {/* Central Morphing Core */}
             <motion.div
-              className="absolute z-20 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 border border-blue-500/30 flex items-center justify-center bg-gradient-to-tr from-blue-900/10 to-indigo-900/10 backdrop-blur-xl"
+              className="absolute z-20 w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-56 lg:h-56 xl:w-64 xl:h-64 border border-blue-500/30 flex items-center justify-center bg-gradient-to-tr from-blue-900/10 to-indigo-900/10 backdrop-blur-xl"
               style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}
               animate={{
                 rotate: 360,
@@ -158,25 +117,25 @@ export default function Hero() {
               }}
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full border border-indigo-400/40 flex items-center justify-center bg-indigo-500/10 shadow-[0_0_40px_rgba(99,102,241,0.3)]">
+              <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-22 md:h-22 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-full border border-indigo-400/40 flex items-center justify-center bg-indigo-500/10 shadow-[0_0_40px_rgba(99,102,241,0.3)]">
                 <motion.div animate={{ rotate: -360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}>
-                  <Network className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-8 lg:h-8 xl:w-10 xl:h-10 text-blue-400 mix-blend-screen" />
+                  <Network className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-8 lg:h-8 xl:w-10 xl:h-10 text-blue-400 mix-blend-screen" />
                 </motion.div>
               </div>
             </motion.div>
 
-            {/* Orbiting Satellite 1: Server */}
+            {/* Orbiting Satellites - Simplified for mobile */}
             <motion.div
-              className="absolute z-30 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-16 lg:h-16 xl:w-16 xl:h-16 bg-blue-950/60 backdrop-blur-md border border-blue-400/30 rounded-2xl flex flex-col items-center justify-center gap-1 shadow-xl lg:shadow-2xl shadow-blue-900/20"
+              className="absolute z-30 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-16 lg:h-16 bg-blue-950/60 backdrop-blur-md border border-blue-400/30 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center gap-0.5 sm:gap-1 shadow-lg lg:shadow-2xl shadow-blue-900/20"
               animate={{
-                y: [0, -12, 0],
-                x: [50, 60, 50],
-                rotate: [0, 8, 0]
+                y: [0, -10, 0],
+                x: [40, 50, 40],
+                rotate: [0, 5, 0]
               }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Server className="w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-6 lg:h-6 text-blue-300" />
-              <div className="bg-blue-500/20 h-0.5 sm:h-1 w-5 sm:w-6 md:w-7 rounded-full overflow-hidden">
+              <Server className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-blue-300" />
+              <div className="bg-blue-500/20 h-0.5 sm:h-1 w-4 sm:w-6 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-blue-400"
                   animate={{ width: ["0%", "100%", "0%"] }}
@@ -185,17 +144,16 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Orbiting Satellite 2: Database */}
             <motion.div
-              className="absolute z-30 w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-20 xl:h-20 bg-indigo-950/60 backdrop-blur-md border border-indigo-400/30 rounded-full flex items-center justify-center shadow-xl lg:shadow-2xl shadow-indigo-900/20"
+              className="absolute z-30 w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 bg-indigo-950/60 backdrop-blur-md border border-indigo-400/30 rounded-full flex items-center justify-center shadow-lg lg:shadow-2xl shadow-indigo-900/20"
               animate={{
-                y: [35, 45, 35],
-                x: [-65, -55, -65],
-                rotate: [-8, 0, -8]
+                y: [25, 35, 25],
+                x: [-50, -40, -50],
+                rotate: [-5, 0, -5]
               }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              <Database className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-8 lg:h-8 text-indigo-300" />
+              <Database className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-indigo-300" />
               <motion.div
                 className="absolute inset-0 rounded-full border-2 border-indigo-400/0 border-t-indigo-400/50"
                 animate={{ rotate: 360 }}
@@ -203,29 +161,84 @@ export default function Hero() {
               />
             </motion.div>
 
-            {/* Orbiting Satellite 3: Cpu */}
             <motion.div
-              className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-14 lg:h-14 xl:w-14 xl:h-14 bg-sky-950/60 backdrop-blur-md border border-sky-400/30 rounded-xl flex items-center justify-center shadow-lg lg:shadow-xl shadow-sky-900/10"
-              style={{ rotate: 15 }}
+              className="absolute z-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-14 lg:h-14 bg-sky-950/60 backdrop-blur-md border border-sky-400/30 rounded-lg lg:rounded-xl flex items-center justify-center shadow-md lg:shadow-xl shadow-sky-900/10"
               animate={{
-                y: [-55, -45, -55],
-                x: [12, 18, 12],
-                rotate: [12, 20, 12]
+                y: [-40, -30, -40],
+                x: [10, 15, 10],
+                rotate: [10, 18, 10]
               }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              <Cpu className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-6 lg:h-6 text-sky-300" />
+              <Cpu className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-6 lg:h-6 text-sky-300" />
             </motion.div>
 
-            {/* Abstract Tech Grid Background */}
-            <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #4f46e5 1px, transparent 1px), linear-gradient(to bottom, #4f46e5 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+            {/* Abstract Tech Grid Background - Hidden on small mobile */}
+            <div className="absolute inset-0 z-0 opacity-[0.02] sm:opacity-[0.03] pointer-events-none hidden sm:block" style={{ backgroundImage: 'linear-gradient(to right, #4f46e5 1px, transparent 1px), linear-gradient(to bottom, #4f46e5 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
           </div>
+
+          {/* Description & CTAs - Bottom Section on Mobile */}
+          <div className="text-center lg:text-left space-y-4 sm:space-y-6 max-w-2xl mx-auto lg:mx-0 z-20 relative order-3">
+            <p ref={descriptionRef} className="text-sm sm:text-base lg:text-lg text-muted-foreground/90 leading-relaxed max-w-lg mx-auto lg:mx-0 px-2 sm:px-0">
+              Streamline operations, secure data, and deliver seamless digital services. We unify enterprise IT, SaaS, and cloud into a single, powerful ecosystem.
+            </p>
+
+            <div ref={ctaContainerRef} className="flex flex-col sm:flex-row items-center lg:items-start gap-4 sm:gap-6 pt-2 lg:pt-4">
+              <Button
+                size="lg"
+                className="group w-full sm:w-auto font-semibold px-6 sm:px-8 py-5 sm:py-6 text-base lg:text-lg bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-[0_0_30px_-5px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105"
+                onClick={handleGetStartedClick}
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base border-white/20 text-white hover:bg-white/5 rounded-full transition-all duration-300 hover:scale-105"
+                onClick={handleLearnMoreClick}
+              >
+                Learn More
+              </Button>
+            </div>
+
+            {/* Featured Cards - Horizontal Scroll on Mobile */}
+            <div className="flex lg:grid lg:grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg mx-auto lg:mx-0 mt-6 sm:mt-8 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory scrollbar-hide">
+              <motion.div
+                whileHover={{ y: -3, borderColor: "rgba(59, 130, 246, 0.5)" }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-blue-500/5 border border-white/5 backdrop-blur-sm hover:bg-blue-500/10 transition-all cursor-pointer group flex flex-col items-start text-left snap-start"
+                onClick={() => window.location.href = '/services'}
+              >
+                <div className="p-2 rounded-lg bg-blue-500/20 mb-3 group-hover:scale-110 transition-transform">
+                  <Shield className="w-5 h-5 text-blue-400" />
+                </div>
+                <h3 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Documentation</h3>
+                <p className="text-[11px] text-muted-foreground leading-tight mt-1">Enterprise-grade IT documentation service.</p>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -3, borderColor: "rgba(99, 102, 241, 0.5)" }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-shrink-0 w-[160px] sm:w-auto p-4 rounded-2xl bg-indigo-500/5 border border-white/5 backdrop-blur-sm hover:bg-indigo-500/10 transition-all cursor-pointer group flex flex-col items-start text-left snap-start"
+                onClick={() => window.location.href = '/services'}
+              >
+                <div className="p-2 rounded-lg bg-indigo-500/20 mb-3 group-hover:scale-110 transition-transform">
+                  <Zap className="w-5 h-5 text-indigo-400" />
+                </div>
+                <h3 className="text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">Governance</h3>
+                <p className="text-[11px] text-muted-foreground leading-tight mt-1">Unified Governance & Compliance Platform.</p>
+              </motion.div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       {/* Subtle bottom fade */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-0" />
     </section>
   );
 }
