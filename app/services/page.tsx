@@ -3,191 +3,113 @@ import React, { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
-import { Clock, CheckCircle2, ArrowRight, Briefcase, Code2, FileSearch, Layers, Shield, Users, Workflow, BarChart3, FileText, Settings, Zap, Database, Lock, MousePointer2 } from "lucide-react";
+import {
+    Clock,
+    CheckCircle2,
+    ArrowRight,
+    Briefcase,
+    Code2,
+    FileSearch,
+    Smartphone,
+    Globe,
+    Map,
+    Zap,
+    Workflow,
+    BarChart3,
+    FileText,
+    Users,
+    Shield,
+    Lock,
+    Database,
+    Settings,
+    MousePointer2
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
 import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-const DaaS_CATEGORIES = [
-    {
-        title: "1. Business Documentation",
-        icon: <Briefcase className="w-6 h-6 text-blue-400" />,
-        items: [
-            "Business Requirement Document (BRD)",
-            "Functional Requirement Document (FRD)",
-            "Software Requirement Specification (SRS)",
-            "Scope of Work (SOW)",
-            "Use Cases & User Stories",
-            "Process Flow (BPMN)",
-            "Change Request (CR) Documentation"
-        ]
-    },
-    {
-        title: "2. Technical Documentation",
-        icon: <Code2 className="w-6 h-6 text-indigo-400" />,
-        items: [
-            "Technical Design Document (TDD)",
-            "API Documentation (Swagger/Postman)",
-            "Database Schema & ERD",
-            "System Architecture Design",
-            "Code Review & Logic Documentation",
-            "User Manuals & SOPs"
-        ]
-    },
-    {
-        title: "3. Tender & Compliance Documentation",
-        icon: <FileSearch className="w-6 h-6 text-emerald-400" />,
-        items: [
-            "RFP/RFQ Technical Responses",
-            "Compliance Matrix Mapping",
-            "Technical Eligibility Documents",
-            "Security & Quality (ISO/GDPR/HIPAA align)",
-            "SLA & Non-Disclosure (NDA)"
-        ]
-    },
-    {
-        title: "4. Specialized Project Assets",
-        icon: <Layers className="w-6 h-6 text-blue-400" />,
-        items: [
-            "Release Notes & Version Control",
-            "Data Migration Documentation",
-            "Risk Mitigation & Contingency Plans",
-            "Training Guides for End-Users"
-        ]
-    }
-];
+import UGS_Card from "@/components/ugs-card";
 
 const UGS_SERVICES = [
     {
         title: "Identity & Access Control",
-        subtitle: "Enterprise-grade security framework.",
-        icon: <Shield className="w-6 h-6 text-blue-400" />,
-        features: [
-            "Role-Based Access Control (RBAC)",
-            "Multi-Level User Hierarchy",
-            "Single Sign-On (SSO)",
-            "Multi-Factor Authentication",
-            "Permission Matrix Management",
-            "Complete Audit Logs"
-        ],
-        gradient: "from-blue-500/10 to-transparent"
+        description: "Enterprise-grade security framework with RBAC and SSO.",
+        icon: <Shield className="w-8 h-8 text-blue-400" />,
+        features: ["RBAC", "SSO", "MFA", "Audit Logs"],
+        gradient: "from-blue-500/20 to-transparent"
     },
     {
         title: "Workflow & Process Automation",
-        subtitle: "Digitize and control complex approval processes.",
-        icon: <Workflow className="w-6 h-6 text-indigo-400" />,
-        features: [
-            "Configurable Multi-Level Workflows",
-            "SLA & Escalation Matrix",
-            "Conditional Logic Routing",
-            "Task Assignment & Tracking",
-            "BPMN-Based Flow Architecture",
-            "File & Document Attachments"
-        ],
-        gradient: "from-indigo-500/10 to-transparent"
+        description: "Digitize and control complex approval processes.",
+        icon: <Workflow className="w-8 h-8 text-indigo-400" />,
+        features: ["Multi-Level Workflows", "SLA Monitoring", "Conditional Routing"],
+        gradient: "from-indigo-500/20 to-transparent"
     },
     {
         title: "Reporting & Executive Analytics",
-        subtitle: "Real-time performance intelligence.",
-        icon: <BarChart3 className="w-6 h-6 text-sky-400" />,
-        features: [
-            "Executive Dashboards",
-            "KPI Monitoring",
-            "Drill-Down Reports",
-            "Custom Report Builder",
-            "Scheduled Report Delivery",
-            "Data Export (Excel/PDF)"
-        ],
-        gradient: "from-sky-500/10 to-transparent"
+        description: "Real-time performance intelligence and dashboards.",
+        icon: <BarChart3 className="w-8 h-8 text-sky-400" />,
+        features: ["KPI Monitoring", "Custom Report Builder", "Scheduled Delivery"],
+        gradient: "from-sky-500/20 to-transparent"
     },
     {
         title: "Communication & Notification",
-        subtitle: "Integrated event-driven communication layer.",
-        icon: <Zap className="w-6 h-6 text-blue-400" />,
-        features: [
-            "Email Notifications",
-            "SMS Alerts",
-            "In-App Notifications",
-            "Approval Alerts",
-            "Bulk Messaging",
-            "Reminder & Escalation Triggers"
-        ],
-        gradient: "from-blue-600/10 to-transparent"
+        description: "Integrated event-driven communication layer.",
+        icon: <Zap className="w-8 h-8 text-blue-400" />,
+        features: ["Email & SMS", "In-App Alerts", "Bulk Messaging"],
+        gradient: "from-blue-600/20 to-transparent"
     },
     {
-        title: "Document & Records Management",
-        subtitle: "Governance-focused digital document repository.",
-        icon: <FileText className="w-6 h-6 text-indigo-400" />,
-        features: [
-            "Centralized Document Storage",
-            "Version Control",
-            "Metadata Tagging",
-            "Role-Based Access",
-            "Search & Indexing",
-            "Document Approval Workflow"
-        ],
-        gradient: "from-indigo-600/10 to-transparent"
+        title: "Document & Records Management System",
+        description: "Governance-focused digital document repository.",
+        icon: <FileText className="w-8 h-8 text-indigo-400" />,
+        features: ["Version Control", "Metadata Tagging", "Role-Based Access"],
+        gradient: "from-indigo-600/20 to-transparent"
     },
     {
         title: "Compliance & Audit Management",
-        subtitle: "Built-in governance protection layer.",
-        icon: <CheckCircle2 className="w-6 h-6 text-emerald-400" />,
-        features: [
-            "Change Request (CR) Tracking",
-            "Audit Logs",
-            "Policy & SOP Repository",
-            "Risk & Issue Register",
-            "Approval History Tracking",
-            "Compliance Checklist Framework"
-        ],
-        gradient: "from-emerald-500/10 to-transparent"
+        description: "Standardize and enforce regulatory requirements and audit trails.",
+        icon: <Shield className="w-8 h-8 text-emerald-400" />,
+        features: ["Compliance Checklists", "Audit Trails", "Regulatory Reporting"],
+        gradient: "from-emerald-500/20 to-transparent"
     },
     {
-        title: "Project & Task Management",
-        subtitle: "Structured execution management.",
-        icon: <Briefcase className="w-6 h-6 text-blue-400" />,
-        features: [
-            "Project Lifecycle Tracking",
-            "Milestone Monitoring",
-            "Resource Allocation",
-            "Time Tracking",
-            "Gantt View",
-            "Performance Monitoring"
-        ],
-        gradient: "from-blue-500/10 to-transparent"
+        title: "Stakeholder & Grievance Management",
+        description: "Centralized platform for managing stakeholder interactions and issues.",
+        icon: <Users className="w-8 h-8 text-blue-400" />,
+        features: ["Ticket Tracking", "Public Portal", "Automated Routing"],
+        gradient: "from-blue-500/20 to-transparent"
     },
     {
-        title: "Integration & API Gateway",
-        subtitle: "Secure integration with external systems.",
-        icon: <Settings className="w-6 h-6 text-indigo-400" />,
-        features: [
-            "REST API Integration",
-            "ERP/CRM Integration",
-            "Payment Gateway Integration",
-            "Secure Data Exchange",
-            "API Documentation Layer",
-            "Encryption & Protection"
-        ],
-        gradient: "from-indigo-500/10 to-transparent"
+        title: "Inspection & Certification Management",
+        description: "Automated inspection workflows and digital certification delivery.",
+        icon: <CheckCircle2 className="w-8 h-8 text-indigo-400" />,
+        features: ["Field Inspections", "QR Certificates", "Validity Tracking"],
+        gradient: "from-indigo-500/20 to-transparent"
     },
     {
-        title: "Master Data & Metadata",
-        subtitle: "Enterprise data governance module.",
-        icon: <Database className="w-6 h-6 text-sky-400" />,
-        features: [
-            "Master Data Configuration",
-            "Data Cataloging",
-            "Dataset Indexing",
-            "Data Validation Rules",
-            "Controlled Update Mechanism",
-            "Data Ownership Governance"
-        ],
-        gradient: "from-sky-500/10 to-transparent"
+        title: "Project & Assets Monitoring",
+        description: "Real-time tracking of project health and asset utilization.",
+        icon: <Briefcase className="w-8 h-8 text-sky-400" />,
+        features: ["Milestone Tracking", "Resource Allocation", "Asset Registry"],
+        gradient: "from-sky-500/20 to-transparent"
+    },
+    {
+        title: "Field Data Collection",
+        description: "Mobile-first application for offline/online field activities.",
+        icon: <Smartphone className="w-8 h-8 text-blue-400" />,
+        features: ["Geo-Tagging", "Offline Sync", "Custom Forms"],
+        gradient: "from-blue-500/20 to-transparent"
+    },
+    {
+        title: "Executive Dashboard & GIS Mapping",
+        description: "Geospatial intelligence for decision-makers.",
+        icon: <Map className="w-8 h-8 text-sky-400" />,
+        features: ["Layered Mapping", "Spatial Analysis", "Live Data Feeds"],
+        gradient: "from-sky-600/20 to-transparent"
     }
 ];
-
 const ENGAGEMENT_MODELS = [
     {
         title: "Project-Based",
@@ -206,6 +128,29 @@ const ENGAGEMENT_MODELS = [
     }
 ];
 
+const DaaS_CATEGORIES = [
+    {
+        title: "Business Documentation",
+        icon: <Briefcase className="w-8 h-8 text-blue-400" />,
+        items: ["BRD/FRD/SRS", "Use Cases & User Stories", "Process Flow (BPMN)", "Gap Analysis Docs"]
+    },
+    {
+        title: "Technical Documentation",
+        icon: <Code2 className="w-8 h-8 text-indigo-400" />,
+        items: ["System Architecture", "API Specifications", "Database Design (ERD)", "High & Low Level Design"]
+    },
+    {
+        title: "Tender & Bid Support",
+        icon: <FileSearch className="w-8 h-8 text-sky-400" />,
+        items: ["RFP Response Prep", "Bill of Quantities (BOQ)", "Technical Presentations", "Compliance Matrix"]
+    },
+    {
+        title: "Governance & SOPs",
+        icon: <Shield className="w-8 h-8 text-emerald-400" />,
+        items: ["Manual of Procedures", "User Training Guides", "Change Management", "Policy Frameworks"]
+    }
+];
+
 import ServicesHero from "@/components/services-hero";
 
 export default function ServicesPage() {
@@ -214,7 +159,6 @@ export default function ServicesPage() {
 
         // Sections entrance
         const anims = [
-            { selector: ".ugs-card", y: 40 },
             { selector: ".daas-card", scale: 0.95 },
             { selector: ".engagement-card", y: 30 }
         ];
@@ -250,7 +194,7 @@ export default function ServicesPage() {
     }, []);
 
     return (
-        <main className="relative min-h-screen bg-black text-foreground overflow-x-hidden">
+        <main className="relative min-h-screen bg-transparent text-foreground overflow-x-hidden">
             <Header />
 
             {/* Background Layer */}
@@ -265,17 +209,19 @@ export default function ServicesPage() {
                     resolutionScale={1}
                 />
             </div>
+            {/* Dark overlay for text readability */}
+            <div className="fixed inset-0 bg-black/40" style={{ zIndex: 1 }}></div>
 
             {/* Content Layer */}
             <div className="relative z-10 w-full">
 
                 <ServicesHero />
 
-                {/* UGS Section */}
-                <section id="ugs-section" className="py-24 px-6 relative">
+                {/* UGS Section with 3D Grid */}
+                <section id="ugs-section" className="py-24 px-6 relative bg-transparent overflow-hidden">
                     <div className="container mx-auto">
-                        <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+                        <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in px-4">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 tracking-tighter">
                                 Unified Governance{" "}
                                 <GradientText
                                     colors={["#3b82f6", "#6366f1", "#60a5fa", "#6366f1", "#3b82f6"]}
@@ -286,49 +232,14 @@ export default function ServicesPage() {
                                     Solutions (UGS)
                                 </GradientText>
                             </h2>
-                            <p className="text-lg md:text-xl text-muted-foreground/80 font-light leading-relaxed">
+                            <p className="text-lg md:text-xl text-muted-foreground/60 font-light leading-relaxed max-w-2xl mx-auto">
                                 Our Unified Governance Solutions provide a standardized framework to manage compliance, workflows, and analytics across large-scale programs.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {UGS_SERVICES.map((service, idx) => (
-                                <div
-                                    key={idx}
-                                    className="ugs-card group relative p-8 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-xl border border-white/5 hover:border-blue-500/40 hover:bg-white/[0.04] transition-all duration-500 flex flex-col h-full overflow-hidden"
-                                >
-                                    {/* Accent Glow */}
-                                    <div className={`absolute -top-32 -right-32 w-64 h-64 bg-gradient-to-br ${service.gradient} blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-
-                                    <div className="relative z-10 flex flex-col h-full">
-                                        <div className="mb-6 p-4 w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/10 transition-all duration-500">
-                                            {service.icon}
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                                            {service.title}
-                                        </h3>
-                                        <p className="text-blue-200/50 text-sm mb-8 italic">
-                                            {service.subtitle}
-                                        </p>
-
-                                        <ul className="space-y-3 mb-8 flex-grow">
-                                            {service.features.map((feature, i) => (
-                                                <li key={i} className="flex items-center gap-2 text-[13px] text-muted-foreground/60 transition-colors group-hover:text-muted-foreground/90">
-                                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500/40 shrink-0" />
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        <Button
-                                            variant="ghost"
-                                            className="w-fit p-0 h-auto text-blue-400/80 hover:text-blue-300 hover:bg-transparent flex items-center gap-2 group/btn"
-                                        >
-                                            <span className="text-xs font-semibold uppercase tracking-wider">Explore Capabilities</span>
-                                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                        </Button>
-                                    </div>
-                                </div>
+                        <div className="flex overflow-x-auto gap-8 pb-12 px-4 snap-x snap-mandatory scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-blue-500/30 hover:scrollbar-thumb-blue-500/50">
+                            {UGS_SERVICES.map((service, index) => (
+                                <UGS_Card key={index} {...service} />
                             ))}
                         </div>
                     </div>
@@ -369,10 +280,10 @@ export default function ServicesPage() {
                             ))}
                         </div>
                     </div>
-                </section>
+                </section >
 
                 {/* Engagement Models */}
-                <section className="py-24 px-6">
+                < section className="py-24 px-6" >
                     <div className="container mx-auto">
                         <div className="text-center mb-20">
                             <h2 className="text-4xl font-bold mb-4">Flexible Engagement</h2>
@@ -395,10 +306,10 @@ export default function ServicesPage() {
                             ))}
                         </div>
                     </div>
-                </section>
+                </section >
 
                 {/* Contact CTA */}
-                <section className="py-32 px-6 relative overflow-hidden">
+                < section className="py-32 px-6 relative overflow-hidden" >
                     <div className="container mx-auto max-w-5xl">
                         <div className="relative p-12 md:p-20 rounded-[3rem] overflow-hidden text-center backdrop-blur-3xl border border-white/10">
                             <div className="absolute inset-0 bg-blue-600/5 z-0" />
@@ -430,10 +341,10 @@ export default function ServicesPage() {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section >
 
-            </div>
+            </div >
             <Footer />
-        </main>
+        </main >
     );
 }

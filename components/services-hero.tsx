@@ -52,7 +52,7 @@ export default function ServicesHero() {
     return (
         <section
             ref={containerRef}
-            className="relative w-full min-h-[85svh] lg:min-h-screen flex items-center justify-center overflow-hidden bg-background pt-24 lg:pt-28 pb-10"
+            className="relative w-full min-h-[85svh] lg:min-h-screen flex items-center justify-center overflow-hidden bg-transparent pt-24 lg:pt-28 pb-10"
         >
             <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full h-full flex items-center">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">

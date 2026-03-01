@@ -13,8 +13,6 @@ export default function Footer() {
     services: [
       { name: "Documentation as a Service", href: "/services" },
       { name: "Unified Governance Solutions (UGS)", href: "/services" },
-      { name: "Technical Consulting", href: "/services" },
-      { name: "Process Optimization", href: "/services" },
     ],
     company: [
       { name: "About ASBAE", href: "/about" },
