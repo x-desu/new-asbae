@@ -152,7 +152,7 @@ export default function ContactForm() {
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-white/10 text-white">
                         <SelectItem value="daas">Documentation as a Service (DaaS)</SelectItem>
-                        <SelectItem value="ugp">Unified Governance & Compliance (UGP)</SelectItem>
+                        <SelectItem value="ugp">Unified Governance Solutions (UGS)</SelectItem>
                         <SelectItem value="tender-documentation">Tender & RFP Documentation</SelectItem>
                         <SelectItem value="technical-writing">Technical Writing & Case Studies</SelectItem>
                         <SelectItem value="other">Other Inquiry</SelectItem>

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
-import { Clock, CheckCircle2, ArrowRight, Briefcase, Code2, FileSearch, Layers, Shield, Users, Workflow, BarChart3, FileText, Settings, Zap } from "lucide-react";
+import { Clock, CheckCircle2, ArrowRight, Briefcase, Code2, FileSearch, Layers, Shield, Users, Workflow, BarChart3, FileText, Settings, Zap, Database, Lock, MousePointer2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
 import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil";
@@ -59,36 +59,132 @@ const DaaS_CATEGORIES = [
     }
 ];
 
-const UGP_MODULES = [
+const UGS_SERVICES = [
     {
-        title: "RBAC & Identity",
-        description: "Granular Role-Based Access Control and centralized identity management for enterprise security.",
-        icon: <Users className="w-5 h-5" />
+        title: "Identity & Access Control",
+        subtitle: "Enterprise-grade security framework.",
+        icon: <Shield className="w-6 h-6 text-blue-400" />,
+        features: [
+            "Role-Based Access Control (RBAC)",
+            "Multi-Level User Hierarchy",
+            "Single Sign-On (SSO)",
+            "Multi-Factor Authentication",
+            "Permission Matrix Management",
+            "Complete Audit Logs"
+        ],
+        gradient: "from-blue-500/10 to-transparent"
     },
     {
-        title: "Workflow Engine",
-        description: "Dynamic process automation with multi-level approvals and configurable business logic.",
-        icon: <Workflow className="w-5 h-5" />
+        title: "Workflow & Process Automation",
+        subtitle: "Digitize and control complex approval processes.",
+        icon: <Workflow className="w-6 h-6 text-indigo-400" />,
+        features: [
+            "Configurable Multi-Level Workflows",
+            "SLA & Escalation Matrix",
+            "Conditional Logic Routing",
+            "Task Assignment & Tracking",
+            "BPMN-Based Flow Architecture",
+            "File & Document Attachments"
+        ],
+        gradient: "from-indigo-500/10 to-transparent"
     },
     {
-        title: "Real-time Analytics",
-        description: "Comprehensive dashboards providing visibility into operations and compliance health.",
-        icon: <BarChart3 className="w-5 h-5" />
+        title: "Reporting & Executive Analytics",
+        subtitle: "Real-time performance intelligence.",
+        icon: <BarChart3 className="w-6 h-6 text-sky-400" />,
+        features: [
+            "Executive Dashboards",
+            "KPI Monitoring",
+            "Drill-Down Reports",
+            "Custom Report Builder",
+            "Scheduled Report Delivery",
+            "Data Export (Excel/PDF)"
+        ],
+        gradient: "from-sky-500/10 to-transparent"
     },
     {
-        title: "Audit & Compliance",
-        description: "Automated audit logs and compliance reporting to ensure regulatory adherence.",
-        icon: <Shield className="w-5 h-5" />
+        title: "Communication & Notification",
+        subtitle: "Integrated event-driven communication layer.",
+        icon: <Zap className="w-6 h-6 text-blue-400" />,
+        features: [
+            "Email Notifications",
+            "SMS Alerts",
+            "In-App Notifications",
+            "Approval Alerts",
+            "Bulk Messaging",
+            "Reminder & Escalation Triggers"
+        ],
+        gradient: "from-blue-600/10 to-transparent"
     },
     {
-        title: "Document Management",
-        description: "Centralized repository for all project and enterprise documentation with version control.",
-        icon: <FileText className="w-5 h-5" />
+        title: "Document & Records Management",
+        subtitle: "Governance-focused digital document repository.",
+        icon: <FileText className="w-6 h-6 text-indigo-400" />,
+        features: [
+            "Centralized Document Storage",
+            "Version Control",
+            "Metadata Tagging",
+            "Role-Based Access",
+            "Search & Indexing",
+            "Document Approval Workflow"
+        ],
+        gradient: "from-indigo-600/10 to-transparent"
     },
     {
-        title: "System Integration",
-        description: "Seamlessly connect with existing enterprise systems through robust API frameworks.",
-        icon: <Settings className="w-5 h-5" />
+        title: "Compliance & Audit Management",
+        subtitle: "Built-in governance protection layer.",
+        icon: <CheckCircle2 className="w-6 h-6 text-emerald-400" />,
+        features: [
+            "Change Request (CR) Tracking",
+            "Audit Logs",
+            "Policy & SOP Repository",
+            "Risk & Issue Register",
+            "Approval History Tracking",
+            "Compliance Checklist Framework"
+        ],
+        gradient: "from-emerald-500/10 to-transparent"
+    },
+    {
+        title: "Project & Task Management",
+        subtitle: "Structured execution management.",
+        icon: <Briefcase className="w-6 h-6 text-blue-400" />,
+        features: [
+            "Project Lifecycle Tracking",
+            "Milestone Monitoring",
+            "Resource Allocation",
+            "Time Tracking",
+            "Gantt View",
+            "Performance Monitoring"
+        ],
+        gradient: "from-blue-500/10 to-transparent"
+    },
+    {
+        title: "Integration & API Gateway",
+        subtitle: "Secure integration with external systems.",
+        icon: <Settings className="w-6 h-6 text-indigo-400" />,
+        features: [
+            "REST API Integration",
+            "ERP/CRM Integration",
+            "Payment Gateway Integration",
+            "Secure Data Exchange",
+            "API Documentation Layer",
+            "Encryption & Protection"
+        ],
+        gradient: "from-indigo-500/10 to-transparent"
+    },
+    {
+        title: "Master Data & Metadata",
+        subtitle: "Enterprise data governance module.",
+        icon: <Database className="w-6 h-6 text-sky-400" />,
+        features: [
+            "Master Data Configuration",
+            "Data Cataloging",
+            "Dataset Indexing",
+            "Data Validation Rules",
+            "Controlled Update Mechanism",
+            "Data Ownership Governance"
+        ],
+        gradient: "from-sky-500/10 to-transparent"
     }
 ];
 
@@ -96,45 +192,48 @@ const ENGAGEMENT_MODELS = [
     {
         title: "Project-Based",
         description: "Fixed-scope documentation or platform implementation for specific project milestones.",
-        icon: <CheckCircle2 className="w-6 h-6 text-blue-400" />
+        icon: <CheckCircle2 className="w-8 h-8 text-blue-500" />
     },
     {
         title: "Retainer (DaaS)",
         description: "Ongoing documentation support to work as an extension of your delivery team.",
-        icon: <Clock className="w-6 h-6 text-indigo-400" />
+        icon: <Clock className="w-8 h-8 text-indigo-500" />
     },
     {
         title: "Tender Support",
         description: "Specialized assistance for high-stakes government and enterprise bidding cycles.",
-        icon: <Zap className="w-6 h-6 text-amber-400" />
+        icon: <Zap className="w-8 h-8 text-blue-400" />
     }
 ];
+
+import ServicesHero from "@/components/services-hero";
 
 export default function ServicesPage() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Header animation
-        gsap.fromTo(".services-hero-content",
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
-        );
-
         // Sections entrance
         const anims = [
-            { selector: ".daas-card", y: 40 },
-            { selector: ".ugp-card", scale: 0.95 },
-            { selector: ".engagement-card", x: 30 }
+            { selector: ".ugs-card", y: 40 },
+            { selector: ".daas-card", scale: 0.95 },
+            { selector: ".engagement-card", y: 30 }
         ];
 
         anims.forEach(anim => {
             gsap.utils.toArray(anim.selector).forEach((card: any, i: number) => {
                 gsap.fromTo(card,
-                    { opacity: 0, ...(anim.y ? { y: anim.y } : {}), ...(anim.scale ? { scale: anim.scale } : {}), ...(anim.x ? { x: i % 2 === 0 ? -anim.x : anim.x } : {}) },
                     {
-                        opacity: 1, y: 0, scale: 1, x: 0,
+                        opacity: 0,
+                        ...(anim.y ? { y: anim.y } : {}),
+                        ...(anim.scale ? { scale: anim.scale } : {})
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
                         duration: 0.8,
                         delay: i * 0.1,
+                        ease: "power3.out",
                         scrollTrigger: {
                             trigger: card,
                             start: "top 85%",
@@ -155,7 +254,7 @@ export default function ServicesPage() {
             <Header />
 
             {/* Background Layer */}
-            <div className="fixed inset-0 z-0">
+            <div className="fixed inset-0 z-0 pointer-events-none">
                 <DarkVeil
                     hueShift={28}
                     noiseIntensity={0}
@@ -165,41 +264,87 @@ export default function ServicesPage() {
                     warpAmount={1}
                     resolutionScale={1}
                 />
-                <div className="absolute inset-0 bg-black/50" />
             </div>
 
             {/* Content Layer */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full">
 
-                {/* Hero Section */}
-                <section className="relative pt-32 pb-20 px-6 lg:pt-48 lg:pb-32 overflow-hidden">
-                    <div className="container mx-auto text-center max-w-4xl relative z-10 services-hero-content">
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
-                            <GradientText
-                                colors={["#3b82f6", "#6366f1", "#60a5fa", "#6366f1", "#3b82f6"]}
-                                animationSpeed={8}
-                                showBorder={false}
-                            >
-                                Comprehensive Solution Ecosystem
-                            </GradientText>
-                        </h1>
-                        <p className="text-lg md:text-xl text-blue-100/60 max-w-2xl mx-auto leading-relaxed">
-                            From high-stakes technical documentation to unified enterprise governance, we provide the infrastructure and expertise to scale your digital operations.
-                        </p>
+                <ServicesHero />
+
+                {/* UGS Section */}
+                <section id="ugs-section" className="py-24 px-6 relative">
+                    <div className="container mx-auto">
+                        <div className="text-center max-w-3xl mx-auto mb-20 animate-fade-in">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+                                Unified Governance{" "}
+                                <GradientText
+                                    colors={["#3b82f6", "#6366f1", "#60a5fa", "#6366f1", "#3b82f6"]}
+                                    animationSpeed={8}
+                                    showBorder={false}
+                                    className="inline-block"
+                                >
+                                    Solutions (UGS)
+                                </GradientText>
+                            </h2>
+                            <p className="text-lg md:text-xl text-muted-foreground/80 font-light leading-relaxed">
+                                Our Unified Governance Solutions provide a standardized framework to manage compliance, workflows, and analytics across large-scale programs.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {UGS_SERVICES.map((service, idx) => (
+                                <div
+                                    key={idx}
+                                    className="ugs-card group relative p-8 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-xl border border-white/5 hover:border-blue-500/40 hover:bg-white/[0.04] transition-all duration-500 flex flex-col h-full overflow-hidden"
+                                >
+                                    {/* Accent Glow */}
+                                    <div className={`absolute -top-32 -right-32 w-64 h-64 bg-gradient-to-br ${service.gradient} blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+
+                                    <div className="relative z-10 flex flex-col h-full">
+                                        <div className="mb-6 p-4 w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/10 transition-all duration-500">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-blue-200/50 text-sm mb-8 italic">
+                                            {service.subtitle}
+                                        </p>
+
+                                        <ul className="space-y-3 mb-8 flex-grow">
+                                            {service.features.map((feature, i) => (
+                                                <li key={i} className="flex items-center gap-2 text-[13px] text-muted-foreground/60 transition-colors group-hover:text-muted-foreground/90">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500/40 shrink-0" />
+                                                    {feature}
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        <Button
+                                            variant="ghost"
+                                            className="w-fit p-0 h-auto text-blue-400/80 hover:text-blue-300 hover:bg-transparent flex items-center gap-2 group/btn"
+                                        >
+                                            <span className="text-xs font-semibold uppercase tracking-wider">Explore Capabilities</span>
+                                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                                        </Button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </section>
 
                 {/* DaaS Section */}
-                <section id="daas" className="py-20 px-6 bg-white/[0.02] border-y border-white/5">
+                <section id="daas" className="py-24 px-6 relative overflow-hidden bg-white/[0.01] border-y border-white/5">
                     <div className="container mx-auto">
-                        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                            <div className="max-w-2xl">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
-                                    <Shield className="w-8 h-8 text-blue-500" />
-                                    Documentation as a Service (DaaS)
+                        <div className="flex flex-col lg:flex-row items-center justify-between mb-20 gap-10">
+                            <div className="max-w-2xl text-center lg:text-left">
+                                <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+                                    Documentation as a{" "}
+                                    <span className="text-blue-500">Service (DaaS)</span>
                                 </h2>
-                                <p className="text-muted-foreground text-lg italic">
-                                    Governance-Grade Documentation for IT & e-Governance Projects
+                                <p className="text-lg md:text-xl text-muted-foreground/80 leading-relaxed italic">
+                                    Governance-Grade Documentation for specialized IT & e-Governance entities.
                                 </p>
                             </div>
                         </div>
@@ -208,14 +353,14 @@ export default function ServicesPage() {
                             {DaaS_CATEGORIES.map((cat, idx) => (
                                 <div
                                     key={idx}
-                                    className="daas-card p-8 rounded-3xl bg-white/[0.03] backdrop-blur-xl border border-white/5 hover:bg-white/[0.06] hover:border-blue-500/30 transition-all group"
+                                    className="daas-card p-10 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-all duration-300 group hover:-translate-y-1"
                                 >
-                                    <div className="mb-4 group-hover:scale-110 transition-transform">{cat.icon}</div>
-                                    <h3 className="text-xl font-bold mb-4 text-white">{cat.title}</h3>
-                                    <ul className="space-y-3">
+                                    <div className="mb-6 group-hover:scale-110 transition-transform">{cat.icon}</div>
+                                    <h3 className="text-xl font-bold mb-6 text-white">{cat.title}</h3>
+                                    <ul className="space-y-4">
                                         {cat.items.map((item, i) => (
-                                            <li key={i} className="text-[13px] text-blue-100/40 flex items-start gap-2">
-                                                <div className="mt-1.5 w-1 h-1 rounded-full bg-blue-500/50 shrink-0" />
+                                            <li key={i} className="text-sm text-muted-foreground/50 flex items-start gap-3">
+                                                <div className="mt-1.5 w-1 h-1 rounded-full bg-blue-500/30 shrink-0" />
                                                 {item}
                                             </li>
                                         ))}
@@ -226,59 +371,26 @@ export default function ServicesPage() {
                     </div>
                 </section>
 
-                {/* UGP Section */}
-                <section id="ugp" className="py-20 px-6">
-                    <div className="container mx-auto">
-                        <div className="text-center max-w-3xl mx-auto mb-16">
-                            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                                Unified Governance Platform (UGP)
-                            </h2>
-                            <p className="text-lg text-muted-foreground italic mb-4">
-                                "A Single Source of Truth for Enterprise Integrity"
-                            </p>
-                            <p className="text-muted-foreground">
-                                Our UGP provides a standardized framework to manage compliance, workflows, and analytics across large-scale government and enterprise programs.
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {UGP_MODULES.map((module, idx) => (
-                                <div
-                                    key={idx}
-                                    className="ugp-card group relative p-8 rounded-[2rem] bg-gradient-to-br from-indigo-500/5 to-transparent backdrop-blur-xl border border-white/5 hover:border-indigo-500/40 hover:bg-white/[0.05] transition-all overflow-hidden"
-                                >
-                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                        {module.icon}
-                                    </div>
-                                    <h3 className="text-xl font-bold mb-4 text-white group-hover:text-indigo-400 transition-colors">
-                                        {module.title}
-                                    </h3>
-                                    <p className="text-blue-100/50 leading-relaxed text-sm font-light">
-                                        {module.description}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
                 {/* Engagement Models */}
-                <section className="py-20 px-6 bg-indigo-500/5">
+                <section className="py-24 px-6">
                     <div className="container mx-auto">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Engagement Models</h2>
-                            <p className="text-muted-foreground">Flexible ways to collaborate based on your organizational goals.</p>
+                        <div className="text-center mb-20">
+                            <h2 className="text-4xl font-bold mb-4">Flexible Engagement</h2>
+                            <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-6" />
+                            <p className="text-muted-foreground text-lg">Scalable collaboration models tailored to your delivery needs.</p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             {ENGAGEMENT_MODELS.map((model, idx) => (
                                 <div
                                     key={idx}
-                                    className="engagement-card text-center p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.03] backdrop-blur-xl hover:bg-white/[0.06] transition-all duration-500"
+                                    className="engagement-card text-center p-10 rounded-[3rem] border border-white/5 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl hover:from-white/[0.1] transition-all duration-500 flex flex-col items-center"
                                 >
-                                    <div className="flex justify-center mb-6">{model.icon}</div>
-                                    <h3 className="text-xl font-bold mb-3 text-white">{model.title}</h3>
-                                    <p className="text-blue-100/60 text-sm leading-relaxed font-light">{model.description}</p>
+                                    <div className="p-6 rounded-3xl bg-blue-900/10 border border-blue-500/20 mb-8">
+                                        {model.icon}
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-4 text-white">{model.title}</h3>
+                                    <p className="text-muted-foreground leading-relaxed font-light">{model.description}</p>
                                 </div>
                             ))}
                         </div>
@@ -286,37 +398,36 @@ export default function ServicesPage() {
                 </section>
 
                 {/* Contact CTA */}
-                <section className="py-24 px-6 relative overflow-hidden">
-                    <div className="container mx-auto max-w-4xl bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2rem] p-12 text-center relative z-10 shadow-2xl overflow-hidden group">
-                        <motion.div
-                            animate={{
-                                scale: [1, 1.1, 1],
-                                rotate: [0, 5, 0]
-                            }}
-                            transition={{ duration: 10, repeat: Infinity }}
-                            className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"
-                        />
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to scale your digital operations?</h2>
-                        <p className="text-blue-100 text-lg mb-10 max-w-xl mx-auto">
-                            Partner with ASBAE TECHNOLOGIES to transform your technical documentation and governance framework.
-                        </p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <Button
-                                size="lg"
-                                variant="default"
-                                className="bg-white text-blue-700 hover:bg-blue-50 font-bold px-8 rounded-full h-14"
-                                onClick={() => window.location.href = '/#contact'}
-                            >
-                                Get a Free Consultation
-                            </Button>
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                className="border-white/30 text-white hover:bg-white/10 font-bold px-8 rounded-full h-14"
-                                onClick={() => window.location.href = '/about'}
-                            >
-                                Learn About Us
-                            </Button>
+                <section className="py-32 px-6 relative overflow-hidden">
+                    <div className="container mx-auto max-w-5xl">
+                        <div className="relative p-12 md:p-20 rounded-[3rem] overflow-hidden text-center backdrop-blur-3xl border border-white/10">
+                            <div className="absolute inset-0 bg-blue-600/5 z-0" />
+                            <div className="relative z-10">
+                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+                                    Ready to Build with <span className="text-blue-500">Precision?</span>
+                                </h2>
+                                <p className="text-blue-100/70 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+                                    Join the ranks of governance-grade institutions leveraging our Unified Governance Solutions.
+                                </p>
+                                <div className="flex flex-col sm:flex-row justify-center gap-6">
+                                    <Button
+                                        size="lg"
+                                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 rounded-full h-16 text-lg shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)] transition-all hover:scale-105 active:scale-95"
+                                        onClick={() => window.location.href = '/contact'}
+                                    >
+                                        Start Your Project
+                                        <ArrowRight className="ml-2 h-5 w-5" />
+                                    </Button>
+                                    <Button
+                                        size="lg"
+                                        variant="outline"
+                                        className="border-white/20 text-white hover:bg-white/5 font-bold px-10 rounded-full h-16 text-lg backdrop-blur-sm transition-all hover:scale-105"
+                                        onClick={() => window.location.href = '/about'}
+                                    >
+                                        How We Work
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>

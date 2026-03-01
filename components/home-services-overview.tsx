@@ -100,18 +100,18 @@ export default function HomeServicesOverview() {
             <div className="container mx-auto px-6 relative z-10">
                 <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                        Documentation as a{" "}
+                        Unified Governance{" "}
                         <GradientText
                             colors={["#3b82f6", "#6366f1", "#60a5fa", "#6366f1", "#3b82f6"]}
                             animationSpeed={8}
                             showBorder={false}
                             className="inline-block"
                         >
-                            Service
+                            Solutions (UGS)
                         </GradientText>
                     </h2>
                     <p className="text-lg md:text-xl text-blue-100/60 font-light leading-relaxed">
-                        Governance-grade documentation for IT & e-Governance projects. We deliver clarity, control, and audit readiness.
+                        Governance-grade documentation and platforms for IT & e-Governance projects. We deliver clarity, control, and audit readiness.
                     </p>
                 </div>
 

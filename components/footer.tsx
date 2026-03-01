@@ -12,7 +12,7 @@ export default function Footer() {
   const footerLinks = {
     services: [
       { name: "Documentation as a Service", href: "/services" },
-      { name: "Gov-Grade IT Solutions", href: "/services" },
+      { name: "Unified Governance Solutions (UGS)", href: "/services" },
       { name: "Technical Consulting", href: "/services" },
       { name: "Process Optimization", href: "/services" },
     ],
