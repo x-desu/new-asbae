@@ -18,6 +18,7 @@ export default function Footer() {
       { name: "About ASBAE", href: "/about" },
       { name: "Our Services", href: "/services" },
       { name: "Contact Us", href: "/contact" },
+      { name: "Statements & Registrations", href: "/statements" },
       { name: "Privacy Policy", href: "/legal/privacy" },
     ],
     legal: [
