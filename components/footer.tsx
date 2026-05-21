@@ -77,7 +77,7 @@ export default function Footer() {
               </div>
 
               {/* Contact Info */}
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <a
                   href="mailto:hello@asbaetech.com"
                   className="flex items-center space-x-3 group"
@@ -87,6 +87,13 @@ export default function Footer() {
                     hello@asbaetech.com
                   </span>
                 </a>
+                
+                <div className="flex items-start space-x-3 group">
+                  <MapPin className="h-5 w-5 text-primary group-hover:text-blue-400 transition-colors flex-shrink-0 mt-0.5" />
+                  <span className="text-sm md:text-base text-muted-foreground group-hover:text-foreground transition-colors">
+                    The Coworkers, Vikaskhand 5, Gwari Village, Vikas Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010
+                  </span>
+                </div>
               </div>
 
               {/* Social Links */}
