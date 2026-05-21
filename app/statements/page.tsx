@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
-import { FileText, Download, Eye, ExternalLink } from "lucide-react";
+import { FileText, Download, Eye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil";
 
 interface PDFDocument {
@@ -75,33 +76,33 @@ export default function StatementsPage() {
       {/* Content Layer */}
       <div className="relative z-10 w-full">
         {/* Hero Section */}
-        <section className="py-20 px-6 border-b border-white/10">
+        <section className="py-16 md:py-24 px-4 md:px-6">
           <div className="container mx-auto max-w-4xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center space-y-6"
+              className="text-center space-y-4"
             >
-              <div className="inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
-                <span className="text-sm font-medium text-blue-400">Statements & Registrations</span>
+              <div className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-blue-500/10 backdrop-blur-sm text-blue-300 text-xs font-medium border border-blue-500/20">
+                <span>Statements & Registrations</span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Our <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">Capability Statements</span>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+                Capability Statements
               </h1>
 
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Access ASBAE&apos;s official organizational and technical capability statements. Download or review our comprehensive credentials and resource capabilities.
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+                Access ASBAE&apos;s official organizational and technical capability statements. Download or review our comprehensive credentials.
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* PDF Documents Grid */}
-        <section className="py-20 px-6">
-          <div className="container mx-auto max-w-5xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="py-12 md:py-16 px-4 md:px-6">
+          <div className="container mx-auto max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {PDF_DOCUMENTS.map((doc, index) => (
                 <motion.div
                   key={doc.id}
@@ -109,55 +110,47 @@ export default function StatementsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:border-blue-500/30 transition-all duration-300"
                 >
-                  {/* Card Header with Icon */}
-                  <div className="p-6 border-b border-white/5 bg-gradient-to-r from-blue-500/10 to-indigo-500/10">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-4 flex-1">
-                        <div className="p-3 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500/30 transition-colors">
-                          <FileText className="w-6 h-6" />
+                  <Card className="flex flex-col h-full">
+                    <CardHeader className="border-b pb-4">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 flex-shrink-0">
+                          <FileText className="w-5 h-5" />
                         </div>
-                        <div className="flex-1">
-                          <h3 className="text-lg font-bold text-white mb-1">{doc.title}</h3>
-                          <p className="text-sm text-blue-400/80">{doc.pages} Pages</p>
+                        <div className="flex-1 min-w-0">
+                          <CardTitle className="text-base md:text-lg line-clamp-2">{doc.title}</CardTitle>
+                          <CardDescription className="text-xs mt-1">{doc.pages} Pages</CardDescription>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </CardHeader>
 
-                  {/* Card Body */}
-                  <div className="p-6 space-y-6">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {doc.description}
-                    </p>
+                    <CardContent className="flex-1 py-4">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {doc.description}
+                      </p>
+                    </CardContent>
 
-                    {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <CardFooter className="flex flex-col sm:flex-row gap-2 border-t pt-4">
                       <Button
                         onClick={() => handleView(doc)}
                         variant="outline"
-                        className="flex-1 group/btn border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10"
+                        size="sm"
+                        className="flex-1 text-xs md:text-sm"
                       >
-                        <Eye className="w-4 h-4 mr-2 group-hover/btn:text-blue-400" />
+                        <Eye className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5" />
                         View PDF
                       </Button>
 
                       <Button
                         onClick={() => handleDownload(doc)}
-                        className="flex-1 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 hover:from-blue-700/90 hover:to-indigo-700/90 text-white group/btn"
+                        size="sm"
+                        className="flex-1 text-xs md:text-sm"
                       >
-                        <Download className="w-4 h-4 mr-2 group-hover/btn:-translate-y-1 transition-transform" />
+                        <Download className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5" />
                         Download
                       </Button>
-                    </div>
-
-                    {/* File Info */}
-                    <div className="pt-4 border-t border-white/5 text-xs text-muted-foreground space-y-1">
-                      <p>Filename: {doc.filename}</p>
-                      <p>Format: PDF Document</p>
-                    </div>
-                  </div>
+                    </CardFooter>
+                  </Card>
                 </motion.div>
               ))}
             </div>
@@ -166,70 +159,59 @@ export default function StatementsPage() {
 
         {/* PDF Viewer Modal */}
         {selectedPDF && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-4xl max-h-[90vh] rounded-xl overflow-hidden border border-white/10 bg-slate-950 flex flex-col"
+              className="w-full max-w-4xl bg-slate-950 rounded-xl overflow-hidden border border-white/10 my-4 flex flex-col max-h-[90vh]"
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900">
-                <h2 className="text-lg font-semibold text-white">
+              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-slate-900 flex-shrink-0">
+                <h2 className="text-base md:text-lg font-semibold text-white truncate pr-4">
                   {PDF_DOCUMENTS.find((d) => d.id === selectedPDF)?.title}
                 </h2>
                 <button
                   onClick={() => setSelectedPDF(null)}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  className="p-1.5 hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
                   aria-label="Close PDF viewer"
                 >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
               </div>
 
-              {/* PDF Viewer */}
-              <div className="flex-1 overflow-auto bg-slate-950">
+              {/* PDF Viewer - Properly Contained */}
+              <div className="flex-1 overflow-auto bg-slate-950 min-h-0">
                 <iframe
                   src={`${PDF_DOCUMENTS.find((d) => d.id === selectedPDF)?.filePath}#toolbar=1`}
                   title="PDF Viewer"
                   className="w-full h-full border-none"
-                  style={{ minHeight: "500px" }}
                 />
               </div>
 
               {/* Modal Footer */}
-              <div className="flex items-center justify-between p-4 border-t border-white/10 bg-slate-900">
-                <p className="text-sm text-muted-foreground">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 border-t border-white/10 bg-slate-900 flex-shrink-0">
+                <p className="text-xs md:text-sm text-muted-foreground">
                   {PDF_DOCUMENTS.find((d) => d.id === selectedPDF)?.pages} pages
                 </p>
-                <div className="flex gap-3">
+                <div className="flex gap-2 w-full sm:w-auto">
                   <Button
                     onClick={() => {
                       const doc = PDF_DOCUMENTS.find((d) => d.id === selectedPDF);
                       if (doc) handleDownload(doc);
                     }}
                     variant="outline"
-                    className="border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10"
+                    size="sm"
+                    className="flex-1 sm:flex-none text-xs md:text-sm"
                   >
-                    <Download className="w-4 h-4 mr-2" />
+                    <Download className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5" />
                     Download
                   </Button>
                   <Button
                     onClick={() => setSelectedPDF(null)}
                     variant="outline"
-                    className="border-white/20 hover:border-white/40"
+                    size="sm"
+                    className="flex-1 sm:flex-none text-xs md:text-sm"
                   >
                     Close
                   </Button>
