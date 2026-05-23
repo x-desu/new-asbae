@@ -53,36 +53,37 @@ export default function HomeOurApproach() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 75%",
-            },
-        });
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 75%",
+                },
+            });
 
-        tl.fromTo(
-            headerRef.current,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
-        );
+            tl.fromTo(
+                headerRef.current,
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6, ease: "power2.out", immediateRender: false },
+            );
 
-        const cards = gsap.utils.toArray(".approach-card") as HTMLElement[];
-        tl.fromTo(
-            cards,
-            { y: 40, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                stagger: 0.15,
-                ease: "back.out(1.2)",
-            },
-            "-=0.2"
-        );
+            const cards = gsap.utils.toArray<HTMLElement>(".approach-card", containerRef.current);
+            tl.fromTo(
+                cards,
+                { y: 40, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.15,
+                    ease: "back.out(1.2)",
+                    immediateRender: false,
+                },
+                "-=0.2",
+            );
+        }, containerRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (

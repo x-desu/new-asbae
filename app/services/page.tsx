@@ -26,7 +26,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
-import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import UGS_Card from "@/components/ugs-card";
@@ -194,26 +193,10 @@ export default function ServicesPage() {
     }, []);
 
     return (
-        <main className="relative min-h-screen bg-transparent text-foreground overflow-x-hidden">
+        <main className="relative z-[2] min-h-screen overflow-x-hidden bg-transparent text-foreground">
             <Header />
 
-            {/* Background Layer */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <DarkVeil
-                    hueShift={28}
-                    noiseIntensity={0}
-                    scanlineIntensity={0}
-                    speed={0.4}
-                    scanlineFrequency={0}
-                    warpAmount={1}
-                    resolutionScale={1}
-                />
-            </div>
-            {/* Dark overlay for text readability */}
-            <div className="fixed inset-0 bg-black/40" style={{ zIndex: 1 }}></div>
-
-            {/* Content Layer */}
-            <div className="relative z-10 w-full">
+            <div className="relative w-full">
 
                 <ServicesHero />
 

@@ -4,6 +4,8 @@ import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModalProvider } from "@/components/modal-context"
+import { SiteBackground } from "@/components/site-background"
+import { SITE_URL, rootMetadata } from "@/lib/seo"
 import Script from "next/script"
 
 const poppins = Poppins({
@@ -20,58 +22,13 @@ const inter = Inter({
   weight: ["400", "500", "600"],
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asbaetech.com"
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "hsl(188 85% 53%)",
+  themeColor: "#0a1628",
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: "ASBAE - Software & IT Services",
-    template: "%s | ASBAE",
-  },
-  description:
-    "Professional software development and IT services for modern businesses. Transform your digital presence with ASBAE.",
-  generator: "ASBAE",
-  keywords: ["software development", "IT services", "web development", "mobile apps", "cloud solutions"],
-  authors: [{ name: "ASBAE" }],
-  metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: siteUrl,
-  },
-  openGraph: {
-    type: "website",
-    url: siteUrl,
-    title: "ASBAE - Software & IT Services",
-    description:
-      "Professional software development and IT services for modern businesses. Transform your digital presence with ASBAE.",
-    siteName: "ASBAE",
-    images: [
-      {
-        url: "/images/asbae-logo.png",
-        width: 1200,
-        height: 630,
-        alt: "ASBAE - Software & IT Services",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@asbae",
-    creator: "@asbae",
-    title: "ASBAE - Software & IT Services",
-    description:
-      "Professional software development and IT services for modern businesses. Transform your digital presence with ASBAE.",
-    images: ["/images/asbae-logo.png"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-}
+export const metadata: Metadata = rootMetadata
 
 export default function RootLayout({
   children,
@@ -93,8 +50,8 @@ html {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'ASBAE',
-            url: siteUrl,
-            logo: `${siteUrl}/images/asbae-logo.png`,
+            url: SITE_URL,
+            logo: `${SITE_URL}/images/asbae-logo.png`,
             sameAs: [
               'https://x.com/asbae',
             ],
@@ -105,10 +62,10 @@ html {
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             name: 'ASBAE',
-            url: siteUrl,
+            url: SITE_URL,
             potentialAction: {
               '@type': 'SearchAction',
-              target: `${siteUrl}/?q={search_term_string}`,
+              target: `${SITE_URL}/?q={search_term_string}`,
               'query-input': 'required name=search_term_string',
             },
           })}
@@ -117,6 +74,7 @@ html {
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <ModalProvider>
+            <SiteBackground />
             {children}
           </ModalProvider>
         </ThemeProvider>

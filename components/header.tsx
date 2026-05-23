@@ -1,227 +1,330 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { HStack, VStack } from "@/components/ui/stack"
 import { viewTransition } from "@/lib/view-transitions"
 import gsap from "gsap"
 import Link from "next/link"
-import ShinyText from "@/lib/TextAnimations/ShinyText/ShinyText"
+import { usePathname, useRouter } from "next/navigation"
+import { AsbaeLogo } from "@/components/asbae-logo"
+import { cn } from "@/lib/utils"
+
+type NavItem = {
+  name: string
+  href: string
+  path: string
+  hash?: string
+}
+
+const navLinkClass = (active: boolean) =>
+  cn(
+    "group relative rounded-lg px-3 py-2 text-sm font-medium outline-none ring-blue-400/50 transition-colors duration-200 focus-visible:ring-2",
+    active
+      ? "bg-white/[0.08] text-blue-300"
+      : "text-white/75 hover:bg-white/[0.06] hover:text-blue-300",
+  )
+
+const navUnderlineClass = (active: boolean) =>
+  cn(
+    "absolute inset-x-3 -bottom-px h-px bg-gradient-to-r from-blue-400 to-indigo-400 transition-transform duration-300",
+    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+  )
+
+const mobileNavLinkClass = (active: boolean) =>
+  cn(
+    "block rounded-xl px-4 py-3.5 text-base font-medium transition-colors",
+    active
+      ? "bg-blue-500/15 text-blue-200"
+      : "text-white/90 hover:bg-blue-500/10 hover:text-blue-200",
+  )
 
 export default function Header() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHome = pathname === "/"
+  const [activeHash, setActiveHash] = useState("")
+
+  const navItems = useMemo<NavItem[]>(
+    () => [
+      { name: "Home", href: "/", path: "/" },
+      { name: "Services", href: isHome ? "#services" : "/services", path: "/services", hash: "services" },
+      { name: "About", href: "/about", path: "/about" },
+      {
+        name: "Statements",
+        href: "/statements-and-registrations",
+        path: "/statements-and-registrations",
+      },
+      { name: "Contact", href: isHome ? "#contact" : "/contact", path: "/contact", hash: "contact" },
+    ],
+    [isHome],
+  )
+
+  const isNavActive = useCallback(
+    (item: NavItem) => {
+      if (item.hash) {
+        return isHome && activeHash === `#${item.hash}`
+      }
+      if (item.path === "/") {
+        return pathname === "/" && !activeHash
+      }
+      return pathname === item.path || pathname.startsWith(`${item.path}/`)
+    },
+    [activeHash, isHome, pathname],
+  )
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-
-  // Refs
   const dropdownRef = useRef<HTMLDivElement>(null)
   const dropdownContentRef = useRef<HTMLDivElement>(null)
   const tl = useRef<gsap.core.Timeline | null>(null)
 
-  // GSAP Animations
   useEffect(() => {
     if (!dropdownContentRef.current) return
 
-    tl.current = gsap.timeline({ paused: true })
-      .fromTo(dropdownContentRef.current,
-        { y: -20, opacity: 0, display: 'none' },
-        {
-          y: 0,
-          opacity: 1,
-          display: 'block',
-          duration: 0.3,
-          ease: 'power2.out',
-          backdropFilter: 'blur(10px)',
-          webkitBackdropFilter: 'blur(10px)'
-        }
-      )
+    tl.current = gsap.timeline({ paused: true }).fromTo(
+      dropdownContentRef.current,
+      { y: -16, opacity: 0, display: "none" },
+      {
+        y: 0,
+        opacity: 1,
+        display: "block",
+        duration: 0.28,
+        ease: "power2.out",
+      }
+    )
 
     return () => {
       tl.current?.kill()
     }
   }, [])
 
-  // Toggle dropdown animation
   useEffect(() => {
     if (!tl.current) return
-
     if (isDropdownOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden"
       tl.current.play()
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = ""
       tl.current.reverse()
     }
   }, [isDropdownOpen])
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false)
       }
     }
-
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      document.body.style.overflow = ''
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.body.style.overflow = ""
     }
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
+    const handleScroll = () => setIsScrolled(window.scrollY > 48)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleNavClick = async (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    if (href.startsWith('#')) {
-      await viewTransition.transitionToSection(href, { duration: 600 })
-    } else {
-      // For full page navigation
-      window.location.href = href
+  useEffect(() => {
+    const syncHash = () => setActiveHash(window.location.hash)
+    syncHash()
+    window.addEventListener("hashchange", syncHash)
+    return () => window.removeEventListener("hashchange", syncHash)
+  }, [pathname])
+
+  const handleNavClick = async (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    item: NavItem,
+  ) => {
+    if (item.href.startsWith("#")) {
+      e.preventDefault()
+      const hash = item.href
+      window.history.pushState(null, "", hash)
+      setActiveHash(hash)
+      await viewTransition.transitionToSection(hash, { duration: 600 })
+      return
     }
-  }
 
-  const handleCTAClick = async (e: React.MouseEvent) => {
+    if (item.path === pathname) {
+      e.preventDefault()
+      if (item.path === "/" && activeHash) {
+        window.history.pushState(null, "", "/")
+        setActiveHash("")
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }
+      return
+    }
+
     e.preventDefault()
-    window.location.href = "/contact"
+    setActiveHash("")
+    router.push(item.href)
   }
 
-  const navItems = [
-    { name: "Services", href: "/services" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-  ]
+  const handleCTAClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setActiveHash("")
+    router.push("/contact")
+  }
+
+  const renderNavLink = (item: NavItem, className: string) => {
+    const active = isNavActive(item)
+    const content = (
+      <>
+        {item.name}
+        <span className={navUnderlineClass(active)} />
+      </>
+    )
+
+    if (item.href.startsWith("#")) {
+      return (
+        <a
+          key={item.name}
+          href={item.href}
+          onClick={(e) => void handleNavClick(e, item)}
+          className={className}
+          aria-current={active ? "page" : undefined}
+        >
+          {content}
+        </a>
+      )
+    }
+
+    return (
+      <Link
+        key={item.name}
+        href={item.href}
+        onClick={(e) => void handleNavClick(e, item)}
+        className={className}
+        aria-current={active ? "page" : undefined}
+      >
+        {content}
+      </Link>
+    )
+  }
 
   return (
     <header
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isScrolled
-        ? "top-4 mx-auto max-w-4xl px-2"
-        : "top-0 max-w-full px-0"
-        }`}
+      className={cn(
+        "fixed inset-x-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
+        isScrolled ? "top-3 px-3 sm:px-4" : "top-0 px-0"
+      )}
     >
       <div
-        className={`transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isScrolled
-          ? "bg-background/60 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_80px_rgba(59,130,246,0.06)] rounded-full px-6"
-          : "bg-transparent rounded-none px-4 sm:px-6 lg:px-8"
-          }`}
+        className={cn(
+          "mx-auto transition-all duration-500",
+          isScrolled
+            ? "max-w-5xl rounded-full border border-white/[0.08] bg-[#0a1628]/75 px-4 sm:px-6 shadow-[0_8px_40px_rgba(0,0,0,0.45),0_0_60px_rgba(59,130,246,0.08)] backdrop-blur-2xl"
+            : "max-w-full border-b border-white/[0.04] bg-[#060d18]/40 backdrop-blur-md lg:border-b-0 lg:bg-transparent"
+        )}
       >
-        <div className={`flex items-center justify-between transition-all duration-500 ${isScrolled ? "h-14" : "h-16 lg:h-20"
-          } ${!isScrolled ? "container mx-auto" : ""}`}>
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className={`rounded-full bg-white/10 backdrop-blur-sm border border-white/15 transition-all duration-500 ${isScrolled ? "p-1" : "p-1.5"
-                }`}>
-                <img
-                  src="/images/asbae-logo.png"
-                  alt="ASBAE Logo"
-                  className={`transition-all duration-500 invert brightness-125 ${isScrolled ? 'h-6 w-6' : 'h-7 w-7 lg:h-9 lg:w-9'
-                    }`}
-                />
-              </div>
-              <ShinyText
-                className={`font-serif font-bold tracking-wide transition-all duration-500 ${isScrolled ? "text-xl" : "text-2xl md:text-3xl"}`}
-                baseColor="rgba(96, 165, 250, 0.9)"
-                shineColor="rgba(255, 255, 255, 0.95)"
-                shimmerWidth={120}
-                speed={4}
-              >
-                ASBAE
-              </ShinyText>
-            </Link>
-          </div>
+        <HStack
+          className={cn(
+            "mx-auto h-16 justify-between lg:h-[4.5rem]",
+            !isScrolled && "container px-4 sm:px-6 lg:px-8"
+          )}
+        >
+          <Link href="/" className="shrink-0 rounded-lg outline-none ring-blue-400/50 focus-visible:ring-2">
+            <AsbaeLogo size={isScrolled ? "sm" : "md"} />
+          </Link>
 
-          <nav className={`hidden lg:flex items-center transition-all duration-500 ${isScrolled ? "space-x-6" : "space-x-12"
-            }`}>
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-foreground/80 hover:text-primary transition-all duration-300 font-medium cursor-pointer relative group rounded-lg hover:bg-primary/10 ${isScrolled ? "text-sm px-2 py-1.5" : "text-base px-3 py-2"
-                  }`}
-              >
-                {item.name}
-                <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-500 transition-all duration-300 group-hover:w-3/4 rounded-full"></span>
-              </a>
-            ))}
+          <nav className="hidden lg:flex" aria-label="Main">
+            <HStack space="lg" className="px-2">
+              {navItems.map((item) => renderNavLink(item, navLinkClass(isNavActive(item))))}
+            </HStack>
           </nav>
 
-          <div className="hidden lg:flex items-center">
+          <HStack space="md" className="hidden lg:flex">
             <Button
-              className={`btn-primary-glow font-bold rounded-full transform hover:scale-105 transition-all duration-500 shadow-2xl ${isScrolled ? "px-6 py-2 text-sm" : "px-2 lg:px-12 py-2 lg:py-4 text-sm lg:text-lg"
-                }`}
+              size="lg"
+              className={cn(
+                "btn-primary-glow rounded-full font-semibold shadow-[0_0_24px_rgba(59,130,246,0.35)] transition-transform hover:scale-[1.02]",
+                isScrolled ? "h-10 px-6 text-sm" : "h-11 px-8 text-base"
+              )}
               onClick={handleCTAClick}
             >
               Get Started
             </Button>
-          </div>
+          </HStack>
 
-          {/* Mobile Navigation */}
-          <div className="lg:hidden relative" ref={dropdownRef}>
+          <div className="lg:hidden" ref={dropdownRef}>
             <Button
               variant="ghost"
               size="icon"
-              className="neomorphic-button relative z-50 w-12 h-12 flex items-center justify-center rounded-xl"
+              className="h-11 w-11 rounded-xl border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08]"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              aria-label="Toggle Menu"
+              aria-expanded={isDropdownOpen}
+              aria-label="Toggle menu"
             >
-              {isDropdownOpen ? (
-                <X className="h-7 w-7" />
-              ) : (
-                <Menu className="h-7 w-7" />
-              )}
+              {isDropdownOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
 
-            {/* Dropdown Menu */}
             <div
               ref={dropdownContentRef}
-              className={`fixed left-0 right-0 z-50 hidden ${isScrolled ? "top-20" : "top-16"
-                }`}
+              className={cn(
+                "fixed inset-x-0 z-40 hidden px-4",
+                isScrolled ? "top-[4.25rem]" : "top-16"
+              )}
             >
-              <div className="container mx-auto px-4 py-3">
-                <div className="dropdown-glass p-4 rounded-2xl">
-                  <div className="space-y-2">
-                    {navItems.map((item) => (
-                      <a
+              <div className="dropdown-glass rounded-2xl p-2">
+                <VStack space="xs">
+                  {navItems.map((item) => {
+                    const active = isNavActive(item)
+                    const className = mobileNavLinkClass(active)
+                    const closeMenu = () => setIsDropdownOpen(false)
+
+                    if (item.href.startsWith("#")) {
+                      return (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className={className}
+                          aria-current={active ? "page" : undefined}
+                          onClick={(e) => {
+                            void handleNavClick(e, item)
+                            closeMenu()
+                          }}
+                        >
+                          {item.name}
+                        </a>
+                      )
+                    }
+
+                    return (
+                      <Link
                         key={item.name}
                         href={item.href}
-                        className="group block px-4 py-4 text-base font-medium text-foreground/90 hover:text-primary transition-all duration-300 ease-out hover:bg-foreground/5 rounded-xl border border-transparent hover:border-white/5"
+                        className={className}
+                        aria-current={active ? "page" : undefined}
                         onClick={(e) => {
-                          handleNavClick(e, item.href)
-                          setIsDropdownOpen(false)
+                          void handleNavClick(e, item)
+                          closeMenu()
                         }}
                       >
-                        <span className="relative group-hover:translate-x-2 transition-transform duration-300 flex items-center">
-                          <span className="absolute -left-2 opacity-0 group-hover:opacity-100 text-primary transition-all duration-300">→</span>
-                          <span className="ml-2">{item.name}</span>
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                  <div className="pt-4 mt-2 border-t border-white/10">
-                    <Button
-                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold rounded-xl py-6 text-base transition-all duration-300 transform hover:scale-[1.01] shadow-xl active:scale-[0.98]"
-                      onClick={(e) => {
-                        handleCTAClick(e)
-                        setIsDropdownOpen(false)
-                      }}
-                    >
-                      Get Started
-                    </Button>
-                  </div>
+                        {item.name}
+                      </Link>
+                    )
+                  })}
+                </VStack>
+                <div className="mt-2 border-t border-white/10 pt-2">
+                  <Button
+                    className="btn-primary-glow h-12 w-full rounded-xl font-semibold"
+                    onClick={(e) => {
+                      handleCTAClick(e)
+                      setIsDropdownOpen(false)
+                    }}
+                  >
+                    Get Started
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </HStack>
       </div>
     </header>
   )

@@ -1,21 +1,20 @@
 import type { MetadataRoute } from "next"
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asbaetech.com"
+import { SITE_URL } from "@/lib/seo"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
-  const routes = [
-    "",
-    "/about",
-    "/legal/privacy",
-    "/legal/terms",
-    "/legal/cookies",
+  const routes: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
+    { path: "", priority: 1, changeFrequency: "weekly" },
+    { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/contact", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/statements-and-registrations", priority: 0.75, changeFrequency: "monthly" },
   ]
 
-  return routes.map((path) => ({
-    url: `${siteUrl}${path}`,
+  return routes.map(({ path, priority, changeFrequency }) => ({
+    url: `${SITE_URL}${path}`,
     lastModified: now,
-    changeFrequency: "monthly",
-    priority: path === "" ? 1 : 0.6,
+    changeFrequency,
+    priority,
   }))
 }

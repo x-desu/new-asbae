@@ -60,46 +60,50 @@ export default function HomeServicesOverview() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        if (headerRef.current) {
-            gsap.fromTo(headerRef.current,
-                { y: 50, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    scrollTrigger: {
-                        trigger: headerRef.current,
-                        start: "top 85%",
-                    }
-                }
-            );
-        }
+        const ctx = gsap.context(() => {
+            if (headerRef.current) {
+                gsap.fromTo(
+                    headerRef.current,
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        immediateRender: false,
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: "top 85%",
+                        },
+                    },
+                );
+            }
 
-        const cards = gsap.utils.toArray(".service-card") as HTMLElement[];
-        cards.forEach((card, i) => {
-            gsap.fromTo(card,
-                { y: 60, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 90%",
-                    }
-                }
-            );
-        });
+            const cards = gsap.utils.toArray<HTMLElement>(".home-overview-card", sectionRef.current);
+            cards.forEach((card, i) => {
+                gsap.fromTo(
+                    card,
+                    { y: 60, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        ease: "power2.out",
+                        immediateRender: false,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 90%",
+                        },
+                    },
+                );
+            });
+        }, sectionRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (
-        <section id="services-overview" ref={sectionRef} className="py-24 md:py-32 relative bg-transparent">
+        <section id="services" ref={sectionRef} className="py-24 md:py-32 relative bg-transparent">
             <div className="container mx-auto px-6 relative z-10">
                 <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
@@ -251,7 +255,7 @@ export default function HomeServicesOverview() {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="service-card group relative p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] bg-white/[0.03] backdrop-blur-xl border border-white/5 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden flex flex-col h-full"
+                            className="home-overview-card group relative p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] bg-white/[0.03] backdrop-blur-xl border border-white/5 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden flex flex-col h-full"
                         >
                             {/* Accent Glow */}
                             <div className={`absolute -top-16 -right-16 sm:-top-20 sm:-right-20 lg:-top-24 lg:-right-24 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 bg-gradient-to-br ${service.color} blur-[60px] sm:blur-[70px] lg:blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />

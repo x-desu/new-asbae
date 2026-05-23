@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 import Header from "@/components/header"
 import Hero from "@/components/hero"
 import { gsapAnimations } from "@/lib/gsap-animations"
-import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil"
+import { viewTransition } from "@/lib/view-transitions"
 
 // Lazy load heavy below-the-fold components
 const IndustriesSection = dynamic(() => import("@/components/industries-section"), { ssr: false })
@@ -20,57 +20,46 @@ export default function Home() {
   useEffect(() => {
     gsapAnimations.initAllAnimations()
 
+    const refreshTimers = [400, 1200, 2500].map((delay) =>
+      window.setTimeout(() => gsapAnimations.refreshAfterLazySections(), delay),
+    )
+
+    const hash = window.location.hash
+    if (hash) {
+      const timer = window.setTimeout(() => {
+        void viewTransition.transitionToSection(hash, { duration: 600 })
+      }, 400)
+      return () => {
+        refreshTimers.forEach((id) => window.clearTimeout(id))
+        window.clearTimeout(timer)
+        gsapAnimations.cleanup()
+      }
+    }
+
     return () => {
+      refreshTimers.forEach((id) => window.clearTimeout(id))
       gsapAnimations.cleanup()
     }
   }, [])
 
   return (
-    <main className="min-h-screen relative">
-      {/* DarkVeil Background - fixed full-screen */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0,
-        }}
-      >
-        <DarkVeil
-          hueShift={28}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.4}
-          scanlineFrequency={0}
-          warpAmount={1}
-          resolutionScale={1}
-        />
+    <main className="relative z-[2] min-h-screen">
+      <Header />
+      <Hero />
+      <HomeServicesOverview />
+      <IndustriesSection />
+      <div id="mission-vision">
+        <HomeMissionVision />
       </div>
-      {/* Dark overlay for text readability */}
-      <div className="fixed inset-0 bg-black/40" style={{ zIndex: 1 }}></div>
-
-      {/* Content layer */}
-      <div className="relative" style={{ zIndex: 2 }}>
-        <Header />
-        <Hero />
-        <HomeServicesOverview />
-        <IndustriesSection />
-        <div id="mission-vision">
-          <HomeMissionVision />
-        </div>
-        <ValuesSection />
-        <div id="approach">
-          <HomeOurApproach />
-        </div>
-        <div id="contact">
-          <Contact />
-        </div>
-        <Footer />
-        <ChatWidget />
+      <ValuesSection />
+      <div id="approach">
+        <HomeOurApproach />
       </div>
+      <div id="contact">
+        <Contact />
+      </div>
+      <Footer />
+      <ChatWidget />
     </main>
   )
 }
-

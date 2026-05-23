@@ -11,9 +11,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = streamText({
-      model: xai("grok-4", {
-        apiKey: process.env.XAI_API_KEY,
-      }),
+      model: xai("grok-4"),
       messages: messages,
       system: `You are ASBAE Tech's integrated AI assistant, embedded directly on the company website. You are NOT a separate chatbot - you are part of the ASBAE Tech experience.
 
@@ -54,7 +52,7 @@ RESPONSE GUIDELINES:
 - For consultations, mention the contact form, phone numbers, or email options available on the site
 - Acknowledge you're part of the ASBAE Tech website experience, not an external service`,
       temperature: 0.1, // Very low for consistent, focused responses
-      maxTokens: 150, // Concise responses
+      maxOutputTokens: 150, // Concise responses
       frequencyPenalty: 0.5, // Reduce repetition
     })
 

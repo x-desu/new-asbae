@@ -33,7 +33,6 @@ export class GSAPAnimations {
     ScrollTrigger.config({
       limitCallbacks: true,
       ignoreMobileResize: true,
-      fastScrollEnd: true,
     })
 
     ScrollTrigger.addEventListener("refreshInit", () => {
@@ -456,6 +455,7 @@ export class GSAPAnimations {
 
   private setupAnimations() {
     this.initHeroAnimations()
+    this.initServicesAnimations()
     this.initProductsAnimations()
     this.initReviewsAnimations()
     this.initContactAnimations()
@@ -465,8 +465,31 @@ export class GSAPAnimations {
     ScrollTrigger.refresh()
   }
 
+  /** Re-run visibility + ScrollTrigger after lazy-loaded home sections mount */
+  refreshAfterLazySections() {
+    if (typeof window === "undefined") return
+
+    gsap.set(
+      ".service-card, .product-card, .review-card, .contact-field, .contact-info-item, section, .home-overview-card, .mission-vision-card, .approach-card",
+      { visibility: "visible" },
+    )
+
+    this.ensureVisibility()
+    ScrollTrigger.refresh()
+  }
+
   private ensureVisibility() {
-    const elementsToCheck = [".service-card", ".product-card", ".review-card", ".contact-field", ".contact-info-item"]
+    const elementsToCheck = [
+      ".service-card",
+      ".product-card",
+      ".review-card",
+      ".contact-field",
+      ".contact-info-item",
+      ".home-overview-card",
+      ".mission-vision-card",
+      ".approach-card",
+      "section",
+    ]
 
     elementsToCheck.forEach((selector) => {
       const elements = document.querySelectorAll(selector)

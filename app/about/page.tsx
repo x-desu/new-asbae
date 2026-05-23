@@ -7,7 +7,6 @@ import { Sparkles, Target, Eye, Users, Shield, BarChart, Layers } from "lucide-r
 import { Accordion } from "@/components/about/accordion"
 import Header from "@/components/header"
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText"
-import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil"
 
 const approachItems = [
   {
@@ -53,33 +52,7 @@ const faqItems = [
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen relative">
-      {/* DarkVeil Background - fixed full-screen */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0,
-        }}
-      >
-        <DarkVeil
-          hueShift={28}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.4}
-          scanlineFrequency={0}
-          warpAmount={1}
-          resolutionScale={1}
-        />
-      </div>
-      {/* Dark overlay for text readability */}
-      <div className="fixed inset-0 bg-black/40" style={{ zIndex: 1 }}></div>
-
-      {/* Content layer */}
-      <div className="relative" style={{ zIndex: 2 }}>
+    <div className="relative z-[2] min-h-screen">
         <Header />
         <div className="pt-20">
 
@@ -260,7 +233,6 @@ const AboutPage = () => {
             </div>
           </footer>
         </div>
-      </div>
     </div>
   )
 }

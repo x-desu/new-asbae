@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { viewTransition } from "@/lib/view-transitions"
 import gsap from "gsap"
 import Link from "next/link"
+import { AsbaeLogo } from "@/components/asbae-logo"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -96,6 +97,7 @@ export default function Header() {
     { name: "Services", href: "#services" },
     { name: "Products", href: "#products" },
     { name: "About", href: "/about" },
+    { name: "Statements", href: "/statements-and-registrations" },
     { name: "Reviews", href: "#reviews" },
     { name: "Contact", href: "#contact" },
   ]
@@ -110,17 +112,8 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 shadow-sm">
-                <img 
-                  src="/images/asbae-logo.png" 
-                  alt="ASBAE Logo" 
-                  className={`h-7 w-7 lg:h-9 lg:w-9 transition-transform duration-300 ${
-                    isScrolled ? 'scale-100' : 'scale-110'
-                  }`} 
-                />
-              </div>
-              <h1 className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">ASBAE</h1>
+            <Link href="/" className="rounded-lg outline-none ring-blue-400/50 focus-visible:ring-2">
+              <AsbaeLogo size={isScrolled ? "sm" : "md"} />
             </Link>
           </div>
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Github, ArrowUp } from "lucide-react"
+import { Mail, MapPin, Facebook, Twitter, Linkedin, Github, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -65,52 +65,62 @@ export default function Footer() {
         </div>
 
         {/* Main Footer Content */}
-        <div className="py-8 sm:py-12">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-6 md:gap-8">
-            {/* Company Info */}
-            <div className="col-span-2 lg:col-span-2 space-y-6 mb-8 sm:mb-0">
-              <div className="space-y-2">
-                <h2 className="text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent mb-2">Asbae</h2>
-                <p className="text-muted-foreground text-sm md:text-base">
-                  Transforming businesses through innovative software solutions and expert IT services.
-                </p>
-              </div>
+        <div className="py-8 sm:py-12 space-y-10">
+          {/* Row 1: compact brand + social */}
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between border-b border-white/5 pb-8">
+            <div className="max-w-md space-y-2">
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                Asbae
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Transforming businesses through innovative software solutions and expert IT services.
+              </p>
+            </div>
+            <div className="flex shrink-0 gap-2">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="p-2 rounded-lg glassmorphic text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                </a>
+              ))}
+            </div>
+          </div>
 
-              {/* Contact Info */}
-              <div className="space-y-2">
+          {/* Row 2: four equal columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
+            {/* Contact */}
+            <div className="space-y-4 sm:col-span-2 lg:col-span-3">
+              <h4 className="font-semibold text-foreground text-sm tracking-wide">Contact</h4>
+              <div className="space-y-3 max-w-xs">
                 <a
                   href="mailto:hello@asbaetech.com"
-                  className="flex items-center space-x-3 group"
+                  className="flex items-start gap-2.5 group"
                 >
-                  <Mail className="h-5 w-5 text-primary group-hover:text-blue-400 transition-colors" />
-                  <span className="text-sm md:text-base text-muted-foreground group-hover:text-foreground transition-colors">
+                  <Mail className="h-4 w-4 shrink-0 text-primary mt-0.5 group-hover:text-blue-400 transition-colors" />
+                  <span className="text-xs sm:text-sm text-muted-foreground group-hover:text-foreground transition-colors break-all">
                     hello@asbaetech.com
                   </span>
                 </a>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="p-2 rounded-lg glassmorphic text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </a>
-                ))}
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="h-4 w-4 shrink-0 text-primary mt-0.5" aria-hidden="true" />
+                  <address className="not-italic text-xs sm:text-sm text-muted-foreground leading-snug">
+                    The Coworkers, Vikaskhand 5, Gwari Village, Vikas Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010
+                  </address>
+                </div>
               </div>
             </div>
 
             {/* Services */}
-            <div className="space-y-4  sm:pt-0">
-              <h4 className="font-semibold text-foreground">Services</h4>
+            <div className="space-y-4 lg:col-span-3">
+              <h4 className="font-semibold text-foreground text-sm tracking-wide">Services</h4>
               <ul className="space-y-2">
                 {footerLinks.services.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <a href={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.name}
                     </a>
                   </li>
@@ -119,12 +129,12 @@ export default function Footer() {
             </div>
 
             {/* Company */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-foreground">Company</h4>
+            <div className="space-y-4 lg:col-span-3">
+              <h4 className="font-semibold text-foreground text-sm tracking-wide">Company</h4>
               <ul className="space-y-2">
                 {footerLinks.company.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <a href={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.name}
                     </a>
                   </li>
@@ -133,12 +143,12 @@ export default function Footer() {
             </div>
 
             {/* Legal */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-foreground">Legal</h4>
+            <div className="space-y-4 lg:col-span-3">
+              <h4 className="font-semibold text-foreground text-sm tracking-wide">Legal</h4>
               <ul className="space-y-2">
                 {footerLinks.legal.map((link, index) => (
                   <li key={index}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <a href={link.href} className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.name}
                     </a>
                   </li>

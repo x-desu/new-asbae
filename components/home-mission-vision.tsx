@@ -12,27 +12,28 @@ export default function HomeMissionVision() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        const cards = gsap.utils.toArray(".mission-vision-card") as HTMLElement[];
+        const ctx = gsap.context(() => {
+            const cards = gsap.utils.toArray<HTMLElement>(".mission-vision-card", containerRef.current);
 
-        gsap.fromTo(
-            cards,
-            { y: 50, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 80%",
+            gsap.fromTo(
+                cards,
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 80%",
+                    },
                 },
-            }
-        );
+            );
+        }, containerRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (

@@ -2,7 +2,6 @@
 
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import DarkVeil from "@/lib/Backgrounds/DarkVeil/DarkVeil"
 import ContactForm from "@/components/contact-form"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
@@ -28,33 +27,7 @@ export default function ContactPage() {
     ]
 
     return (
-        <main className="min-h-screen relative text-white selection:bg-blue-500/30">
-            {/* DarkVeil Background - fixed full-screen */}
-            <div
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    zIndex: 0,
-                }}
-            >
-                <DarkVeil
-                    hueShift={28}
-                    noiseIntensity={0}
-                    scanlineIntensity={0}
-                    speed={0.4}
-                    scanlineFrequency={0}
-                    warpAmount={1}
-                    resolutionScale={1}
-                />
-            </div>
-            {/* Dark overlay for text readability */}
-            <div className="fixed inset-0 bg-black/40" style={{ zIndex: 1 }}></div>
-
-            {/* Content layer */}
-            <div className="relative" style={{ zIndex: 2 }}>
+        <main className="relative z-[2] min-h-screen text-white selection:bg-blue-500/30">
                 <Header />
                 <div className="pt-32 pb-20 lg:pt-48 lg:pb-32 relative">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -131,7 +104,6 @@ export default function ContactPage() {
                 </div>
 
                 <Footer />
-            </div>
         </main>
     )
 }

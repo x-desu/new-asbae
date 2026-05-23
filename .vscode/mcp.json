@@ -6,6 +6,12 @@
         "shadcn@latest",
         "mcp"
       ]
+    },
+    "gluestack": {
+      "command": "node",
+      "args": [
+        "/Users/amitesh/.cursor/mcp-servers/gluestack-mcp/index.js"
+      ]
     }
   }
 }

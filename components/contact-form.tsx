@@ -69,7 +69,7 @@ export default function ContactForm() {
             setTimeout(() => setIsSubmitted(false), 5000)
         } catch (err: any) {
             setError("Something went wrong. Please try again.")
-            console.log("[ASBAE] Unexpected client error:", err?.message)
+            console.error("[ASBAE] Unexpected client error:", err?.message)
         } finally {
             setIsSubmitting(false)
         }

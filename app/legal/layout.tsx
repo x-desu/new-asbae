@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import type { Metadata } from "next";
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   robots: {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   title: {
-    default: "Legal | ASBAE",
+    default: "Legal",
     template: "%s | ASBAE",
   },
 }

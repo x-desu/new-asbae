@@ -68,13 +68,10 @@ export default function ChatWidget() {
   const handleMessage = async (messageContent: string, userMessage: Message) => {
     setIsLoading(true)
 
-    console.log("[v0] Processing message:", messageContent)
-
     // Check knowledge base first (only for very basic questions)
     const knowledgeResponse = findKnowledgeResponse(messageContent)
 
     if (knowledgeResponse) {
-      console.log("[v0] Using knowledge base response")
       // Use local knowledge base response
       setTimeout(() => {
         const assistantMessage: Message = {
@@ -89,7 +86,6 @@ export default function ChatWidget() {
       return
     }
 
-    console.log("[v0] Calling Grok AI API with site context")
     try {
       const siteContext = getSiteContext()
 
@@ -106,8 +102,6 @@ export default function ChatWidget() {
           siteContext: siteContext, // Pass current site context
         }),
       })
-
-      console.log("[v0] API response status:", response.status)
 
       if (!response.ok) {
         throw new Error(`API responded with status: ${response.status}`)
@@ -126,16 +120,13 @@ export default function ChatWidget() {
       setMessages((prev) => [...prev, assistantMessage])
 
       if (reader) {
-        console.log("[v0] Starting to read stream")
         while (true) {
           const { done, value } = await reader.read()
           if (done) {
-            console.log("[v0] Stream completed")
             break
           }
 
           const chunk = decoder.decode(value, { stream: true })
-          console.log("[v0] Received chunk:", chunk)
 
           // AI SDK streams plain text, not JSON
           assistantContent += chunk
