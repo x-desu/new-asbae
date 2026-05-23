@@ -20,14 +20,14 @@ export default function PrivacyPolicy() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="glassmorphic p-8 rounded-2xl">
+            <div className="neomorphic p-8 rounded-2xl">
               <div className="flex items-center mb-6">
                 <Shield className="w-8 h-8 text-primary mr-3" />
                 <h1 className="text-3xl md:text-4xl font-bold">Privacy Policy</h1>
               </div>
-              <p className="text-foreground/80 mb-8">Last updated: September 2, 2025</p>
+              <p className="mb-8">Last updated: September 2, 2025</p>
               
-              <div className="prose prose-invert max-w-none">
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-muted-foreground prose-li:text-muted-foreground">
                 <h2>1. Information We Collect</h2>
                 <p>
                   We collect several types of information from and about users of our Services, including:

@@ -5,8 +5,11 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModalProvider } from "@/components/modal-context"
 import { SiteBackground } from "@/components/site-background"
+import { NavigationProgressBar } from "@/components/navigation-progress-bar"
+import { ChromePerformanceMonitor } from "@/components/chrome-performance-monitor"
 import { SITE_URL, rootMetadata } from "@/lib/seo"
 import Script from "next/script"
+import { Suspense } from "react"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -36,15 +39,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
-        <style>{`
-html {
-  font-family: ${inter.style.fontFamily};
-  --font-sans: ${inter.variable};
-  --font-serif: ${poppins.variable};
-}
-        `}</style>
         <Script id="ldjson-org" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
             '@context': 'https://schema.org',
@@ -74,6 +70,10 @@ html {
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <ModalProvider>
+            <ChromePerformanceMonitor />
+            <Suspense fallback={null}>
+              <NavigationProgressBar />
+            </Suspense>
             <SiteBackground />
             {children}
           </ModalProvider>

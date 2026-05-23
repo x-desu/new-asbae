@@ -4,7 +4,12 @@ import React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Sparkles, Target, Eye, Users, Shield, BarChart, Layers } from "lucide-react"
-import { Accordion } from "@/components/about/accordion"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import Header from "@/components/header"
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText"
 
@@ -92,7 +97,7 @@ const AboutPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto mb-10 leading-relaxed"
+                  className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed"
                 >
                   At ASBAE TECHNOLOGIES, we help organisations streamline operations, secure data, and deliver seamless digital services. Our solutions combine enterprise IT, SaaS platforms, and cloud infrastructure to create a unified, scalable, and future-ready ecosystem.
                 </motion.p>
@@ -203,8 +208,8 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Frequently Asked Questions</h2>
-                <p className="text-neutral-400 max-w-2xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p className="max-w-2xl mx-auto">
                   Find answers to common questions about our platform and services.
                 </p>
               </motion.div>
@@ -216,7 +221,14 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <Accordion items={faqItems} />
+                <Accordion type="single" collapsible className="w-full">
+                  {faqItems.map((item, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger>{item.title}</AccordionTrigger>
+                      <AccordionContent>{item.content}</AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </motion.div>
             </div>
           </section>
@@ -224,11 +236,11 @@ const AboutPage = () => {
           {/* Footer */}
           <footer className="border-t border-white/10 mt-10">
             <div className="container mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-neutral-400 text-sm">© {new Date().getFullYear()} ASBAE. All rights reserved.</p>
+              <p className="text-sm">© {new Date().getFullYear()} ASBAE. All rights reserved.</p>
               <nav className="flex items-center gap-6 text-sm">
-                <Link href="/legal/privacy" className="text-neutral-300 hover:text-blue-400 transition-colors">Privacy</Link>
-                <Link href="/legal/cookies" className="text-neutral-300 hover:text-blue-400 transition-colors">Cookies</Link>
-                <Link href="/legal/terms" className="text-neutral-300 hover:text-blue-400 transition-colors">Terms</Link>
+                <Link href="/legal/privacy" className="hover:text-blue-400 transition-colors">Privacy</Link>
+                <Link href="/legal/cookies" className="hover:text-blue-400 transition-colors">Cookies</Link>
+                <Link href="/legal/terms" className="hover:text-blue-400 transition-colors">Terms</Link>
               </nav>
             </div>
           </footer>

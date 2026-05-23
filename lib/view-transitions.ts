@@ -15,8 +15,19 @@ export class ViewTransitionManager {
   }
 
   // Check if View Transition API is supported
-  private isViewTransitionSupported(): boolean {
-    return "startViewTransition" in document
+  isViewTransitionSupported(): boolean {
+    return typeof document !== "undefined" && "startViewTransition" in document
+  }
+
+  // Generic view transition wrapper for any state update
+  async startTransition(callback: () => void | Promise<void>): Promise<void> {
+    if (this.isViewTransitionSupported()) {
+      // @ts-ignore
+      const transition = document.startViewTransition(callback)
+      return transition.finished
+    } else {
+      await callback()
+    }
   }
 
   // Smooth scroll to element with view transition

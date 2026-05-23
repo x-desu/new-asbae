@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Layers, BarChart3, Users, ShoppingCart, Calendar, ArrowRight, Star, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 
 export default function Products() {
   const [activeProduct, setActiveProduct] = useState(0)
@@ -133,11 +134,13 @@ export default function Products() {
           {/* Product Preview */}
           <div className="product-preview neomorphic rounded-3xl p-8">
             <div className="space-y-6">
-              <div className="aspect-video rounded-2xl overflow-hidden glassmorphic">
-                <img
+              <div className="aspect-video rounded-2xl overflow-hidden glassmorphic relative">
+                <Image
                   src={products[activeProduct].image || "/placeholder.svg"}
                   alt={products[activeProduct].name}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
                 />
               </div>
 

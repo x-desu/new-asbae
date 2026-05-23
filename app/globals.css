@@ -91,16 +91,75 @@
   --radius: var(--radius);
 }
 
+/* NProgress customization */
+#nprogress .bar {
+  background: hsl(215 85% 60%) !important;
+  height: 3px !important;
+  box-shadow: 0 0 10px hsl(215 85% 60% / 0.5), 0 0 5px hsl(215 85% 60% / 0.3) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px hsl(215 85% 60%), 0 0 5px hsl(215 85% 60%) !important;
+}
+
+/* Chrome View Transitions API Customization */
+@view-transition {
+  navigation: auto; /* Enable native cross-document view transitions */
+}
+
+::view-transition-old(root) {
+  animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both scale-down;
+}
+
+::view-transition-new(root) {
+  animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both scale-up;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes scale-up {
+  from { transform: scale(0.98); }
+}
+
+@keyframes scale-down {
+  to { transform: scale(1.02); }
+}
+
 @layer base {
   * {
     /* Replace border-border with border-white/10 for consistent border styling */
     @apply border-white/10 outline-ring/50;
   }
 
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body leading-relaxed;
     /* Updated gradient to deep charcoal black theme */
     background: radial-gradient(ellipse at top, hsl(0 0% 7%) 0%, hsl(0 0% 4%) 100%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight text-white;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+
+  p {
+    @apply text-muted-foreground;
   }
 
   /* Enhanced glassomorphic utilities with new color theme and 20-30px blur */

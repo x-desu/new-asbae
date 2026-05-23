@@ -50,29 +50,26 @@ export default function Header() {
   const navItems = useMemo<NavItem[]>(
     () => [
       { name: "Home", href: "/", path: "/" },
-      { name: "Services", href: isHome ? "#services" : "/services", path: "/services", hash: "services" },
+      { name: "Services", href: "/services", path: "/services" },
       { name: "About", href: "/about", path: "/about" },
       {
         name: "Statements",
         href: "/statements-and-registrations",
         path: "/statements-and-registrations",
       },
-      { name: "Contact", href: isHome ? "#contact" : "/contact", path: "/contact", hash: "contact" },
+      { name: "Contact", href: "/contact", path: "/contact" },
     ],
-    [isHome],
+    [],
   )
 
   const isNavActive = useCallback(
     (item: NavItem) => {
-      if (item.hash) {
-        return isHome && activeHash === `#${item.hash}`
-      }
       if (item.path === "/") {
-        return pathname === "/" && !activeHash
+        return pathname === "/"
       }
       return pathname === item.path || pathname.startsWith(`${item.path}/`)
     },
-    [activeHash, isHome, pathname],
+    [pathname],
   )
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -141,32 +138,21 @@ export default function Header() {
     e: React.MouseEvent<HTMLAnchorElement>,
     item: NavItem,
   ) => {
-    if (item.href.startsWith("#")) {
-      e.preventDefault()
-      const hash = item.href
-      window.history.pushState(null, "", hash)
-      setActiveHash(hash)
-      await viewTransition.transitionToSection(hash, { duration: 600 })
-      return
-    }
+    // Close dropdown immediately to prevent "stuck" UI
+    setIsDropdownOpen(false)
 
     if (item.path === pathname) {
-      e.preventDefault()
-      if (item.path === "/" && activeHash) {
-        window.history.pushState(null, "", "/")
-        setActiveHash("")
+      if (item.path === "/") {
         window.scrollTo({ top: 0, behavior: "smooth" })
       }
       return
     }
 
-    e.preventDefault()
     setActiveHash("")
-    router.push(item.href)
   }
 
   const handleCTAClick = (e: React.MouseEvent) => {
-    e.preventDefault()
+    setIsDropdownOpen(false)
     setActiveHash("")
     router.push("/contact")
   }
@@ -180,25 +166,11 @@ export default function Header() {
       </>
     )
 
-    if (item.href.startsWith("#")) {
-      return (
-        <a
-          key={item.name}
-          href={item.href}
-          onClick={(e) => void handleNavClick(e, item)}
-          className={className}
-          aria-current={active ? "page" : undefined}
-        >
-          {content}
-        </a>
-      )
-    }
-
     return (
       <Link
         key={item.name}
         href={item.href}
-        onClick={(e) => void handleNavClick(e, item)}
+        onClick={(e) => handleNavClick(e, item)}
         className={className}
         aria-current={active ? "page" : undefined}
       >

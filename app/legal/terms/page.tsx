@@ -20,11 +20,11 @@ export default function TermsOfService() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="glassmorphic p-8 rounded-2xl">
+            <div className="neomorphic p-8 rounded-2xl">
               <h1 className="text-3xl md:text-4xl font-bold mb-6">Terms of Service</h1>
-              <p className="text-foreground/80 mb-8">Last updated: September 2, 2025</p>
+              <p className="mb-8">Last updated: September 2, 2025</p>
               
-              <div className="prose prose-invert max-w-none">
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-muted-foreground prose-li:text-muted-foreground">
                 <h2>1. Introduction</h2>
                 <p>
                   Welcome to asbae. These Terms of Service ("Terms") govern your access to and use of our website, products, and services (collectively, the "Services").

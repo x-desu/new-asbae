@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Star, Quote, ChevronLeft, ChevronRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 
 export default function Reviews() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -100,10 +101,13 @@ export default function Reviews() {
                 <p className="text-lg text-foreground leading-relaxed">"{reviews[currentReview].text}"</p>
 
                 <div className="flex items-center space-x-4">
-                  <img
+                  <Image
                     src={reviews[currentReview].image || "/placeholder.svg"}
                     alt={reviews[currentReview].name}
+                    width={48}
+                    height={48}
                     className="h-12 w-12 rounded-full object-cover"
+                    loading="lazy"
                   />
                   <div>
                     <div className="font-semibold">{reviews[currentReview].name}</div>

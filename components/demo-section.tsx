@@ -5,6 +5,7 @@ import { Play, Monitor, Smartphone, Tablet, ArrowRight, CheckCircle } from "luci
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
+import Image from "next/image"
 
 export default function DemoSection() {
   const [selectedDemo, setSelectedDemo] = useState(0)
@@ -103,10 +104,12 @@ Best regards`)
             <Card className="neomorphic p-8">
               <div className="space-y-6">
                 <div className="aspect-video rounded-2xl overflow-hidden glassmorphic relative">
-                  <img
+                  <Image
                     src={demos[selectedDemo].thumbnail || "/placeholder.svg"}
                     alt={demos[selectedDemo].title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    loading="lazy"
                   />
                   {!isPlaying && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm">

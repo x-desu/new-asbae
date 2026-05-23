@@ -14,7 +14,9 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   images: {
-    unoptimized: true,
+    unoptimized: false,
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [],
   },
   experimental: {
     optimizePackageImports: ['lucide-react'],

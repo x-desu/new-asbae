@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import Header from "@/components/header"
 import Hero from "@/components/hero"
@@ -20,9 +20,10 @@ export default function Home() {
   useEffect(() => {
     gsapAnimations.initAllAnimations()
 
-    const refreshTimers = [400, 1200, 2500].map((delay) =>
-      window.setTimeout(() => gsapAnimations.refreshAfterLazySections(), delay),
-    )
+    // Single consolidated refresh after most components have likely mounted
+    const refreshTimer = window.setTimeout(() => {
+      gsapAnimations.refreshAfterLazySections()
+    }, 1500)
 
     const hash = window.location.hash
     if (hash) {
@@ -30,14 +31,14 @@ export default function Home() {
         void viewTransition.transitionToSection(hash, { duration: 600 })
       }, 400)
       return () => {
-        refreshTimers.forEach((id) => window.clearTimeout(id))
+        window.clearTimeout(refreshTimer)
         window.clearTimeout(timer)
         gsapAnimations.cleanup()
       }
     }
 
     return () => {
-      refreshTimers.forEach((id) => window.clearTimeout(id))
+      window.clearTimeout(refreshTimer)
       gsapAnimations.cleanup()
     }
   }, [])

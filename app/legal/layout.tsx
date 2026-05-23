@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function LegalLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-950 to-neutral-900">
+    <div className="relative z-[2]">
       <Header />
       <main className="pt-20">
         {children}

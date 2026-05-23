@@ -20,14 +20,14 @@ export default function CookiePolicy() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="glassmorphic p-8 rounded-2xl">
+            <div className="neomorphic p-8 rounded-2xl">
               <div className="flex items-center mb-6">
                 <Cookie className="w-8 h-8 text-primary mr-3" />
                 <h1 className="text-3xl md:text-4xl font-bold">Cookie Policy</h1>
               </div>
-              <p className="text-foreground/80 mb-8">Last updated: September 2, 2025</p>
+              <p className="mb-8">Last updated: September 2, 2025</p>
               
-              <div className="prose prose-invert max-w-none">
+              <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-muted-foreground prose-li:text-muted-foreground">
                 <h2>1. What Are Cookies</h2>
                 <p>
                   Cookies are small text files that are placed on your computer by websites that you visit. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site.
