@@ -6,15 +6,15 @@ import Hero from "@/components/hero"
 import { gsapAnimations } from "@/lib/gsap-animations"
 import { viewTransition } from "@/lib/view-transitions"
 
-// Lazy load heavy below-the-fold components
-const IndustriesSection = dynamic(() => import("@/components/industries-section"), { ssr: false })
-const HomeMissionVision = dynamic(() => import("@/components/home-mission-vision"), { ssr: false })
-const ValuesSection = dynamic(() => import("@/components/values-section"), { ssr: false })
-const HomeOurApproach = dynamic(() => import("@/components/home-our-approach"), { ssr: false })
-const HomeServicesOverview = dynamic(() => import("@/components/home-services-overview"), { ssr: false })
-const Contact = dynamic(() => import("@/components/contact"), { ssr: false })
-const Footer = dynamic(() => import("@/components/footer"), { ssr: false })
-const ChatWidget = dynamic(() => import("@/components/chat-widget"), { ssr: false })
+// Lazy load below-the-fold components (SSR enabled for crawlable HTML)
+const IndustriesSection = dynamic(() => import("@/components/industries-section"))
+const HomeMissionVision = dynamic(() => import("@/components/home-mission-vision"))
+const ValuesSection = dynamic(() => import("@/components/values-section"))
+const HomeOurApproach = dynamic(() => import("@/components/home-our-approach"))
+const HomeServicesOverview = dynamic(() => import("@/components/home-services-overview"))
+const Contact = dynamic(() => import("@/components/contact"))
+const Footer = dynamic(() => import("@/components/footer"))
+const ChatWidget = dynamic(() => import("@/components/chat-widget"))
 
 export default function Home() {
   useEffect(() => {

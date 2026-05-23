@@ -6,6 +6,8 @@ export const OG_IMAGE_SIZE = { width: 1200, height: 630 }
 export const OG_IMAGE_ALT = "ASBAE — Intelligent IT Solutions"
 export const OG_IMAGE_CONTENT_TYPE = "image/png"
 
+const SITE_HOST_LABEL = "www.asbaetech.in"
+
 export async function generateOgImage(): Promise<ImageResponse> {
   const logoPath = join(process.cwd(), "public/images/asbae-logo.png")
   const logoData = await readFile(logoPath)
@@ -23,6 +25,7 @@ export async function generateOgImage(): Promise<ImageResponse> {
           padding: "72px 80px",
           background: "linear-gradient(135deg, #0a1628 0%, #132a4a 45%, #1e3a5f 100%)",
           fontFamily: "system-ui, sans-serif",
+          position: "relative",
         }}
       >
         <div
@@ -32,13 +35,27 @@ export async function generateOgImage(): Promise<ImageResponse> {
             marginBottom: 40,
           }}
         >
-          <img
-            src={logoSrc}
-            width={88}
-            height={88}
-            alt=""
-            style={{ objectFit: "contain", marginRight: 28 }}
-          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 120,
+              height: 120,
+              borderRadius: 28,
+              background: "#ffffff",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
+              marginRight: 28,
+            }}
+          >
+            <img
+              src={logoSrc}
+              width={80}
+              height={80}
+              alt=""
+              style={{ objectFit: "contain" }}
+            />
+          </div>
           <div
             style={{
               display: "flex",
@@ -64,7 +81,7 @@ export async function generateOgImage(): Promise<ImageResponse> {
                 marginTop: 6,
               }}
             >
-              asbaetech.com
+              {SITE_HOST_LABEL}
             </div>
           </div>
         </div>

@@ -1,8 +1,15 @@
 import type { Metadata } from "next"
+import { OG_IMAGE_ALT } from "@/lib/og-image"
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://asbaetech.com"
+/** Production site URL — set NEXT_PUBLIC_SITE_URL=https://www.asbaetech.in on deploy. */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.asbaetech.in"
 export const SITE_NAME = "ASBAE"
 export const TWITTER_SITE = "@asbae"
+
+export const SHARE_IMAGE_PATH = "/og-image.png"
+export const SHARE_IMAGE_WIDTH = 1200
+export const SHARE_IMAGE_HEIGHT = 630
 
 export const DEFAULT_TITLE = "ASBAE — Intelligent IT Solutions"
 export const DEFAULT_DESCRIPTION =
@@ -13,6 +20,29 @@ export function absoluteUrl(path: string = ""): string {
   if (!path || path === "/") return base
   return `${base}${path.startsWith("/") ? path : `/${path}`}`
 }
+
+/** Shared Open Graph / Twitter image fields for rich link previews (WhatsApp, Slack, etc.). */
+export function getDefaultShareImages(): Pick<Metadata, "openGraph" | "twitter"> {
+  const image = {
+    url: SHARE_IMAGE_PATH,
+    width: SHARE_IMAGE_WIDTH,
+    height: SHARE_IMAGE_HEIGHT,
+    alt: OG_IMAGE_ALT,
+    type: "image/png" as const,
+  }
+
+  return {
+    openGraph: {
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [SHARE_IMAGE_PATH],
+    },
+  }
+}
+
+const shareImages = getDefaultShareImages()
 
 type PageMetadataInput = {
   title: string
@@ -34,9 +64,15 @@ export function createPageMetadata({
   return {
     title,
     description,
-    ...(noIndex && {
-      robots: { index: false, follow: true },
-    }),
+    ...(noIndex
+      ? { robots: { index: false, follow: true } }
+      : {
+          robots: {
+            index: true,
+            follow: true,
+            googleBot: { index: true, follow: true },
+          },
+        }),
     alternates: {
       canonical,
     },
@@ -47,16 +83,19 @@ export function createPageMetadata({
       description,
       siteName: SITE_NAME,
       locale: "en_US",
+      ...shareImages.openGraph,
     },
     twitter: {
-      card: "summary_large_image",
       site: TWITTER_SITE,
       creator: TWITTER_SITE,
       title,
       description,
+      ...shareImages.twitter,
     },
   }
 }
+
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -75,8 +114,25 @@ export const rootMetadata: Metadata = {
     "e-governance",
     "enterprise IT",
     "software development",
+    "ASBAE",
+    "asbaetech",
   ],
   authors: [{ name: SITE_NAME }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  ...(googleVerification && {
+    verification: {
+      google: googleVerification,
+    },
+  }),
   alternates: {
     canonical: SITE_URL,
   },
@@ -87,12 +143,13 @@ export const rootMetadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     siteName: SITE_NAME,
     locale: "en_US",
+    ...shareImages.openGraph,
   },
   twitter: {
-    card: "summary_large_image",
     site: TWITTER_SITE,
     creator: TWITTER_SITE,
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
+    ...shareImages.twitter,
   },
 }
