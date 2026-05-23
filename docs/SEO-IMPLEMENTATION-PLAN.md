@@ -4,11 +4,13 @@
 
 **Canonical site URL:** `https://www.asbaetech.in`
 
-Set in deployment (Vercel / hosting):
+Set in deployment (Vercel / hosting) — **required** or sitemap/canonical will use the wrong domain and Search Console will show errors:
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://www.asbaetech.in
 ```
+
+Copy from [`.env.example`](../.env.example). After changing env vars in Vercel, **redeploy** (rebuild) so `sitemap.xml` and `robots.txt` list `https://www.asbaetech.in` URLs, not `asbaetech.com`.
 
 Optional — Google Search Console HTML tag verification:
 
@@ -56,7 +58,7 @@ Code alone does not list your site on Google. You must:
 1. Go to [Google Search Console](https://search.google.com/search-console)
 2. Add property **`https://www.asbaetech.in`**
 3. Verify ownership (HTML meta via `GOOGLE_SITE_VERIFICATION`, or DNS)
-4. Submit sitemap: **`https://www.asbaetech.in/sitemap.xml`**
+4. Submit sitemap: **`https://www.asbaetech.in/sitemap.xml`** (must list `.in` URLs — if you see `asbaetech.com` in the XML, fix `NEXT_PUBLIC_SITE_URL` and redeploy)
 5. **URL Inspection** → Request indexing for `/`, `/about`, `/services`, `/contact`
 
 Indexing often takes **days to weeks**.

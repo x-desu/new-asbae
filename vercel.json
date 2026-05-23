@@ -1,0 +1,22 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "asbaetech.com" }],
+      "destination": "https://www.asbaetech.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.asbaetech.com" }],
+      "destination": "https://www.asbaetech.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "asbaetech.in" }],
+      "destination": "https://www.asbaetech.in/:path*",
+      "permanent": true
+    }
+  ]
+}
