@@ -255,16 +255,14 @@ export default function HomeServicesOverview() {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="home-overview-card group relative p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] bg-white/[0.03] backdrop-blur-xl border border-white/5 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden flex flex-col h-full"
+                            className="home-overview-card group relative p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] bg-white/[0.03] backdrop-blur-xl border border-white/5 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden flex flex-col h-full"
                         >
                             {/* Accent Glow */}
                             <div className={`absolute -top-16 -right-16 sm:-top-20 sm:-right-20 lg:-top-24 lg:-right-24 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 bg-gradient-to-br ${service.color} blur-[60px] sm:blur-[70px] lg:blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
                             <div className="relative z-10">
-                                <div className="mb-4 sm:mb-5 lg:mb-6 p-3 sm:p-3 lg:p-4 w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-xl sm:rounded-xl lg:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/10 transition-all duration-500">
-                                    <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8">
-                                        {service.icon}
-                                    </div>
+                                <div className="mb-5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/5 text-blue-400 transition-all duration-500 group-hover:scale-105 group-hover:bg-white/10 sm:mb-5 sm:h-12 sm:w-12 lg:mb-6 lg:h-16 lg:w-16 lg:rounded-2xl [&>svg]:h-6 [&>svg]:w-6 lg:[&>svg]:h-8 lg:[&>svg]:w-8">
+                                    {service.icon}
                                 </div>
                                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3 lg:mb-4 group-hover:text-blue-400 transition-colors">
                                     {service.title}
