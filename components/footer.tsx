@@ -97,18 +97,18 @@ export default function Footer() {
               <h4 className="font-semibold text-foreground text-sm tracking-wide">Contact</h4>
               <div className="space-y-3 max-w-xs">
                 <a
-                  href="mailto:Info@asbaetech.in"
+                  href="mailto:info@asbaetech.in"
                   className="flex items-start gap-2.5 group"
                 >
                   <Mail className="h-4 w-4 shrink-0 text-primary mt-0.5 group-hover:text-blue-400 transition-colors" />
                   <span className="text-xs sm:text-sm text-muted-foreground group-hover:text-foreground transition-colors break-all">
-                    Info@asbaetech.in
+                    info@asbaetech.in
                   </span>
                 </a>
                 <div className="flex items-start gap-2.5">
                   <MapPin className="h-4 w-4 shrink-0 text-primary mt-0.5" aria-hidden="true" />
                   <address className="not-italic text-xs sm:text-sm text-muted-foreground leading-snug">
-                    The Coworkers, Vikaskhand 5, Gwari Village, Vikas Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010
+                    ASBAE Technologies (D-05), 1st Floor, 5/588, Vikas Khand, Gomti Nagar, Lucknow - 226010, Uttar Pradesh
                   </address>
                 </div>
               </div>

@@ -23,7 +23,7 @@ ASBAE TECH COMPANY PROFILE:
 • Founded to help businesses transform through technology
 • Passionate team delivering cutting-edge solutions with personalized service
 • Competitive pricing with focus on quality and innovation
-• Contact: Info@asbaetech.in | +91 97534 98392 | +91 80751 98043
+• Contact: info@asbaetech.in | +91 97534 98392 | +91 80751 98043
 
 COMPREHENSIVE SERVICES:
 • Custom Software Development - Web applications, mobile apps, enterprise software solutions

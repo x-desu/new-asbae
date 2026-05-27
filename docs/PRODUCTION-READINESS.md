@@ -15,8 +15,12 @@
 
 ## Deploy
 
-- Set `NEXT_PUBLIC_SITE_URL` (or `SITE_URL` in `lib/seo.ts`) to the production domain
-- API routes: `RESEND_API_KEY`, chat provider keys as configured in `app/api/`
+- Set `NEXT_PUBLIC_SITE_URL=https://www.asbaetech.in`
+- Verify `asbaetech.in` in Resend before enabling contact-form email delivery
+- Set `RESEND_API_KEY` in Vercel
+- Set `RESEND_FROM="ASBAE <info@asbaetech.in>"` in Vercel
+- Optional: set `CONTACT_TO_EMAIL=info@asbaetech.in` in Vercel
+- API routes: chat provider keys as configured in `app/api/`
 
 ## Removed from repo (build hygiene)
 

@@ -48,7 +48,7 @@ export const knowledgeBase: KnowledgeItem[] = [
   {
     keywords: ["contact info", "contact details", "how to contact", "email", "phone"],
     response:
-      "You can contact ASBAE Tech:\n📧 Email: Info@asbaetech.in\n📞 Phone: +91 97534 98392 or +91 80751 98043\n🌍 Based in India\n\nWould you like me to help you schedule a consultation or have specific questions about our Documentation or Governance services?",
+      "You can contact ASBAE Tech:\n📧 Email: info@asbaetech.in\n📞 Phone: +91 97534 98392 or +91 80751 98043\n🌍 Based in India\n\nWould you like me to help you schedule a consultation or have specific questions about our Documentation or Governance services?",
     category: "contact",
   },
   {
@@ -72,7 +72,7 @@ export const knowledgeBase: KnowledgeItem[] = [
   {
     keywords: ["consultation", "meeting", "schedule", "appointment", "demo"],
     response:
-      "Yes! We offer free consultations to discuss your Documentation, Governance, or other IT needs. You can:\n• Fill out our contact form on this website\n• Call us at +91 97534 98392 or +91 80751 98043\n• Email Info@asbaetech.in\n\nOur team will get back to you within 24 hours to schedule a convenient time for a 1:1 consultation about your specific requirements.",
+      "Yes! We offer free consultations to discuss your Documentation, Governance, or other IT needs. You can:\n• Fill out our contact form on this website\n• Call us at +91 97534 98392 or +91 80751 98043\n• Email info@asbaetech.in\n\nOur team will get back to you within 24 hours to schedule a convenient time for a 1:1 consultation about your specific requirements.",
     category: "consultation",
   },
   {

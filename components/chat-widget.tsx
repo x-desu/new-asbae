@@ -141,7 +141,7 @@ export default function ChatWidget() {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content:
-          "Sorry, I'm having trouble connecting right now. Please try again or contact us directly at Info@asbaetech.in or call +91 97534 98392",
+          "Sorry, I'm having trouble connecting right now. Please try again or contact us directly at info@asbaetech.in or call +91 97534 98392",
       }
       setMessages((prev) => [...prev, errorMessage])
     } finally {
