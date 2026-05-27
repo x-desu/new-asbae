@@ -51,7 +51,7 @@ Please let me know your available time slots for a 1:1 demonstration.
 
 Best regards`)
 
-    window.open(`mailto:hello@asbaetech.com?subject=${subject}&body=${body}`)
+    window.open(`mailto:Info@asbaetech.in?subject=${subject}&body=${body}`)
   }
 
   return (

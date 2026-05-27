@@ -100,10 +100,8 @@ export default function Header() {
   useEffect(() => {
     if (!tl.current) return
     if (isDropdownOpen) {
-      document.body.style.overflow = "hidden"
       tl.current.play()
     } else {
-      document.body.style.overflow = ""
       tl.current.reverse()
     }
   }, [isDropdownOpen])
@@ -117,7 +115,6 @@ export default function Header() {
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
-      document.body.style.overflow = ""
     }
   }, [])
 
@@ -242,7 +239,7 @@ export default function Header() {
                 isScrolled ? "top-[4.25rem]" : "top-16"
               )}
             >
-              <div className="dropdown-glass rounded-2xl p-2">
+              <div className="dropdown-glass max-h-[calc(100svh-5.5rem)] overflow-y-auto rounded-2xl p-2">
                 <VStack space="xs">
                   {navItems.map((item) => {
                     const active = isNavActive(item)

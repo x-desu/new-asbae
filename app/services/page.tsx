@@ -473,30 +473,30 @@ export default function ServicesPage() {
                 </section >
 
                 {/* Contact CTA */}
-                < section className="py-32 px-6 relative overflow-hidden" >
+                < section className="px-4 py-16 sm:px-6 sm:py-24 lg:py-32 relative overflow-hidden" >
                     <div className="container mx-auto max-w-5xl">
-                        <div className="relative p-12 md:p-20 rounded-[3rem] overflow-hidden text-center backdrop-blur-3xl border border-white/10">
+                        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 p-6 text-center backdrop-blur-3xl sm:rounded-[3rem] sm:p-12 md:p-20">
                             <div className="absolute inset-0 bg-blue-600/5 z-0" />
                             <div className="relative z-10">
-                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+                                <h2 className="mb-5 text-3xl font-bold leading-tight text-white sm:mb-8 sm:text-4xl md:text-5xl lg:text-6xl">
                                     Ready to Build with <span className="text-blue-500">Precision?</span>
                                 </h2>
-                                <p className="text-blue-100/70 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+                                <p className="mx-auto mb-8 max-w-2xl text-base leading-8 text-blue-100/70 sm:mb-12 sm:text-lg md:text-xl">
                                     Join the ranks of governance-grade institutions leveraging our Unified Governance Solutions.
                                 </p>
-                                <div className="flex flex-col sm:flex-row justify-center gap-6">
+                                <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
                                     <Button
                                         size="lg"
-                                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 rounded-full h-16 text-lg shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)] transition-all hover:scale-105 active:scale-95"
+                                        className="h-14 w-full max-w-[17rem] rounded-full bg-blue-600 px-6 text-base font-bold text-white shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)] transition-all hover:scale-105 hover:bg-blue-500 active:scale-95 sm:h-16 sm:w-auto sm:max-w-none sm:px-10 sm:text-lg"
                                         onClick={() => window.location.href = '/contact'}
                                     >
-                                        Start Your Project
-                                        <ArrowRight className="ml-2 h-5 w-5" />
+                                        <span className="whitespace-nowrap">Start Your Project</span>
+                                        <ArrowRight className="ml-2 h-5 w-5 shrink-0" />
                                     </Button>
                                     <Button
                                         size="lg"
                                         variant="outline"
-                                        className="border-white/20 text-white hover:bg-white/5 font-bold px-10 rounded-full h-16 text-lg backdrop-blur-sm transition-all hover:scale-105"
+                                        className="h-14 w-full max-w-[17rem] rounded-full border-white/20 px-6 text-base font-bold text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/5 sm:h-16 sm:w-auto sm:max-w-none sm:px-10 sm:text-lg"
                                         onClick={() => window.location.href = '/about'}
                                     >
                                         How We Work

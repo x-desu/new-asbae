@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react"
-import Link from "next/link"
 import { motion } from "framer-motion"
 import { Sparkles, Target, Eye, Users, Shield, BarChart, Layers } from "lucide-react"
 import {
@@ -11,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import Header from "@/components/header"
+import Footer from "@/components/footer"
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText"
 
 const approachItems = [
@@ -233,17 +233,7 @@ const AboutPage = () => {
             </div>
           </section>
 
-          {/* Footer */}
-          <footer className="border-t border-white/10 mt-10">
-            <div className="container mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm">© {new Date().getFullYear()} ASBAE. All rights reserved.</p>
-              <nav className="flex items-center gap-6 text-sm">
-                <Link href="/legal/privacy" className="hover:text-blue-400 transition-colors">Privacy</Link>
-                <Link href="/legal/cookies" className="hover:text-blue-400 transition-colors">Cookies</Link>
-                <Link href="/legal/terms" className="hover:text-blue-400 transition-colors">Terms</Link>
-              </nav>
-            </div>
-          </footer>
+          <Footer />
         </div>
     </div>
   )

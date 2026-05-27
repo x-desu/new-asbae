@@ -26,11 +26,11 @@ export async function POST(req: NextRequest) {
       .filter(Boolean)
       .join("\n")
 
-    const fromAddress = process.env.RESEND_FROM || "Asbae <hello@asbaetech.com>"
+    const fromAddress = process.env.RESEND_FROM || "Asbae <Info@asbaetech.in>"
 
     const { data, error } = await resend.emails.send({
       from: fromAddress,
-      to: ["hello@asbaetech.com"],
+      to: ["Info@asbaetech.in"],
       // Using the property name you requested
       replyTo: email,
       subject: subject || "New website inquiry",

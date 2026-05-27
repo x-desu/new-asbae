@@ -60,7 +60,7 @@ export default function ContactForm() {
                     formData.message || "-",
                 ].join("\n")
                 setFallbackMailto(
-                    `mailto:hello@asbaetech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+                    `mailto:Info@asbaetech.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
                 )
             }
 
