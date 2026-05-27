@@ -119,9 +119,25 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 48)
+    let frameId = 0
+
+    const handleScroll = () => {
+      cancelAnimationFrame(frameId)
+      frameId = requestAnimationFrame(() => {
+        setIsScrolled((current) => {
+          if (!current && window.scrollY > 88) return true
+          if (current && window.scrollY < 24) return false
+          return current
+        })
+      })
+    }
+
+    handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      cancelAnimationFrame(frameId)
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   useEffect(() => {
@@ -140,7 +156,11 @@ export default function Header() {
 
     if (item.path === pathname) {
       if (item.path === "/") {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        if (window.__ASBAE_LENIS__) {
+          window.__ASBAE_LENIS__.scrollTo(0, { duration: 0.8 })
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        }
       }
       return
     }
@@ -179,26 +199,23 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-        isScrolled ? "top-3 px-3 sm:px-4" : "top-0 px-0"
+        "fixed inset-x-0 z-50 px-3 transition-[top,padding] duration-700 ease-out sm:px-4",
+        isScrolled ? "top-3" : "top-0"
       )}
     >
       <div
         className={cn(
-          "mx-auto transition-all duration-500",
+          "mx-auto transition-[max-width,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-700 ease-out",
           isScrolled
-            ? "max-w-5xl rounded-full border border-white/[0.08] bg-[#0a1628]/75 px-4 sm:px-6 shadow-[0_8px_40px_rgba(0,0,0,0.45),0_0_60px_rgba(59,130,246,0.08)] backdrop-blur-2xl"
-            : "max-w-full border-b border-white/[0.04] bg-[#060d18]/40 backdrop-blur-md lg:border-b-0 lg:bg-transparent"
+            ? "max-w-5xl rounded-[2rem] border border-white/[0.08] bg-[#0a1628]/75 px-4 sm:px-6 shadow-[0_8px_40px_rgba(0,0,0,0.45),0_0_60px_rgba(59,130,246,0.08)] backdrop-blur-2xl"
+            : "max-w-6xl rounded-[1.75rem] border border-white/[0.05] bg-[#060d18]/45 px-4 sm:px-6 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-md lg:bg-[#060d18]/25"
         )}
       >
         <HStack
-          className={cn(
-            "mx-auto h-16 justify-between lg:h-[4.5rem]",
-            !isScrolled && "container px-4 sm:px-6 lg:px-8"
-          )}
+          className="mx-auto h-16 justify-between lg:h-[4.5rem]"
         >
           <Link href="/" className="shrink-0 rounded-lg outline-none ring-blue-400/50 focus-visible:ring-2">
-            <AsbaeLogo size={isScrolled ? "sm" : "md"} />
+            <AsbaeLogo size="md" />
           </Link>
 
           <nav className="hidden lg:flex" aria-label="Main">

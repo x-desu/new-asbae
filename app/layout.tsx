@@ -7,6 +7,7 @@ import { ModalProvider } from "@/components/modal-context"
 import { SiteBackground } from "@/components/site-background"
 import { NavigationProgressBar } from "@/components/navigation-progress-bar"
 import { ChromePerformanceMonitor } from "@/components/chrome-performance-monitor"
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { SITE_URL, rootMetadata } from "@/lib/seo"
 import Script from "next/script"
 import { Suspense } from "react"
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <Script id="ldjson-org" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
@@ -71,6 +72,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <ModalProvider>
             <ChromePerformanceMonitor />
+            <SmoothScrollProvider />
             <Suspense fallback={null}>
               <NavigationProgressBar />
             </Suspense>

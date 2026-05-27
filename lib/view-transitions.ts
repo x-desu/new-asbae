@@ -74,6 +74,16 @@ export class ViewTransitionManager {
   }
 
   private async performSmoothScroll(targetElement: HTMLElement, options: ViewTransitionOptions): Promise<void> {
+    const lenis = window.__ASBAE_LENIS__
+
+    if (lenis) {
+      lenis.scrollTo(targetElement, {
+        duration: (options.duration || 800) / 1000,
+        offset: -80,
+      })
+      return
+    }
+
     return new Promise((resolve) => {
       const startPosition = window.pageYOffset
       const targetPosition = targetElement.offsetTop - 80 // Account for fixed header
@@ -109,8 +119,13 @@ export class ViewTransitionManager {
 
   private scrollToElement(element: HTMLElement): void {
     const headerOffset = 80
-    const elementPosition = element.offsetTop
-    const offsetPosition = elementPosition - headerOffset
+    const offsetPosition = element.offsetTop - headerOffset
+    const lenis = window.__ASBAE_LENIS__
+
+    if (lenis) {
+      lenis.scrollTo(offsetPosition, { duration: 0.8 })
+      return
+    }
 
     window.scrollTo({
       top: offsetPosition,
@@ -159,11 +174,6 @@ export class ViewTransitionManager {
             transform: translateY(0);
             opacity: 1;
           }
-        }
-
-        /* Smooth scroll behavior fallback */
-        html {
-          scroll-behavior: smooth;
         }
 
         /* Enhanced section transitions */

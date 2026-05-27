@@ -140,13 +140,26 @@
   }
 
   html {
-    @apply scroll-smooth antialiased;
+    @apply antialiased;
   }
 
   body {
     @apply bg-background text-foreground font-body leading-relaxed;
     /* Updated gradient to deep charcoal black theme */
     background: radial-gradient(ellipse at top, hsl(0 0% 7%) 0%, hsl(0 0% 4%) 100%);
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  html.lenis.lenis-stopped {
+    overflow: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {

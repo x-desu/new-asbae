@@ -6,6 +6,11 @@ import { Input } from "@/components/ui/input"
 
 export default function Footer() {
   const scrollToTop = () => {
+    if (window.__ASBAE_LENIS__) {
+      window.__ASBAE_LENIS__.scrollTo(0, { duration: 0.8 })
+      return
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
