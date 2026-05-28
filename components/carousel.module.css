@@ -1,0 +1,133 @@
+.container {
+  --outer-r: 24px;
+  --p-distance: 12px;
+
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(59 130 246 / 20%);
+  border-radius: var(--outer-r);
+  padding: 16px;
+  background:
+    radial-gradient(circle at 35% 0%, rgb(56 189 248 / 12%), transparent 34%),
+    linear-gradient(145deg, rgb(7 16 30 / 88%), rgb(2 8 18 / 92%));
+  box-shadow:
+    0 20px 50px rgb(0 0 0 / 35%),
+    inset 0 1px 0 rgb(255 255 255 / 8%);
+  touch-action: pan-y;
+}
+
+.track {
+  display: flex;
+  cursor: grab;
+}
+
+.track:active {
+  cursor: grabbing;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: stretch;
+  min-height: 380px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: calc(var(--outer-r) - var(--p-distance));
+  background-color: rgb(9 17 31 / 72%);
+}
+
+.roundContainer {
+  border: 1px solid rgb(59 130 246 / 24%);
+}
+
+.roundItem {
+  bottom: 0.1em;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 12%);
+  background-color: rgb(9 17 31 / 82%);
+  text-align: center;
+}
+
+.roundItemHeader {
+  margin: 0;
+  padding: 0;
+}
+
+.roundIndicatorsContainer {
+  position: absolute;
+  z-index: 2;
+  bottom: 3em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.itemHeader {
+  margin-bottom: 16px;
+  padding: 20px 20px 0;
+}
+
+.iconContainer {
+  display: flex;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 92%);
+  color: #061120;
+}
+
+.itemContent {
+  padding: 20px;
+}
+
+.itemTitle {
+  margin-bottom: 4px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.itemDescription {
+  color: rgb(255 255 255 / 72%);
+  font-size: 14px;
+}
+
+.indicatorsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.indicators {
+  margin-top: 16px;
+  display: flex;
+  max-width: 210px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px;
+}
+
+.indicator {
+  height: 7px;
+  width: 7px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  transition: background-color 150ms ease, width 150ms ease;
+}
+
+.active {
+  width: 18px;
+  background-color: rgb(96 165 250);
+}
+
+.inactive {
+  background-color: rgb(148 163 184 / 35%);
+}

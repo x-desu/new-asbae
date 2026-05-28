@@ -6,6 +6,7 @@ import { FileStack, Sparkles } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText"
+import BorderGlow from "@/components/border-glow"
 import { PdfDocumentViewer } from "@/components/pdf-document-viewer"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
@@ -28,6 +29,15 @@ const DOCUMENTS = [
       "Detailed technical capability, resource mobilization plan, and supporting documentation for tender and compliance submissions.",
     src: "/documents/technical-capability-resource-mobilization.pdf",
     pageCount: 43,
+  },
+  {
+    id: "past-experience",
+    tabLabel: "Past Experience",
+    title: "Past Experience and Delivery Capacity Statement",
+    description:
+      "Past experience, delivery capability, and execution readiness statement for partner, tender, and compliance reviews.",
+    src: "/documents/past-experience-delivery-capacity-statement.pdf",
+    pageCount: 8,
   },
 ] as const
 
@@ -87,7 +97,7 @@ export default function StatementsAndRegistrationsPage() {
                   <FileStack className="h-4 w-4 text-blue-400" aria-hidden />
                   <span>Select document</span>
                 </div>
-                <div className="flex flex-col gap-2 sm:flex-row sm:gap-1">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-1">
                   {DOCUMENTS.map((doc) => {
                     const isActive = doc.id === activeId
                     return (
@@ -119,13 +129,28 @@ export default function StatementsAndRegistrationsPage() {
                 id={`panel-${activeDocument.id}`}
                 aria-labelledby={`tab-${activeDocument.id}`}
               >
-                <PdfDocumentViewer
+                <BorderGlow
                   key={activeDocument.src}
-                  title={activeDocument.title}
-                  description={activeDocument.description}
-                  src={activeDocument.src}
-                  pageCount={activeDocument.pageCount}
-                />
+                  className="rounded-2xl"
+                  edgeSensitivity={26}
+                  glowColor="203 96 68"
+                  backgroundColor="#061120"
+                  borderRadius={24}
+                  glowRadius={32}
+                  glowIntensity={0.86}
+                  coneSpread={22}
+                  animated
+                  colors={["#2563eb", "#38bdf8", "#818cf8"]}
+                  fillOpacity={0.26}
+                >
+                  <PdfDocumentViewer
+                    title={activeDocument.title}
+                    description={activeDocument.description}
+                    src={activeDocument.src}
+                    pageCount={activeDocument.pageCount}
+                    className="border-0 bg-transparent shadow-none"
+                  />
+                </BorderGlow>
               </div>
 
               <p className="mt-6 text-center text-xs text-muted-foreground/80">

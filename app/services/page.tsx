@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import GradientText from "@/lib/TextAnimations/GradientText/GradientText";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Carousel from "@/components/carousel";
 import UGS_Card from "@/components/ugs-card";
 
 const UGS_SERVICES = [
@@ -269,40 +270,42 @@ export default function ServicesPage() {
                             </div>
                         </div>
                         
-                        {/* UGS Services Grid - Horizontal scroll on mobile, grid on desktop */}
-                        <div className="md:hidden mb-4">
-                            <p className="text-sm text-blue-300/50 mb-3 text-center">Swipe to explore all services</p>
-                            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-[calc((100vw-280px)/2)] sm:px-[calc((100vw-280px)/2)]">
-                                {UGS_SERVICES.map((service, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                                        viewport={{ once: true }}
-                                        className="flex-shrink-0 w-[280px] snap-center first:pl-0 last:pr-0"
-                                    >
-                                        <UGS_Card
-                                            title={service.title}
-                                            description={service.description}
-                                            icon={service.icon}
-                                            features={service.features.slice(0, 2)}
-                                            gradient={service.gradient}
-                                            compact
-                                        />
-                                    </motion.div>
-                                ))}
-                            </div>
-                            {/* Dots indicator */}
-                            <div className="flex justify-center gap-1.5 mt-2">
-                                {UGS_SERVICES.map((_, i) => (
-                                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-blue-500/30" />
-                                ))}
+                        {/* Mobile Carousel */}
+                        <div className="mb-4 md:hidden">
+                            <p className="mb-3 text-center text-sm text-blue-300/60">Swipe or tap a service to learn more</p>
+                            <div className="flex justify-center">
+                                <Carousel
+                                    baseWidth={300}
+                                    autoplay
+                                    autoplayDelay={3600}
+                                    pauseOnHover
+                                    loop
+                                    round={false}
+                                    items={UGS_SERVICES.map((service, index) => ({
+                                        id: service.title,
+                                        title: service.title,
+                                        description: service.description,
+                                        icon: service.icon,
+                                        content: (
+                                            <UGS_Card
+                                                title={service.title}
+                                                description={service.description}
+                                                icon={service.icon}
+                                                features={service.features.slice(0, 3)}
+                                                gradient={service.gradient}
+                                                compact
+                                            />
+                                        ),
+                                    }))}
+                                />
                             </div>
                         </div>
 
-                        {/* Desktop Grid - Hidden on mobile */}
-                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+                        {/* Desktop Services Layout */}
+                        <div
+                            data-services-grid
+                            className="hidden rounded-[2rem] border border-white/10 bg-white/[0.025] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-md md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4"
+                        >
                             {UGS_SERVICES.map((service, index) => (
                                 <motion.div
                                     key={index}

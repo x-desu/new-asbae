@@ -10,6 +10,7 @@ import gsap from "gsap"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { AsbaeLogo } from "@/components/asbae-logo"
+import GlassSurface from "@/components/glass-surface"
 import { cn } from "@/lib/utils"
 
 type NavItem = {
@@ -203,19 +204,38 @@ export default function Header() {
         isScrolled ? "top-3" : "top-0"
       )}
     >
-      <div
+      <GlassSurface
+        width="100%"
+        height="auto"
+        borderRadius={isScrolled ? 32 : 28}
+        borderWidth={0.1}
+        brightness={62}
+        opacity={0.8}
+        blur={9}
+        displace={0.35}
+        backgroundOpacity={isScrolled ? 0.62 : 0.38}
+        saturation={1.75}
+        distortionScale={-135}
+        redOffset={3}
+        greenOffset={12}
+        blueOffset={22}
+        mixBlendMode="screen"
         className={cn(
-          "mx-auto transition-[max-width,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-700 ease-out",
+          "mx-auto w-[calc(100%-1rem)] px-4 sm:w-full sm:px-6",
           isScrolled
-            ? "max-w-5xl rounded-[2rem] border border-white/[0.08] bg-[#0a1628]/75 px-4 sm:px-6 shadow-[0_8px_40px_rgba(0,0,0,0.45),0_0_60px_rgba(59,130,246,0.08)] backdrop-blur-2xl"
-            : "max-w-6xl rounded-[1.75rem] border border-white/[0.05] bg-[#060d18]/45 px-4 sm:px-6 shadow-[0_8px_32px_rgba(0,0,0,0.24)] backdrop-blur-md lg:bg-[#060d18]/25"
+            ? "max-w-5xl"
+            : "max-w-6xl"
         )}
       >
         <HStack
-          className="mx-auto h-16 justify-between lg:h-[4.5rem]"
+          className="mx-auto h-[4.25rem] w-full justify-between gap-3 lg:h-[4.5rem]"
         >
           <Link href="/" className="shrink-0 rounded-lg outline-none ring-blue-400/50 focus-visible:ring-2">
-            <AsbaeLogo size="md" />
+            <AsbaeLogo
+              size="sm"
+              className="gap-2.5 lg:gap-2.5"
+              wordmarkClassName="text-[1.45rem] sm:text-2xl lg:text-2xl"
+            />
           </Link>
 
           <nav className="hidden lg:flex" aria-label="Main">
@@ -241,12 +261,12 @@ export default function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-11 w-11 rounded-xl border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08]"
+              className="h-10 w-10 rounded-full border border-white/10 bg-white/[0.035] text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm transition-colors hover:bg-white/[0.08] hover:text-white"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               aria-expanded={isDropdownOpen}
               aria-label="Toggle menu"
             >
-              {isDropdownOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isDropdownOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
 
             <div
@@ -311,7 +331,7 @@ export default function Header() {
             </div>
           </div>
         </HStack>
-      </div>
+      </GlassSurface>
     </header>
   )
 }

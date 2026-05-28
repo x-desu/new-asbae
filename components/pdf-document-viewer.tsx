@@ -46,7 +46,7 @@ export function PdfDocumentViewer({
   src,
   pageCount,
   className,
-  viewerHeightClassName = "h-[min(70vh,600px)] min-h-[400px]",
+  viewerHeightClassName = "h-[72svh] min-h-[520px] md:h-[min(70vh,600px)] md:min-h-[400px]",
 }: PdfDocumentViewerProps) {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -102,6 +102,24 @@ export function PdfDocumentViewer({
         </div>
       </div>
 
+      <div className="mb-4 flex flex-col gap-2 rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-sm text-blue-100/80 sm:hidden">
+        <p>Mobile browsers can be picky with inline PDF previews. Use these controls if the preview does not render.</p>
+        <div className="grid grid-cols-2 gap-2">
+          <Button variant="outline" size="sm" asChild className="border-blue-400/30 bg-blue-500/10">
+            <a href={src} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4" />
+              Open
+            </a>
+          </Button>
+          <Button variant="secondary" size="sm" asChild>
+            <a href={src} download>
+              <Download className="h-4 w-4" />
+              Download
+            </a>
+          </Button>
+        </div>
+      </div>
+
       <div
         className={cn(
           "relative overflow-hidden rounded-xl border border-white/10 bg-neutral-950/80 shadow-inner",
@@ -109,16 +127,41 @@ export function PdfDocumentViewer({
         )}
       >
         {isLoading && <PdfViewerSkeleton />}
-        <iframe
+        <object
           key={src}
           title={title}
-          src={`${src}#toolbar=1&navpanes=0`}
+          data={`${src}#toolbar=1&navpanes=0`}
+          type="application/pdf"
           className={cn(
             "h-full w-full transition-opacity duration-500",
             isLoading ? "opacity-0" : "opacity-100"
           )}
           onLoad={handleLoad}
-        />
+        >
+          <div className="flex h-full flex-col items-center justify-center gap-4 p-6 text-center">
+            <FileText className="h-10 w-10 text-blue-400" aria-hidden />
+            <div className="space-y-2">
+              <h3 className="text-base font-semibold text-foreground">PDF preview unavailable</h3>
+              <p className="max-w-sm text-sm text-muted-foreground">
+                Your browser could not display this PDF inline. Open it in a new tab or download it instead.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-2">
+              <Button variant="outline" size="sm" asChild className="border-white/15 bg-white/5">
+                <a href={src} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4" />
+                  Open in new tab
+                </a>
+              </Button>
+              <Button variant="secondary" size="sm" asChild>
+                <a href={src} download>
+                  <Download className="h-4 w-4" />
+                  Download
+                </a>
+              </Button>
+            </div>
+          </div>
+        </object>
       </div>
     </article>
   )

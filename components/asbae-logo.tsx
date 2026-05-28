@@ -8,18 +8,18 @@ type AsbaeLogoProps = {
   size?: "sm" | "md" | "lg"
   className?: string
   wordmarkClassName?: string
-  /** Frosted glass plate + blue backlight behind mark on dark nav */
+  /** Soft backlight behind the transparent mark on dark nav */
   markOnLight?: boolean
 }
 
 const markSizes = {
-  sm: "h-8 w-8",
-  md: "h-9 w-9 lg:h-10 lg:w-10",
-  lg: "h-11 w-11",
+  sm: "h-9 w-9 lg:h-10 lg:w-10",
+  md: "h-10 w-10 lg:h-11 lg:w-11",
+  lg: "h-12 w-12",
 }
 
 const wordmarkSizes = {
-  sm: "text-lg",
+  sm: "text-xl lg:text-2xl",
   md: "text-xl md:text-2xl",
   lg: "text-2xl md:text-3xl",
 }
@@ -56,33 +56,33 @@ type AsbaeLogoMarkProps = {
   alt?: string
 }
 
-/** PNG mark from `public/images/asbae-logo.png` — optional glass plate for dark backgrounds. */
+/** Transparent PNG mark from `public/images/asbae-logo.png`. */
 export function AsbaeLogoMark({
   className,
   onLight = true,
   alt = "ASBAE",
 }: AsbaeLogoMarkProps) {
   return (
-    <span className={cn("relative inline-flex shrink-0", className)}>
+    <span className={cn("relative inline-flex shrink-0 items-center justify-center", className)}>
       {onLight ? (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10 scale-[1.4] rounded-[0.65rem] bg-[radial-gradient(circle_at_50%_60%,rgba(96,165,250,0.55),rgba(59,130,246,0.2)_50%,transparent_72%)] blur-[7px]"
-        />
+        <>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-[10%] rounded-full bg-cyan-400/20 blur-[10px]"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-[18%] rounded-full bg-blue-500/15 blur-[18px]"
+          />
+        </>
       ) : null}
-      <span
-        className={cn(
-          "relative inline-flex h-full w-full items-center justify-center overflow-hidden rounded-[0.65rem]",
-          onLight &&
-            "border border-white/20 bg-white/10 backdrop-blur-md backdrop-saturate-150 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_0_22px_rgba(59,130,246,0.28),0_4px_14px_rgba(0,0,0,0.35)]"
-        )}
-      >
+      <span className="relative inline-flex h-full w-full items-center justify-center">
         <Image
           src={LOGO_SRC}
           alt={alt}
           fill
-          sizes="(max-width: 1024px) 36px, 40px"
-          className="object-contain p-[14%]"
+          sizes="(max-width: 1024px) 40px, 44px"
+          className="object-contain drop-shadow-[0_0_10px_rgba(56,189,248,0.28)]"
           priority
         />
       </span>
