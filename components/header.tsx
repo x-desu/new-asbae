@@ -272,11 +272,11 @@ export default function Header() {
             <div
               ref={dropdownContentRef}
               className={cn(
-                "fixed inset-x-0 z-40 hidden px-4",
-                isScrolled ? "top-[4.25rem]" : "top-16"
+                "absolute z-40 hidden left-[-1rem] right-[-1rem] sm:left-[-1.5rem] sm:right-[-1.5rem]",
+                isScrolled ? "top-[3.65rem]" : "top-[3.45rem]"
               )}
             >
-              <div className="dropdown-glass max-h-[calc(100svh-5.5rem)] overflow-y-auto rounded-2xl p-2">
+              <div className="dropdown-glass mx-auto max-h-[calc(100svh-5.5rem)] w-full max-w-6xl overflow-y-auto px-2 pb-2 pt-5">
                 <VStack space="xs">
                   {navItems.map((item) => {
                     const active = isNavActive(item)
