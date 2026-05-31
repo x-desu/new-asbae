@@ -59,7 +59,7 @@ export default function GlassSurface({
   const filterId = `glass-filter-${uniqueId}`
   const redGradId = `red-grad-${uniqueId}`
   const blueGradId = `blue-grad-${uniqueId}`
-  const [svgSupported, setSvgSupported] = useState(false)
+  const [glassMode, setGlassMode] = useState<"svg" | "native">("native")
   const containerRef = useRef<HTMLDivElement>(null)
   const feImageRef = useRef<SVGFEImageElement>(null)
   const redChannelRef = useRef<SVGFEDisplacementMapElement>(null)
@@ -143,19 +143,22 @@ export default function GlassSurface({
   }, [])
 
   useEffect(() => {
-    const isSupported = () => {
-      if (typeof window === "undefined" || typeof document === "undefined") return false
+    const getGlassMode = (): "svg" | "native" => {
+      if (typeof window === "undefined" || typeof document === "undefined") return "native"
+
+      const shouldUseNativeGlass = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches
+      if (shouldUseNativeGlass) return "native"
 
       const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
       const isFirefox = /Firefox/.test(navigator.userAgent)
-      if (isWebkit || isFirefox) return false
+      if (isWebkit || isFirefox) return "native"
 
       const div = document.createElement("div")
       div.style.backdropFilter = `url(#${filterId})`
-      return div.style.backdropFilter !== ""
+      return div.style.backdropFilter !== "" ? "svg" : "native"
     }
 
-    setSvgSupported(isSupported())
+    setGlassMode(getGlassMode())
     window.setTimeout(updateDisplacementMap, 0)
   }, [filterId, width, height])
 
@@ -173,7 +176,8 @@ export default function GlassSurface({
     <div
       ref={containerRef}
       data-glass-surface
-      className={cn(styles.surface, svgSupported ? styles.svg : styles.fallback, className)}
+      data-glass-mode={glassMode}
+      className={cn(styles.surface, glassMode === "svg" ? styles.svg : styles.native, className)}
       style={containerStyle}
     >
       <svg className={styles.filter} xmlns="http://www.w3.org/2000/svg" aria-hidden>
