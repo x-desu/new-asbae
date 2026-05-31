@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail, MapPin, Facebook, Twitter, Linkedin, Github, ArrowUp } from "lucide-react"
+import { Mail, MapPin, Facebook, Twitter, Linkedin, Github, ArrowUp, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -115,6 +115,17 @@ export default function Footer() {
                   <address className="not-italic text-xs sm:text-sm text-muted-foreground leading-snug">
                     ASBAE Technologies (D-05), 1st Floor, 5/588, Vikas Khand, Gomti Nagar, Lucknow - 226010, Uttar Pradesh
                   </address>
+                </div>
+                <div className="flex items-start gap-2.5 rounded-xl border border-blue-500/20 bg-blue-500/10 p-3">
+                  <FileText className="h-4 w-4 shrink-0 text-blue-300 mt-0.5" aria-hidden="true" />
+                  <div className="space-y-0.5">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-blue-200/80">
+                      GSTIN
+                    </p>
+                    <p className="text-xs sm:text-sm font-medium text-blue-50">
+                      09ACJFA9803E1ZC
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
