@@ -36,10 +36,10 @@ const navUnderlineClass = (active: boolean) =>
 
 const mobileNavLinkClass = (active: boolean) =>
   cn(
-    "block rounded-xl px-4 py-3.5 text-base font-medium transition-colors",
+    "block rounded-xl px-4 py-3.5 text-base font-semibold text-shadow-sm transition-colors",
     active
-      ? "bg-blue-500/15 text-blue-200"
-      : "text-white/90 hover:bg-blue-500/10 hover:text-blue-200",
+      ? "bg-blue-500/22 text-blue-100"
+      : "text-white/95 hover:bg-blue-500/14 hover:text-blue-100",
   )
 
 export default function Header() {
