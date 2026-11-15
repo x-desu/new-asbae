@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function LegalLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative z-[2]">
+    <div className="inner-site legal-site relative z-[2]">
       <Header />
       <main className="pt-20">
         {children}

@@ -1,0 +1,43 @@
+.inner-site { background:#090f19; color:#edf3fc; font-family:var(--font-inter),sans-serif; }
+.inner-site :is(h1,h2,h3,h4) { font-family:var(--font-inter),sans-serif; }
+.inner-container { width:min(1120px,calc(100% - 64px)); margin-inline:auto; }
+.inner-hero { position:relative; overflow:hidden; padding:160px 0 90px; min-height:430px; }
+.inner-hero > img { object-fit:cover; object-position:center 36%; }
+.inner-hero-shade { position:absolute; inset:0; background:linear-gradient(180deg,#10223545,#090f198c 55%,#090f19); }
+.inner-hero .inner-container { position:relative; }
+.inner-hero h1 { max-width:850px; margin:22px 0; font-size:clamp(38px,5.2vw,64px); line-height:1.08; font-weight:500; letter-spacing:-.055em; }
+.inner-hero p { max-width:660px; color:#d0dbea; font-size:16px; line-height:1.75; }
+.inner-site .saas-eyebrow { color:#9db3ce; font-size:10px; font-weight:500; letter-spacing:.16em; }
+.inner-section { padding-block:66px; border-bottom:1px solid #a5bfd515; scroll-margin-top:80px; }
+.inner-site h2 { font-size:clamp(27px,3.2vw,40px); line-height:1.17; font-weight:500; letter-spacing:-.04em; }
+.inner-site h3 { font-size:18px; font-weight:500; line-height:1.4; letter-spacing:-.02em; }
+.inner-site p { color:#9eafc4; line-height:1.8; font-size:14px; }
+.inner-section-heading { max-width:680px; margin-bottom:32px; }
+.inner-section-heading h2 { margin:15px 0; }
+.inner-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.inner-card-grid.two-columns { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.inner-card { padding:28px; border:1px solid #abc7e01a; border-radius:12px; background:#0d1724; }
+.inner-card-icon { margin-bottom:23px; color:#80b6ed; }
+.inner-card-icon svg { width:22px; height:22px; color:inherit; }
+.inner-card h3 { margin-bottom:12px; }
+.inner-card p { font-size:13px; }
+.inner-card ul { padding-top:18px; margin-top:20px; border-top:1px solid #abc7e012; display:grid; gap:10px; color:#c3cfde; font-size:12px; }
+.inner-card li::before,.inner-assurances li::before { content:'↗'; color:#76abe2; margin-right:10px; }
+.inner-section-nav { display:flex; flex-wrap:wrap; gap:30px; padding-block:20px; border-bottom:1px solid #abc7e01a; font-size:12px; color:#a9bbd2; }
+.inner-section-nav a:hover { color:#fff; }
+.inner-purpose,.inner-faq,.inner-contact { display:grid; grid-template-columns:1fr 1fr; gap:80px; }
+.inner-purpose h2,.inner-faq h2,.inner-contact h2 { margin:16px 0; }
+.inner-purpose-copy { display:grid; gap:36px; }
+.inner-purpose-copy article + article { border-top:1px solid #abc7e01a; padding-top:32px; }
+.inner-purpose-copy h3 { margin:12px 0; font-size:22px; }
+.inner-company-note { display:grid; gap:8px; padding-top:28px; margin-top:30px; border-top:1px solid #abc7e01a; }
+.inner-company-note strong { font-size:12px; font-weight:500; }.inner-company-note span { font-size:11px; color:#92a7bf; }
+.inner-faq button { text-align:left; font-size:14px; font-weight:400; line-height:1.6; }.inner-faq [role=region] { color:#a7b7c9; line-height:1.8; }
+.inner-cta { padding-block:65px; display:flex; align-items:center; justify-content:space-between; gap:30px; }.inner-cta h2 { max-width:600px; margin-top:14px; }
+.inner-contact { gap:70px; align-items:start; }.inner-contact-details { margin:35px 0; display:grid; gap:28px; }.inner-contact-details > div { display:grid; gap:8px; }.inner-contact-details span { font-size:11px; color:#91a5be; }.inner-contact-details a { font-size:20px; }.inner-contact-details strong { font-size:12px; font-weight:500; }.inner-assurances { padding-top:26px; border-top:1px solid #abc7e01a; display:grid; gap:14px; font-size:12px; color:#adc0d6; }
+.inner-form-panel { background:#0d1724; padding:30px; border:1px solid #abc7e01a; border-radius:12px; }.inner-form-panel h2 { font-size:24px; margin:0 0 10px; }.inner-form-panel > p { margin-bottom:26px; }.inner-form-panel :is(input,textarea,[role=combobox]) { border-radius:7px; background:#101e2e; border-color:#9eb8d129; font-family:inherit; }.inner-form-panel button[type=submit] { border-radius:7px; box-shadow:none; font-size:14px; height:46px; }
+.inner-registration { display:grid; grid-template-columns:1.1fr 1fr; gap:70px; padding:34px; border:1px solid #abc7e01a; border-radius:12px; background:#0d1724; }.inner-registration h2 { font-size:27px; margin:16px 0; }.inner-registration dl { display:grid; gap:22px; }.inner-registration dt { font-size:11px; color:#91a7bf; margin-bottom:7px; }.inner-registration dd { color:#e0e8f2; font-size:13px; line-height:1.7; }
+.inner-document-tabs { display:flex; gap:8px; border-bottom:1px solid #abc7e025; padding-bottom:14px; margin-bottom:22px; }.inner-document-tabs button { flex:1; padding:14px 18px; text-align:left; border:1px solid transparent; border-radius:8px; color:#91a5bd; }.inner-document-tabs button[aria-selected=true] { background:#122338; color:#e6f0fc; border-color:#96bce22b; }.inner-document-tabs strong { display:block; font-size:13px; font-weight:500; }.inner-document-tabs span { display:block; margin-top:5px; font-size:11px; }.inner-document-panel { border:1px solid #abc7e01a; background:#0d1724; border-radius:12px; overflow:hidden; }
+.legal-site main { max-width:1000px; margin:auto; }.legal-site section { padding-top:75px; }.legal-site .neomorphic { background:#0d1724; border:1px solid #abc7e01a; box-shadow:none; }.legal-site h1 { font-weight:500; letter-spacing:-.04em; }.legal-site .prose h2 { font-size:20px; margin-top:30px; margin-bottom:12px; }.legal-site .prose :is(p,li) { color:#a9b9cc; font-size:14px; line-height:1.8; }
+@media(max-width:850px) { .inner-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.inner-purpose,.inner-faq,.inner-contact { gap:35px; }.inner-registration { gap:30px; } }
+@media(max-width:600px) { .inner-container { width:calc(100% - 40px); }.inner-hero { padding:125px 0 55px; min-height:370px; }.inner-hero p { font-size:14px; }.inner-section { padding-block:42px; }.inner-card-grid,.inner-card-grid.two-columns,.inner-purpose,.inner-faq,.inner-contact,.inner-registration { grid-template-columns:1fr; }.inner-card { padding:24px; }.inner-cta { align-items:flex-start; flex-direction:column; padding-block:45px; }.inner-registration { padding:24px; }.inner-form-panel { padding:24px; }.inner-document-tabs { gap:3px; }.inner-document-tabs button { padding:12px 8px; }.inner-document-tabs strong { font-size:11px; }.inner-section-nav { gap:18px; font-size:11px; } }

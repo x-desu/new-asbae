@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,6 +9,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      aspectRatio: { "4/3": "4 / 3" },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -76,7 +78,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
         serif: ["var(--font-poppins)", "ui-serif", "Georgia", "serif"],
-        heading: ["var(--font-poppins)", "ui-sans-serif", "system-ui", "sans-serif"],
+        heading: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
         body: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       keyframes: {

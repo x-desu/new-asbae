@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
+import "@/styles/saas.css"
+import "@/styles/inner-pages.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModalProvider } from "@/components/modal-context"
 import { SiteBackground } from "@/components/site-background"
@@ -9,6 +11,7 @@ import { NavigationProgressBar } from "@/components/navigation-progress-bar"
 import { ChromePerformanceMonitor } from "@/components/chrome-performance-monitor"
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { SITE_URL, rootMetadata } from "@/lib/seo"
+import { COMPANY } from "@/lib/company"
 import Script from "next/script"
 import { Suspense } from "react"
 
@@ -47,6 +50,9 @@ export default function RootLayout({
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'ASBAE',
+            legalName: COMPANY.legalName,
+            foundingDate: COMPANY.incorporatedOn,
+            identifier: { '@type': 'PropertyValue', propertyID: 'LLPIN', value: COMPANY.llpin },
             url: SITE_URL,
             logo: `${SITE_URL}/images/asbae-logo.png`,
             sameAs: [
