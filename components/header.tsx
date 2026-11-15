@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ArrowUpRight, Menu, X } from "lucide-react"
+import ThemeToggle from "@/components/theme-toggle"
 import { AsbaeLogo } from "@/components/asbae-logo"
 
 const links = [
@@ -74,6 +75,7 @@ export default function Header() {
             </Link>
           ))}
         </nav>
+        <ThemeToggle/>
         <Link href="/contact" className="asbae-nav-cta">
           Let’s talk <ArrowUpRight size={16} aria-hidden />
         </Link>

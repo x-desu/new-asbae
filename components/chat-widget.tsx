@@ -183,7 +183,7 @@ export default function ChatWidget() {
       </Button>
 
       {isOpen && (
-        <Card className="fixed bottom-20 right-6 z-40 w-80 sm:w-96 h-96 sm:h-[450px] bg-black/10 backdrop-blur-2xl border border-blue-500/20 shadow-2xl flex flex-col overflow-hidden">
+        <Card className="site-chat-panel fixed bottom-20 right-6 z-40 w-80 sm:w-96 h-96 sm:h-[450px] bg-black/10 backdrop-blur-2xl border border-blue-500/20 shadow-2xl flex flex-col overflow-hidden">
           <div className="flex items-center justify-between p-3 border-b border-blue-500/20 flex-shrink-0">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30">

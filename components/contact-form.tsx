@@ -150,7 +150,7 @@ export default function ContactForm() {
                     <SelectTrigger className="bg-white/5 border-white/10 text-white h-12 rounded-xl focus:ring-blue-500/20">
                         <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-white/10 text-white">
+                    <SelectContent className="bg-popover border-border text-popover-foreground">
                         <SelectItem value="documentation">Documentation Service</SelectItem>
                         <SelectItem value="governance">Unified Governance Solutions</SelectItem>
                         <SelectItem value="tender-documentation">Tender & RFP Documentation</SelectItem>

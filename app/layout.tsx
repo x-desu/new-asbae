@@ -5,6 +5,8 @@ import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
 import "@/styles/saas.css"
 import "@/styles/inner-pages.css"
+import "@/styles/theme.css"
+import "@/styles/home-capabilities.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModalProvider } from "@/components/modal-context"
 import { SiteBackground } from "@/components/site-background"
@@ -44,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script id="ldjson-org" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
@@ -79,7 +81,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ModalProvider>
             <ChromePerformanceMonitor />
             <SmoothScrollProvider />
