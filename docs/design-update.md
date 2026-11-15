@@ -45,3 +45,15 @@ The source demo is available at `/components-preview/parallax`. It keeps the six
 - The final delivery message records production-build and mobile-check results.
 
 Reference: [Aceternity Inference page](https://ui.aceternity.com/pages/inference-landing-page).
+
+## Footer wordmark placement
+
+Current selection: Ruixen WordmarkFooter as the final section below Footer Pro, with the original wordmark size, clipped fade, and cursor-following shine. Brand text is ASBAE; the background remains navy to match the site.
+
+Saved alternative: the same WordmarkFooter inside the mountain CTA, after `.photo-cta-overlay` and before `.photo-cta-copy`, wrapped in `<div className="photo-cta-watermark" aria-hidden="true">`. Its existing CSS places it behind the content, aligned to the bottom with a 24% downward translation and 0.15 opacity. To restore this alternative, move the WordmarkFooter from the footer into that wrapper.
+
+The final footer wordmark was subsequently reduced to 54–86px in height, with 54–112px lettering and 4px vertical padding, per the request for a more compact footer.
+
+Latest wordmark selection: the original Ruixen WordmarkFooter source has been restored without custom size, fade, font, or spacing overrides. It sits below the copyright and receives only `brandName="ASBAE"`. Its deliberate bottom crop and pointer-following gradient match the supplied reference. This supersedes the compact wordmark dimensions above.
+
+Current footer treatment: compact Footer Pro with restored GSTIN, Instagram and separate LinkedIn profile/company links. The Ruixen wordmark is below the footer with a blue-gray cursor shine over the site navy, and the copyright/links layered over the top of its shorter band. The original black background is replaced by site colors. Earlier placement and size notes describe previous variants.

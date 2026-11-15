@@ -58,6 +58,9 @@ export default function RootLayout({
             logo: `${SITE_URL}/images/asbae-logo.png`,
             sameAs: [
               'https://x.com/asbae',
+              'https://www.instagram.com/asbaetech2025/',
+              'https://www.linkedin.com/in/asbae-technologies-767209433/',
+              'https://www.linkedin.com/company/asbae-technologies/',
             ],
           })}
         </Script>
