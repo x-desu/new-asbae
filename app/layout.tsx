@@ -1,4 +1,5 @@
 import type React from "react"
+import WhatsAppButton from "@/components/whatsapp-button"
 import type { Metadata, Viewport } from "next"
 import { Poppins, Inter } from "next/font/google"
 import "./globals.css"
@@ -84,6 +85,7 @@ export default function RootLayout({
             </Suspense>
             <SiteBackground />
             {children}
+            <WhatsAppButton />
           </ModalProvider>
         </ThemeProvider>
       </body>
