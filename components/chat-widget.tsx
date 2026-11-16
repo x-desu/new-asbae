@@ -26,7 +26,7 @@ export default function ChatWidget() {
     <button type="button" className="chat-launcher" aria-label={open?"Close chat":"Open ASBAE chat"} aria-expanded={open} aria-controls="asbae-chat" onClick={()=>setOpen(!open)}>{open?<X size={20}/>:<MessageCircle size={20}/>}</button>
     {open && <section id="asbae-chat" className="asbae-chat" aria-label="ASBAE assistant">
       <header className="chat-heading"><div><strong>ASBAE assistant</strong><span>Platforms, documentation & governance</span></div><button type="button" aria-label="Close chat" onClick={()=>setOpen(false)}><X size={18}/></button></header>
-      <div ref={viewport} className="chat-conversation" role="log" aria-label="Conversation" aria-live="off" onScroll={()=>{const el=viewport.current;if(el)follow.current=el.scrollHeight-el.scrollTop-el.clientHeight<80}}>
+      <div ref={viewport} className="chat-conversation" data-nosnippet role="log" aria-label="Conversation" aria-live="off" onScroll={()=>{const el=viewport.current;if(el)follow.current=el.scrollHeight-el.scrollTop-el.clientHeight<80}}>
         {messages.map(message=>{const text=message.parts.filter(p=>p.type==="text").map(p=>p.text).join("");return text ? <div key={message.id} className={`chat-message chat-${message.role}`}><span>{message.role==="user"?"You":"ASBAE"}</span><p>{text}</p></div> : null})}
         {waiting && <div className="chat-waiting" role="status"><i/><i/><i/><span>Preparing your answer…</span></div>}
         {status==="streaming"&&!waiting&&<span className="chat-streaming" role="status">Responding…</span>}

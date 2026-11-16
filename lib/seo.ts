@@ -4,7 +4,7 @@ import { OG_IMAGE_ALT } from "@/lib/og-image"
 /** Production site URL — set NEXT_PUBLIC_SITE_URL=https://www.asbaetech.in on deploy. */
 export const SITE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL || "https://www.asbaetech.in").replace(/\/$/, "")
-export const SITE_NAME = "ASBAE"
+export const SITE_NAME = "ASBAE Technologies"
 
 export const SHARE_IMAGE_PATH = "/asbae-social-2026-11.png"
 export const SHARE_IMAGE_WIDTH = 1200
@@ -64,12 +64,12 @@ export function createPageMetadata({
     title,
     description,
     ...(noIndex
-      ? { robots: { index: false, follow: true } }
+      ? { robots: { index: false, follow: true, googleBot: { index: false, follow: true } } }
       : {
           robots: {
             index: true,
             follow: true,
-            googleBot: { index: true, follow: true },
+            googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
           },
         }),
     alternates: {
@@ -136,6 +136,7 @@ export const rootMetadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-96.png", sizes: "96x96", type: "image/png" },
       { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
       { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
       { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },

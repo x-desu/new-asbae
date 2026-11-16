@@ -22,3 +22,13 @@ Public content pages return HTTP 200, contain one h1, route-specific titles/desc
 Search Console ownership, sitemap submission status, actual Google indexing, query rankings, and field Core Web Vitals require authenticated Search Console data and were not verified. No ranking or PageSpeed score is claimed. After deployment, inspect the homepage and sitemap in Search Console. Social platforms may retain cached cards for existing shared URLs; the new image filename helps refresh the artwork but cannot force every platform cache to expire.
 
 References: https://developers.google.com/search/docs/fundamentals/get-started and https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap.
+
+
+## Follow-up after chatbot release
+
+- Refreshed the public-page search titles/descriptions and site name.
+- Linked WebSite to Organization and added an OfferCatalog describing the services visible on the Services page; no ratings, prices, or guarantees are asserted.
+- Kept chatbot conversation content out of search snippets with data-nosnippet.
+- Made generic and Googlebot noindex rules consistent for legal pages.
+- Rebuilt all icons from the current transparent brand mark, fitted inside 64% of an opaque white square. This leaves padding for circular search-result frames. Updated the legacy ICO and added a crawlable 96×96 PNG alongside 32/180/192/512px assets.
+- Google controls when it recrawls and displays updated favicons; no instant search-result refresh is claimed.

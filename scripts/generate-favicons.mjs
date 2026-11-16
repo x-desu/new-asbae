@@ -1,41 +1,22 @@
 import { writeFile } from "node:fs/promises"
-import sharp from "sharp"
+import { generateFaviconPng } from "../lib/favicon-icon.mjs"
 
-const { generateFaviconPng } = await import("../lib/favicon-icon.tsx")
-
-async function verifyCorners(buf, label) {
-  const { data, info } = await sharp(buf).raw().toBuffer({ resolveWithObject: true })
-  const size = info.width
-  const corners = [
-    [0, 0],
-    [size - 1, 0],
-    [0, size - 1],
-    [size - 1, size - 1],
-  ]
-  for (const [x, y] of corners) {
-    const i = (y * size + x) * 4
-    const alpha = data[i + 3]
-    if (alpha > 0) {
-      throw new Error(`${label} corner (${x},${y}) alpha=${alpha}, expected 0`)
-    }
-  }
-  const center = Math.floor(size / 2)
-  const ci = (center * size + center) * 4
-  if (data[ci + 3] === 0) {
-    throw new Error(`${label} center is fully transparent`)
-  }
-  console.log(`${label}: corners transparent, center opaque ✓`)
+for (const [size, paths] of [
+  [32,["public/favicon-32.png"]],
+  [96,["app/icon.png","public/favicon-96.png"]],
+  [180,["app/apple-icon.png","public/favicon-180.png"]],
+  [192,["public/android-chrome-192x192.png"]],
+  [512,["public/android-chrome-512x512.png"]],
+]) {
+  const png=await generateFaviconPng(size)
+  for (const path of paths) await writeFile(path,png)
 }
-
-const png32 = await generateFaviconPng(32)
-const png180 = await generateFaviconPng(180)
-
-await verifyCorners(png32, "32x32")
-await verifyCorners(png180, "180x180")
-
-await writeFile("app/icon.png", png32)
-await writeFile("app/apple-icon.png", png180)
-await writeFile("public/favicon-32.png", png32)
-await writeFile("public/favicon-180.png", png180)
-
-console.log("Wrote app/icon.png, app/apple-icon.png, public/favicon-32.png, public/favicon-180.png")
+// ICO directory embeds PNG images so legacy favicon requests get the same safe padding.
+const sizes=[16,32,48]
+const images=await Promise.all(sizes.map(generateFaviconPng))
+const directory=Buffer.alloc(6+16*sizes.length)
+directory.writeUInt16LE(1,2);directory.writeUInt16LE(sizes.length,4)
+let offset=directory.length
+images.forEach((image,index)=>{const entry=6+16*index;directory[entry]=sizes[index];directory[entry+1]=sizes[index];directory.writeUInt16LE(1,entry+4);directory.writeUInt16LE(32,entry+6);directory.writeUInt32LE(image.length,entry+8);directory.writeUInt32LE(offset,entry+12);offset+=image.length})
+await writeFile("app/favicon.ico",Buffer.concat([directory,...images]))
+console.log("Generated padded favicons at 16, 32, 48, 96, 180, 192 and 512px")

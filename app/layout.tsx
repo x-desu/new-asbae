@@ -72,7 +72,11 @@ export default function RootLayout({
           JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'ASBAE',
+            '@id': `${SITE_URL}/#website`,
+            name: 'ASBAE Technologies',
+            alternateName: 'ASBAE',
+            publisher: { '@id': `${SITE_URL}/#organization` },
+            inLanguage: 'en-IN',
             url: SITE_URL,
 
           }).replace(/</g, "\\u003c") }} />

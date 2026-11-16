@@ -2,9 +2,8 @@ import type { Metadata } from "next"
 import { createPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Contact ASBAE",
-  description:
-    "Get in touch for DaaS, governance-ready documentation, and tender-aligned IT solutions. Schedule a consultation with the ASBAE team.",
+  title: "Contact ASBAE in Lucknow",
+  description: "Discuss enterprise software, technical documentation, governance, or tender requirements with ASBAE Technologies LLP. Contact our team in Lucknow.",
   path: "/contact",
 })
 
