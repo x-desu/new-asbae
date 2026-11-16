@@ -23,7 +23,10 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 48)
+    const update = () => {
+      const hero = document.querySelector(".saas-hero, .inner-hero")
+      setScrolled(hero ? hero.getBoundingClientRect().bottom <= 72 : window.scrollY > 48)
+    }
     update()
     window.addEventListener("scroll", update, { passive: true })
     return () => window.removeEventListener("scroll", update)

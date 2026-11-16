@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import ProjectWorkspace, { workspaceViews } from "@/components/project-workspace"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
+import { LinkPreview } from "@/components/ui/link-preview"
 import { motion, useScroll, useSpring, useTransform } from "motion/react"
 
 export default function PinnedProjectShowcase() {
@@ -52,7 +53,7 @@ export default function PinnedProjectShowcase() {
     <section id="work" className="pinned-showcase" aria-label="Vidhayak Connect project showcase">
       <div ref={track} className={`showcase-track ${reduced?"is-reduced":""}`}>
         <div ref={stage} className="showcase-sticky">
-          <div className="showcase-caption"><div><span className="saas-eyebrow">ASBAE IN ACTION</span><h2>Vidhayak Connect<span> / MLA office workspace</span></h2></div><Link href="/contact">Discuss a similar project <ArrowUpRight size={14} aria-hidden/></Link></div>
+          <div className="showcase-caption"><div><span className="saas-eyebrow">ASBAE IN ACTION</span><h2><LinkPreview url="https://vidhayakconnect.in/" isStatic imageSrc="/images/vidhayak-connect-preview.jpg" width={320} height={200} className="showcase-project-link">Vidhayak Connect ↗</LinkPreview><span> / MLA office workspace</span></h2></div><Link href="/contact">Discuss a similar project <ArrowUpRight size={14} aria-hidden/></Link></div>
           <motion.div className="showcase-window-entry" style={reduced ? undefined : { scale: entryScale, rotateX: entryTilt, y: entryY }}>
             <ProjectWorkspace active={active} onSelect={select}/>
           </motion.div>

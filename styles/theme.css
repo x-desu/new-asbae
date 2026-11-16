@@ -39,3 +39,5 @@ body,.saas-site,.inner-site,.site-background{background:var(--site-bg);color:var
 .light .asbae-parallax-hero .saas-capability-strip strong{color:#243c53;text-shadow:0 1px 8px #ffffff80}
 .light .asbae-parallax-hero .saas-capability-strip svg{opacity:1}
 .light .photo-cta-copy p,.light .photo-cta-copy>.saas-eyebrow,.light .photo-cta-copy>small{color:#354e66}
+
+.showcase-caption h2 .showcase-project-link{color:inherit;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px}.showcase-caption h2 .showcase-project-link:hover{ text-decoration-color:currentColor}
