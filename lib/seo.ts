@@ -3,17 +3,16 @@ import { OG_IMAGE_ALT } from "@/lib/og-image"
 
 /** Production site URL — set NEXT_PUBLIC_SITE_URL=https://www.asbaetech.in on deploy. */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.asbaetech.in"
+  (process.env.NEXT_PUBLIC_SITE_URL || "https://www.asbaetech.in").replace(/\/$/, "")
 export const SITE_NAME = "ASBAE"
-export const TWITTER_SITE = "@asbae"
 
-export const SHARE_IMAGE_PATH = "/og-image.png"
+export const SHARE_IMAGE_PATH = "/asbae-social-2026-11.png"
 export const SHARE_IMAGE_WIDTH = 1200
 export const SHARE_IMAGE_HEIGHT = 630
 
-export const DEFAULT_TITLE = "ASBAE — Intelligent IT Solutions"
+export const DEFAULT_TITLE = "ASBAE Technologies | Enterprise IT & Documentation"
 export const DEFAULT_DESCRIPTION =
-  "Documentation as a Service (DaaS) and Unified Governance Solutions for enterprise IT. Streamline operations, secure data, and deliver seamless digital services."
+  "ASBAE Technologies LLP builds enterprise platforms, technical documentation, and digital governance solutions. Based in Lucknow, serving organizations across India."
 
 export function absoluteUrl(path: string = ""): string {
   const base = SITE_URL.replace(/\/$/, "")
@@ -58,7 +57,7 @@ export function createPageMetadata({
   path,
   noIndex = false,
 }: PageMetadataInput): Metadata {
-  const canonical = path === "/" ? SITE_URL : path
+  const canonical = absoluteUrl(path)
   const url = absoluteUrl(path === "/" ? "" : path)
 
   return {
@@ -82,12 +81,10 @@ export function createPageMetadata({
       title,
       description,
       siteName: SITE_NAME,
-      locale: "en_US",
+      locale: "en_IN",
       ...shareImages.openGraph,
     },
     twitter: {
-      site: TWITTER_SITE,
-      creator: TWITTER_SITE,
       title,
       description,
       ...shareImages.twitter,
@@ -151,12 +148,10 @@ export const rootMetadata: Metadata = {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     siteName: SITE_NAME,
-    locale: "en_US",
+    locale: "en_IN",
     ...shareImages.openGraph,
   },
   twitter: {
-    site: TWITTER_SITE,
-    creator: TWITTER_SITE,
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     ...shareImages.twitter,

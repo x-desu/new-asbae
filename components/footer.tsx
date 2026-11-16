@@ -4,9 +4,6 @@ import FooterPro from "@/components/ui/footer-pro"
 import { AsbaeLogoMark } from "@/components/asbae-logo"
 import { COMPANY } from "@/lib/company"
 
-function XIcon({className}:{className?:string}) {
- return <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-}
 function InstagramIcon({className}:{className?:string}) {
  return <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true"><path d="M7 0h10a7 7 0 0 1 7 7v10a7 7 0 0 1-7 7H7a7 7 0 0 1-7-7V7a7 7 0 0 1 7-7Zm0 2a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5H7Zm5 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm6.5-4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
 }
@@ -26,7 +23,6 @@ export default function Footer() {
     {title:"Contact",links:[{label:"info@asbaetech.in",href:"mailto:info@asbaetech.in"},{label:"+91 8922900541",href:"https://wa.me/918922900541"}]},
    ]}
    socials={[
-    {icon:XIcon,href:"https://x.com/asbae",label:"ASBAE on X"},
     {icon:InstagramIcon,href:"https://www.instagram.com/asbaetech2025/",label:"ASBAE on Instagram"},
     {icon:LinkedinIcon,href:"https://www.linkedin.com/in/asbae-technologies-767209433/",label:"ASBAE LinkedIn profile",text:"Profile"},
     {icon:LinkedinIcon,href:"https://www.linkedin.com/company/asbae-technologies/",label:"ASBAE LinkedIn company page",text:"Company"},

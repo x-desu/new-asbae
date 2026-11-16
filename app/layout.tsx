@@ -15,7 +15,6 @@ import { ChromePerformanceMonitor } from "@/components/chrome-performance-monito
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 import { SITE_URL, rootMetadata } from "@/lib/seo"
 import { COMPANY } from "@/lib/company"
-import Script from "next/script"
 import { Suspense } from "react"
 
 const poppins = Poppins({
@@ -48,37 +47,34 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Script id="ldjson-org" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify({
+        <script id="ldjson-org" type="application/ld+json" dangerouslySetInnerHTML={{ __html:
+          JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'ASBAE',
+            '@id': `${SITE_URL}/#organization`,
+            name: 'ASBAE Technologies',
+            email: 'info@asbaetech.in',
+            telephone: '+918922900541',
+            address: { '@type': 'PostalAddress', streetAddress: '5/588 Vikas Khand, Gomti Nagar', addressLocality: 'Lucknow', addressRegion: 'Uttar Pradesh', postalCode: '226010', addressCountry: 'IN' },
             legalName: COMPANY.legalName,
             foundingDate: COMPANY.incorporatedOn,
             identifier: { '@type': 'PropertyValue', propertyID: 'LLPIN', value: COMPANY.llpin },
             url: SITE_URL,
             logo: `${SITE_URL}/images/asbae-logo.png`,
             sameAs: [
-              'https://x.com/asbae',
               'https://www.instagram.com/asbaetech2025/',
               'https://www.linkedin.com/in/asbae-technologies-767209433/',
               'https://www.linkedin.com/company/asbae-technologies/',
             ],
-          })}
-        </Script>
-        <Script id="ldjson-website" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify({
+          }).replace(/</g, "\\u003c") }} />
+        <script id="ldjson-website" type="application/ld+json" dangerouslySetInnerHTML={{ __html:
+          JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             name: 'ASBAE',
             url: SITE_URL,
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: `${SITE_URL}/?q={search_term_string}`,
-              'query-input': 'required name=search_term_string',
-            },
-          })}
-        </Script>
+
+          }).replace(/</g, "\\u003c") }} />
       </head>
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

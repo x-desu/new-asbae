@@ -29,11 +29,8 @@ const publicRoutes: RouteEntry[] = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date()
-
   return publicRoutes.map(({ path, priority, changeFrequency }) => ({
     url: path === "/" ? SITE_URL.replace(/\/$/, "") : absoluteUrl(path),
-    lastModified,
     changeFrequency,
     priority,
   }))
