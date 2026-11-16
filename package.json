@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/react": "^3.0.335",
     "@ai-sdk/xai": "latest",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",
