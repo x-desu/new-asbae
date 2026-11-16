@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   const parsed = inputSchema.safeParse(body)
   if (!parsed.success || parsed.data.messages.at(-1)?.role !== "user") return Response.json({error:"Please send a valid message."},{status:400})
   const messages = parsed.data.messages as UIMessage[]
-  if (!process.env.AI_GATEWAY_API_KEY && !process.env.VERCEL_OIDC_TOKEN) {
+  if (!process.env.AI_GATEWAY_API_KEY && !process.env.VERCEL_OIDC_TOKEN && !process.env.VERCEL) {
     return createUIMessageStreamResponse({stream:createUIMessageStream({execute:({writer})=>{
       writer.write({type:"text-start",id:"fallback"})
       writer.write({type:"text-delta",id:"fallback",delta:"AI chat is temporarily unavailable. ASBAE can help with enterprise platforms, technical documentation, digital governance, and integrations. For advice on your project, contact info@asbaetech.in or WhatsApp +91 8922900541."})
