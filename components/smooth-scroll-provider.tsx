@@ -26,7 +26,15 @@ export function SmoothScrollProvider() {
       stop()
       if(preference.matches) return
       window.__ASBAE_LENIS__?.destroy()
-      const lenis=new Lenis({duration:1.1,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,wheelMultiplier:.9,touchMultiplier:1.1})
+      // Match Brevity's duration and native wheel distance. Keep touch native
+      // and let chat, menus, and other nested panels scroll independently.
+      const lenis=new Lenis({
+        duration:1.1,
+        smoothWheel:true,
+        syncTouch:false,
+        anchors:true,
+        allowNestedScroll:true,
+      })
       instance=lenis
       window.__ASBAE_LENIS__=lenis
       void import("gsap/ScrollTrigger").then(({ScrollTrigger})=>{

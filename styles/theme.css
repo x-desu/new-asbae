@@ -10,7 +10,7 @@ body,.saas-site,.inner-site,.site-background{background:var(--site-bg);color:var
 .asbae-footer-pro{background:var(--site-bg);--background:216 45% 9%;--foreground:214 50% 94%;--muted:215 30% 18%}.light .asbae-footer-pro{--background:60 17% 98%;--foreground:213 44% 17%;--muted:215 25% 94%}.asbae-footer-company,.asbae-footer-company>p:first-child,.asbae-footer-company summary,.asbae-footer-pro footer>div>div:last-child :is(p,a){color:var(--site-muted)}.light .asbae-footer-pro footer [class*='text-foreground/']{color:var(--site-muted)}.light .wf span{filter:brightness(.58) saturate(.8)}
 @media(max-width:767px){.asbae-nav-shell{gap:12px}.theme-toggle{margin-left:auto}}
 .corporate-header:is([data-scrolled=true],[data-home=false],[data-menu-open=true]) .asbae-nav-shell>a:first-child>span>span:last-child{color:var(--site-text)!important}
-.light .asbae-parallax-hero .hero-parallax-shade{background:linear-gradient(180deg,#0a172b26,#0a172b26 55%,var(--site-bg)),radial-gradient(ellipse at 50% 40%,#0a172b80,transparent 70%)}
+.asbae-parallax-hero .hero-parallax-shade{background:linear-gradient(180deg,#0a172b26,#0a172b26 55%,var(--site-bg)),radial-gradient(ellipse at 50% 40%,#0a172b80,transparent 70%)}
 
 @media(min-width:768px){.asbae-desktop-nav{flex:1}.theme-toggle{margin-left:0}}
 .light .inner-site .saas-secondary{background:var(--site-panel);color:var(--site-text);border-color:var(--site-line)}

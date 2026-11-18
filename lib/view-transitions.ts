@@ -40,6 +40,11 @@ export class ViewTransitionManager {
       return
     }
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.scrollTo({ top: targetElement.getBoundingClientRect().top + window.scrollY - 80, behavior: "instant" })
+      return
+    }
+
     this.isTransitioning = true
 
     try {
