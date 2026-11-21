@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/react": "^3.0.335",
+    "@ai-sdk/xai": "latest",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "1.2.2",
@@ -42,6 +44,7 @@
     "@react-email/render": "latest",
     "@tailwindcss/vite": "^4.0.0",
     "@types/nprogress": "^0.2.3",
+    "ai": "latest",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
