@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { AI_SERVICES } from "@/lib/ai-services"
 import { absoluteUrl, SITE_URL } from "@/lib/seo"
 
 const CANONICAL_HOST = "www.asbaetech.in"
@@ -24,6 +25,7 @@ const publicRoutes: RouteEntry[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+  ...AI_SERVICES.map(({ slug }) => ({ path: `/services/ai/${slug}`, priority: 0.7, changeFrequency: "monthly" as const })),
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
   { path: "/statements-and-registrations", priority: 0.7, changeFrequency: "monthly" },
 ]

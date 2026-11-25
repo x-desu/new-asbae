@@ -18,7 +18,7 @@ export default function Footer() {
    description="Enterprise technology. Clear documentation. Better governance."
    brandDetails={<div className="asbae-footer-company"><p>GSTIN {COMPANY.gstin} · LLPIN {COMPANY.llpin}</p><details><summary>Lucknow office</summary><address>D-05, 1st Floor, 5/588 Vikas Khand, Gomti Nagar, Lucknow – 226010, Uttar Pradesh</address></details></div>}
    columns={[
-    {title:"Services",links:[{label:"Enterprise platforms",href:"/services#governance"},{label:"Documentation",href:"/services#documentation"}]},
+    {title:"Services",links:[{label:"Enterprise platforms",href:"/services#governance"},{label:"Documentation",href:"/services#documentation"},{label:"AI as a Service",href:"/services#ai-services"}]},
     {title:"Company",links:[{label:"About ASBAE",href:"/about"},{label:"Statements & registrations",href:"/statements-and-registrations"}]},
     {title:"Contact",links:[{label:"info@asbaetech.in",href:"mailto:info@asbaetech.in"},{label:"+91 8922900541",href:"https://wa.me/918922900541"}]},
    ]}

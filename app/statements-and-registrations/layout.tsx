@@ -3,7 +3,7 @@ import { createPageMetadata } from "@/lib/seo"
 
 export const metadata: Metadata = createPageMetadata({
   title: "Company Statements & Registrations",
-  description: "View ASBAE Technologies LLP’s company details, capability statements, and technical documentation for tender and vendor onboarding.",
+  description: "View ASBAE Technologies LLP’s registration details, capability statements, and AI service portfolio and engagement guides.",
   path: "/statements-and-registrations",
 })
 

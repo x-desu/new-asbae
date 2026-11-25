@@ -1,4 +1,7 @@
+import Link from "next/link"
 import InnerPage, { InnerCTA } from "@/components/inner-page"
+import { AI_DOCUMENTS_URL, AI_SERVICE_DOCUMENTS } from "@/lib/ai-service-documents"
+import { AI_SERVICES } from "@/lib/ai-services"
 import { Clock, CheckCircle2, Briefcase, Code2, FileSearch, Smartphone, Map, Zap, Workflow, BarChart3, FileText, Users, Shield } from "lucide-react"
 const UGS_SERVICES = [
     {
@@ -120,9 +123,50 @@ const DOCUMENTATION_CATEGORIES = [
     }
 ];
 
+const AI_ENGAGEMENT_STAGES = [
+  { title: "Assess the opportunity", description: "Choose one workflow and agree on a baseline, data requirements, and a measurable outcome." },
+  { title: "Run a bounded pilot", description: "Test with representative data and evaluate task quality, controls, and cost per completed task." },
+  { title: "Deploy to production", description: "After the pilot meets agreed criteria, harden integrations, verify access controls, and train the team." },
+  { title: "Operate and improve", description: "Scope ongoing monitoring for quality, operating cost, incidents, and model or data changes." },
+]
+
 export default function ServicesPage() {
-  return <InnerPage eyebrow="OUR SERVICES" title="Connected systems. Clear documentation." description="Enterprise platforms, Documentation as a Service, and governance support built around your organization.">
-    <nav className="inner-container inner-section-nav" aria-label="Service categories"><a href="#governance">Governance platforms</a><a href="#documentation">Documentation</a><a href="#engagement">Engagement models</a></nav>
+  return <InnerPage eyebrow="OUR SERVICES" title="Enterprise platforms, documentation & AI." description="Build connected systems, keep delivery documented, and bring governed AI into your workflows.">
+    <nav className="inner-container inner-section-nav" aria-label="Service categories"><a href="#governance">Governance platforms</a><a href="#documentation">Documentation</a><a href="#ai-services">AI services</a><a href="#engagement">Engagement models</a></nav>
+    <section id="ai-services" className="inner-container inner-section" aria-labelledby="ai-services-heading">
+      <div className="inner-section-heading">
+        <h2 id="ai-services-heading">AI as a Service for private enterprises</h2>
+        <p>Use AI to search business knowledge, handle repetitive work, forecast demand, or inspect physical assets. We start with one measurable workflow and use pilot results to decide whether to expand.</p>
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          <Link className="underline underline-offset-4" href="/contact">Discuss an AI opportunity</Link>
+          <Link className="underline underline-offset-4" href={AI_DOCUMENTS_URL}>View AI service documents</Link>
+          <a className="underline underline-offset-4" href={AI_SERVICE_DOCUMENTS[0].src} download>Download the full portfolio (PDF)</a>
+        </div>
+      </div>
+      <div className="inner-card-grid">
+        {AI_SERVICES.map((service) => (
+          <article className="inner-card" key={service.slug}>
+            <h3><Link className="underline underline-offset-4" href={`/services/ai/${service.slug}`}>{service.title}</Link></h3>
+            <p>{service.summary}</p>
+          </article>
+        ))}
+      </div>
+      <div className="inner-section-heading mt-12">
+        <h3>From assessment to managed operations</h3>
+      </div>
+      <ol className="inner-card-grid two-columns">
+        {AI_ENGAGEMENT_STAGES.map((stage) => (
+          <li className="inner-card" key={stage.title}>
+            <h3>{stage.title}</h3>
+            <p>{stage.description}</p>
+          </li>
+        ))}
+      </ol>
+      <div className="inner-card mt-4">
+        <h3>Deployment and governance</h3>
+        <p>Scope managed cloud APIs, an isolated client cloud environment, self-hosted models, on-premises edge processing, or a hybrid deployment. Define access permissions, data handling, audit trails, and human approval for sensitive actions during discovery.</p>
+      </div>
+    </section>
     <section id="governance" className="inner-container inner-section"><div className="inner-section-heading"><span className="saas-eyebrow">01 / UNIFIED GOVERNANCE</span><h2>A clearer way to manage complex operations.</h2><p>Modular, configurable platforms connect secure access, workflows, records, and reporting. Deployment can be planned for cloud, on-premise, or hybrid environments.</p></div><div className="inner-card-grid">{UGS_SERVICES.map(service=><article className="inner-card" key={service.title}><div className="inner-card-icon">{service.icon}</div><h3>{service.title}</h3><p>{service.description}</p><ul>{service.features.map(feature=><li key={feature}>{feature}</li>)}</ul></article>)}</div></section>
     <section id="documentation" className="inner-container inner-section"><div className="inner-section-heading"><span className="saas-eyebrow">02 / DOCUMENTATION AS A SERVICE</span><h2>The structure behind successful delivery.</h2><p>From the first requirement to technical handover, keep business intent and implementation aligned.</p></div><div className="inner-card-grid two-columns">{DOCUMENTATION_CATEGORIES.map(category=><article className="inner-card" key={category.title}><div className="inner-card-icon">{category.icon}</div><h3>{category.title}</h3><ul>{category.items.map(item=><li key={item}>{item}</li>)}</ul></article>)}</div></section>
     <section id="engagement" className="inner-container inner-section"><div className="inner-section-heading"><span className="saas-eyebrow">03 / WORKING TOGETHER</span><h2>An engagement that fits your team.</h2></div><div className="inner-card-grid">{ENGAGEMENT_MODELS.map(model=><article className="inner-card" key={model.title}><div className="inner-card-icon">{model.icon}</div><h3>{model.title}</h3><p>{model.description}</p></article>)}</div></section><InnerCTA/>
