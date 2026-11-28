@@ -1,7 +1,7 @@
 /** Public incorporation details from the supplied MCA Form 16 certificate. */
 export const COMPANY = {
   legalName: "ASBAE TECHNOLOGIES LLP",
-  gstin: "09ACJFA9803E1ZC",
+  gstin: "09ACQFA8317A1ZE",
   llpin: "ADE-1231",
   incorporatedOn: "2026-11-12",
   incorporationDateLabel: "12 November 2026",
